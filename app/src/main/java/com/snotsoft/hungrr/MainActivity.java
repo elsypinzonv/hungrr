@@ -1,6 +1,7 @@
 package com.snotsoft.hungrr;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
         initUI();
+        setTypeface();
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void actionRegister(){
         start(RegisterActivity.class);
+    }
+
+    private void setTypeface(){
+      /*  Typeface robotoBoldCondensedItalic = Typeface.createFromAsset(getAssets(), "fonts/lobster.otf");
+        if(welcomeMessage != null){
+            welcomeMessage.setTypeface(robotoBoldCondensedItalic);
+        } */
     }
 
     private void start(Class clas){

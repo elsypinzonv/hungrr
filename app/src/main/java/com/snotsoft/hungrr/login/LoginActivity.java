@@ -8,16 +8,18 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.snotsoft.hungrr.R;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
-    private TextView welcomeMessage;
+    private Toolbar toolbar;
     private Button btnLogin;
     private TextInputLayout usernameWrapper;
     private TextInputLayout passwordWrapper;
@@ -31,15 +33,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         mActionsListener = new LoginPresenter(this); //, Injection.provideUsersDataSource(this));
 
-        welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
-        Typeface robotoBoldCondensedItalic = Typeface.createFromAsset(getAssets(), "fonts/lobster.otf");
-        if(welcomeMessage != null){
-            welcomeMessage.setTypeface(robotoBoldCondensedItalic);
-        }
-        usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
-        passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
-
-        btnLogin = (Button) findViewById(R.id.btn_login);
+        initUI();
+        initToolbar();
 
         usernameWrapper.setHint(getString(R.string.lbl_username_hint));
         passwordWrapper.setHint(getString(R.string.lbl_password_hint));
@@ -52,6 +47,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                         usernameWrapper.getEditText().getText().toString().trim(),
                         passwordWrapper.getEditText().getText().toString().trim()
                 );
+            }
+        });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
@@ -122,5 +123,17 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
                     hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    private void initToolbar(){
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void initUI(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
+        passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
+        btnLogin = (Button) findViewById(R.id.btn_login);
     }
 }
