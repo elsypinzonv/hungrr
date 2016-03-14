@@ -1,6 +1,7 @@
 package com.snotsoft.hungrr.register;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,11 +17,11 @@ import com.snotsoft.hungrr.login.LoginActivity;
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
 
     private Toolbar toolbar;
-    private EditText edit_username;
-    private EditText edit_email;
-    private EditText edit_password;
-    private EditText edit_repeat_password;
-    private EditText edit_gender;
+    private TextInputEditText edit_username;
+    private TextInputEditText edit_email;
+    private TextInputEditText edit_password;
+    private TextInputEditText edit_repeat_password;
+    private TextInputEditText edit_gender;
     private RelativeLayout rl_go_login;
     private RegisterContract.UserActionListener mActionsListener;
 
@@ -89,11 +90,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     private void initUI(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        edit_username = (EditText) findViewById(R.id.username);
-        edit_email = (EditText) findViewById(R.id.email);
-        edit_password = (EditText) findViewById(R.id.password);
-        edit_repeat_password = (EditText) findViewById(R.id.repeat_password);
-        edit_gender = (EditText) findViewById(R.id.gender);
+        edit_username = (TextInputEditText) findViewById(R.id.username);
+        edit_email = (TextInputEditText) findViewById(R.id.email);
+        edit_password = (TextInputEditText) findViewById(R.id.password);
+        edit_repeat_password = (TextInputEditText) findViewById(R.id.repeat_password);
+        edit_gender = (TextInputEditText) findViewById(R.id.gender);
         rl_go_login = (RelativeLayout) findViewById(R.id.go_login);
     }
 }
