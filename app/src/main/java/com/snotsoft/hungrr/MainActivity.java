@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.facebook.FacebookSdk;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn_login;
     private Button btn_register;
+    private TextView tx_appname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTypeface(){
-      /*  Typeface robotoBoldCondensedItalic = Typeface.createFromAsset(getAssets(), "fonts/lobster.otf");
-        if(welcomeMessage != null){
-            welcomeMessage.setTypeface(robotoBoldCondensedItalic);
-        } */
+        Typeface robotoBoldCondensedItalic = Typeface.createFromAsset(getAssets(), "fonts/lobster.otf");
+        if(tx_appname != null){
+            tx_appname.setTypeface(robotoBoldCondensedItalic);
+        }
     }
 
     private void start(Class clas){
@@ -63,5 +65,6 @@ public class MainActivity extends AppCompatActivity {
     private void initUI(){
         btn_login = (Button) findViewById(R.id.login);
         btn_register = (Button) findViewById(R.id.register);
+        tx_appname = (TextView) findViewById(R.id.appname);
     }
 }
