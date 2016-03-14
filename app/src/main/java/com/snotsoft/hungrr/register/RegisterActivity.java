@@ -81,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     private void start(Class clas){
         Intent intent = new Intent().setClass(getApplication(), clas);
+        finish();
         startActivity(intent);
     }
 
