@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.snotsoft.hungrr.register.RegisterActivity">
+
+    <include
+        layout="@layout/appbar"
+        android:id="@+id/appbar"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/appbar"
+        >
+
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:drawableLeft="@mipmap/ic_account"
+            android:background="@drawable/edit_style"
+            android:hint="@string/lbl_username_hint_"
+            android:textSize="15dp"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:drawableLeft="@mipmap/ic_email"
+            android:background="@drawable/edit_style"
+            android:hint="@string/lbl_password_hint_"
+            android:textSize="15dp"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:drawableLeft="@mipmap/ic_key"
+            android:background="@drawable/edit_style"
+            android:hint="@string/lbl_password_hint_"
+            android:textSize="15dp"/>
+
+        <EditText
+            android:id="@+id/repeat_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:drawableLeft="@mipmap/ic_key"
+            android:background="@drawable/edit_style"
+            android:hint="@string/lbl_repeat_password_hint"
+            android:textSize="15dp"
+            />
+
+        <EditText
+            android:id="@+id/gender"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:drawableLeft="@mipmap/ic_gender"
+            android:background="@drawable/edit_style"
+            android:hint="@string/lbl_gender_hint"
+            android:textSize="15dp"
+            />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/go_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        android:background="@color/colorGreen">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:text="@string/lbl_alredy_account"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:text="@string/lbl_login"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

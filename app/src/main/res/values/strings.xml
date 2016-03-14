@@ -31,4 +31,15 @@
     <string name="lbl_password_hint">Password</string>
     <string name="lbl_username_hint">Username</string>
 
+    <!-- Register Activity -->
+    <string name="title_activity_register">Registrarse</string>
+    <string name="lbl_username_hint_">Nombre de usuario</string>
+    <string name="lbl_email_hint">Correo electrónico</string>
+    <string name="lbl_password_hint_">Contraseña</string>
+    <string name="lbl_repeat_password_hint">Volver a ingresar la constraseña</string>
+    <string name="lbl_gender_hint">Género</string>
+    <string name="lbl_alredy_account">¿Ya tienes cuenta?</string>
+    <string name="lbl_login">Inicia Sesión</string>
+
+
 </resources>
