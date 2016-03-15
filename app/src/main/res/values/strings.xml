@@ -3,6 +3,7 @@
     <!-- Application -->
     <string name="app_name">HunGrr</string>
     <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">592704597565085</string>
 
     <!-- Splash Activity -->
     <string name="title_activity_splash">Splash Screen</string>
@@ -30,5 +31,19 @@
     <string name="lbl_username_prefix"><b>"Username: "</b></string>
     <string name="lbl_password_hint">Password</string>
     <string name="lbl_username_hint">Username</string>
+
+    <!-- Register Activity -->
+    <string name="title_activity_register">Registrarse</string>
+    <string name="lbl_username_hint_">Nombre de usuario</string>
+    <string name="lbl_email_hint">Correo electrónico</string>
+    <string name="lbl_password_hint_">Contraseña</string>
+    <string name="lbl_repeat_password_hint">Volver a ingresar la constraseña</string>
+    <string name="lbl_gender_hint">Género</string>
+    <string name="lbl_alredy_account">¿Ya tienes cuenta?</string>
+    <string name="lbl_login">Inicia Sesión</string>
+
+    <!-- Main Activity-->
+    <string name="lbl_btn_login_hint">Iniciar Sesión</string>
+    <string name="lbl_btn_register_hint">Registrarse</string>
 
 </resources>

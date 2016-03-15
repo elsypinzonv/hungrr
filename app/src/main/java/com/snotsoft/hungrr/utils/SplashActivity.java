@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.snotsoft.hungrr.MainActivity;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.login.LoginActivity;
 
@@ -33,9 +34,9 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent i;
                 if(sessionManager.isUserLoggedIn()){
-                    i = new Intent(SplashActivity.this, LoginActivity.class);
+                    i = new Intent(SplashActivity.this, MainActivity.class);
                 }else{
-                    i = new Intent(SplashActivity.this, LoginActivity.class);
+                    i = new Intent(SplashActivity.this, MainActivity.class);
                 }
                 startActivity(i);
                 finish();
