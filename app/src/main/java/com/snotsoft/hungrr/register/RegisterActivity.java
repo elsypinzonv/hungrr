@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.login.LoginActivity;
 
-public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
+public class    RegisterActivity extends AppCompatActivity implements RegisterContract.View {
 
     private Toolbar toolbar;
     private TextInputLayout edit_username;

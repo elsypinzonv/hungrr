@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-
-import com.facebook.FacebookSdk;
 import com.snotsoft.hungrr.login.LoginActivity;
 import com.snotsoft.hungrr.register.RegisterActivity;
 
@@ -22,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+
         setContentView(R.layout.activity_main);
         initUI();
         setTypeface();
