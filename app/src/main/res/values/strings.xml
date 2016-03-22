@@ -45,5 +45,8 @@
     <!-- Main Activity-->
     <string name="lbl_btn_login_hint">Iniciar Sesión</string>
     <string name="lbl_btn_register_hint">Registrarse</string>
+    <string name="title_activity_restaunrant_list">RestaunrantList</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_restaurant_profile">RestaurantProfile</string>
 
 </resources>
