@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import com.snotsoft.hungrr.domain.User;
+import com.snotsoft.hungrr.interactor.UserLoginInteractor;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
 import java.util.regex.Matcher;
@@ -20,6 +21,7 @@ public class LoginPresenter implements LoginContract.UserActionsListener {
     private Handler handler;
     private UserSessionManager mSessionManager;
     //private UserDataSource mDataSource;
+    private UserLoginInteractor loginInteractor;
 
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
     private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
