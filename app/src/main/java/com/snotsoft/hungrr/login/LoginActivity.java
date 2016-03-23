@@ -2,20 +2,17 @@ package com.snotsoft.hungrr.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.snotsoft.hungrr.R;
+import com.snotsoft.hungrr.restaurants.RestaurantsActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
@@ -47,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                         usernameWrapper.getEditText().getText().toString().trim(),
                         passwordWrapper.getEditText().getText().toString().trim()
                 );
+                sendTo(RestaurantsActivity.class);
             }
         });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

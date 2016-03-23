@@ -40,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private  void actionLogin(){
-        start(LoginActivity.class);
+        sendTo(LoginActivity.class);
     }
 
     private void actionRegister(){
-        start(RegisterActivity.class);
+        sendTo(RegisterActivity.class);
     }
 
     private void setTypeface(){
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void start(Class clas){
+    private void sendTo(Class clas){
         Intent intent = new Intent().setClass(getApplication(), clas);
         startActivity(intent);
     }

@@ -1,7 +1,6 @@
 package com.snotsoft.hungrr.register;
 
 import android.content.Intent;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.snotsoft.hungrr.R;
@@ -76,10 +74,10 @@ public class    RegisterActivity extends AppCompatActivity implements RegisterCo
     }
 
     private void actionGoLogin(){
-        start(LoginActivity.class);
+        sendTo(LoginActivity.class);
     }
 
-    private void start(Class clas){
+    private void sendTo(Class clas){
         Intent intent = new Intent().setClass(getApplication(), clas);
         finish();
         startActivity(intent);
