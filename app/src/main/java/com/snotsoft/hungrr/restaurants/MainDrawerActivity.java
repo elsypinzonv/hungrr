@@ -19,8 +19,6 @@ import com.snotsoft.hungrr.R;
 
 public class MainDrawerActivity extends AppCompatActivity {
 
-    private MainDrawerContract.UserActionsListener mActionsListener;
-
     private CoordinatorLayout mCoordinator;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
