@@ -4,9 +4,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.interactor.UserLoginInteractor;
+import com.snotsoft.hungrr.io.callbacks.LoginCallback;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
 import java.util.regex.Matcher;
@@ -15,7 +17,7 @@ import java.util.regex.Pattern;
 /**
  * Created by luisburgos on 6/02/16.
  */
-public class LoginPresenter implements LoginContract.UserActionsListener {
+public class LoginPresenter implements LoginContract.UserActionsListener, LoginCallback {
 
     private LoginContract.View mLoginView;
     private Handler handler;
@@ -103,5 +105,25 @@ public class LoginPresenter implements LoginContract.UserActionsListener {
         } else {
             return true;
         }
+    }
+
+    @Override
+    public void onLoginSuccess() {
+        Toast.makeText(((AppCompatActivity)mLoginView).getApplicationContext(), "Login Success", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onFailedLogin() {
+        Toast.makeText(((AppCompatActivity)mLoginView).getApplicationContext(), "Login faile", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNetworkError() {
+        Toast.makeText(((AppCompatActivity)mLoginView).getApplicationContext(), "Network Err", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onServerError() {
+        Toast.makeText(((AppCompatActivity)mLoginView).getApplicationContext(), "Server Err", Toast.LENGTH_LONG).show();
     }
 }
