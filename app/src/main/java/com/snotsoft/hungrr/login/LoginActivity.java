@@ -13,8 +13,6 @@ import android.widget.Button;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
-import com.snotsoft.hungrr.restaurants.MainDrawerContract;
-import com.snotsoft.hungrr.restaurants.RestaurantsActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 

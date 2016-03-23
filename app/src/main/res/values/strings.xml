@@ -3,6 +3,7 @@
     <!-- Application -->
     <string name="app_name">HunGrr</string>
     <string name="action_settings">Settings</string>
+    <string name="action_filter">Filter</string>
     <string name="facebook_app_id">592704597565085</string>
 
     <!-- Splash Activity -->
