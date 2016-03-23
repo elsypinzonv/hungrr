@@ -45,6 +45,12 @@ public class HugryLevelActivity extends AppCompatActivity {
                 selected(HIGH_LEVEL);
             }
         });
+        btn_go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void selected(int selection){
@@ -73,8 +79,6 @@ public class HugryLevelActivity extends AppCompatActivity {
         changeBtn(btnMessage, color);
         changeMark(low, medium, high);
     }
-
-
 
     private void changeMark(Drawable low, Drawable medium, Drawable high){
         img_low_level.setBackground(low);

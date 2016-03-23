@@ -7,10 +7,14 @@
 
     <color name="colorOrangeDark">#F57C00</color>
     <color name="colorOrange">#FF9800</color>
-    <color name="colorOrfangeLight">#FDCA89</color>
+    <color name="colorOrangeLight">#FDCA89</color>
+
 
     <color name="colorFlesh">#FFe0B2</color>
+
     <color name="colorTeal">#009688</color>
+    <color name="colorTealDark">#03877A</color>
+
     <color name="colorBlack">#212121</color>
 
     <color name="colorRed">#FF5252</color>

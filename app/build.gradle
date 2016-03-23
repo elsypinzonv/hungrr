@@ -25,6 +25,8 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:palette-v7:$rootProject.supportLibraryVersion"
+    compile 'com.edmodo:rangebar:1.0.0'
+
 
     //Third party libs and SDKs
     compile "com.facebook.android:facebook-android-sdk:$rootProject.facebook"

@@ -31,6 +31,11 @@
         <item name="colorAccent">@color/colorGreen</item>
     </style>
 
+    <style name="BudgetTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorTeal</item>
+        <item name="colorPrimaryDark">@color/colorTealDark</item>
+        <item name="colorAccent">@color/colorRed</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

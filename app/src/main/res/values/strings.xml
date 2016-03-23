@@ -56,4 +56,12 @@
     <string name="lbl_btn_explorer">Explorar opciones</string>
     <string name="lbl_btn_see_restaurants">Ver restaurantes</string>
     <string name="lbl_btn_give_me_combinations">¡Dame combinaciones!</string>
+    <string name="title_activity_budget">BudgetActivity</string>
+
+    <!-- Budget Activity-->
+    <string name="lbl_budget">Presupuesto</string>
+    <string name="lbl_budget_description">Determina cuanto dinero puedes gastar</string>
+    <string name="lbl_btn_search_options">Buscar opciones</string>
+    <string name="lbl_min_budget">MX$100</string>
+    <string name="lbl_max_budget">MX$1030</string>
 </resources>
