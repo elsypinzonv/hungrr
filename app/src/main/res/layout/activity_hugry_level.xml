@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlue"
+    android:padding="15dp"
+    tools:context="com.snotsoft.hungrr.base_preferences.HugryLevelActivity">
+
+
+    <LinearLayout
+        android:id="@+id/hungry_levels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        >
+
+        <ImageView
+            android:id="@+id/low_level"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@mipmap/ic_low_level"
+            android:background="@drawable/background_low_level"/>
+
+        <ImageView
+            android:id="@+id/medium_level"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_weight=".3"
+            android:src="@mipmap/ic_medium_level"
+            android:background="@null"/>
+
+        <ImageView
+            android:id="@+id/high_level"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@mipmap/ic_high_level"
+            android:background="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/hungry_levels"
+        android:layout_above="@+id/go"
+        android:gravity="center_horizontal|center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_hungry"
+            android:textColor="@android:color/white"
+            android:layout_margin="15dp"
+            android:textSize="26dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_hungry_level"
+            android:textColor="@android:color/white"
+            android:layout_margin="15dp"
+            android:textSize="24dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/go"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="@android:color/white"
+        android:textSize="22dp"
+        android:layout_marginBottom="50dp"
+        android:background="@color/colorGreen"
+        android:text="@string/lbl_btn_explorer"
+        />
+
+</RelativeLayout>

@@ -49,4 +49,11 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_restaurant_profile">RestaurantProfile</string>
 
+
+    <!--Hungry Level Activity-->
+    <string name="lbl_hungry">Hambre</string>
+    <string name="lbl_hungry_level">¿Cúanta hambre tienes?</string>
+    <string name="lbl_btn_explorer">Explorar opciones</string>
+    <string name="lbl_btn_see_restaurants">Ver restaurantes</string>
+    <string name="lbl_btn_give_me_combinations">¡Dame combinaciones!</string>
 </resources>

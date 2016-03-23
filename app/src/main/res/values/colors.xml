@@ -7,12 +7,23 @@
 
     <color name="colorOrangeDark">#F57C00</color>
     <color name="colorOrange">#FF9800</color>
+    <color name="colorOrfangeLight">#FDCA89</color>
+
     <color name="colorFlesh">#FFe0B2</color>
     <color name="colorTeal">#009688</color>
     <color name="colorBlack">#212121</color>
+
     <color name="colorRed">#FF5252</color>
+    <color name="colorRedLigth">#F4898A</color>
+
     <color name="colorGray">#B6B6B6</color>
+
+    <color name="colorGreenLigth">#B9D882</color>
     <color name="colorGreen">#8BC34A</color>
+
+    <color name="colorBlue">#00BCD4</color>
+    <color name="colorBlueDark">#00A8BE</color>
+
 
     <color name="colorLigthPrimaryColor">#C5CAE9</color>
     <color name="colorTextIcons">#FFFFFF</color>
