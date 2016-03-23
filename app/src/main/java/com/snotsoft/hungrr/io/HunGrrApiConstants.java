@@ -7,17 +7,23 @@ public class HunGrrApiConstants {
 
     //TODO: Change string VALUES
 
-    public static final String BASE_URL = "https://api.hungrr.com";
+    public static final String API_BASE_URL = "https://www.hungrr.com.mx";
 
+    public static final String API_PATH = "/api";
     public static final String VERSION_PATH = "/v1";
 
     public static final String SEARCH_PATH = "/search";
+    public static final String LOGIN_PATH = "/login";
 
     public static final String TYPE_QUERY = "type";
     public static final String QUERY_TO_SEARCH = "q";
 
     public static final String RESTAURANT = "restaurant";
+    public static final String RESTAURANTS = "restaurants";
 
     public static final String RESTAURANT_SEARCH_URL = VERSION_PATH + SEARCH_PATH + "?"+ TYPE_QUERY + "=" + RESTAURANT;
 
+    public static final String LOGIN_URL = API_PATH + VERSION_PATH + LOGIN_PATH;
+    public static final String RESTAURANTS_URL = API_PATH + VERSION_PATH + RESTAURANTS;
+    public static final String TOKEN_URL = "/token";
 }
