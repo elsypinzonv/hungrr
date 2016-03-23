@@ -44,6 +44,10 @@
         <activity
             android:name=".restaurant.RestaurantProfile"
             android:label="@string/title_activity_restaurant_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".restaurants.MainDrawerActivity"
+            android:label="@string/title_activity_main_drawer"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

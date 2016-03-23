@@ -23,7 +23,7 @@ public class RestaurantsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaunrants);
+        setContentView(R.layout.fragment_restaunrants_low_level);
         initUI();
         initRecycler();
         setSupportActionBar(toolbar);

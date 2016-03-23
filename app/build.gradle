@@ -32,7 +32,7 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.converterGson"
     compile "com.google.code.gson:gson:$rootProject.gson"
-
+    compile "de.hdodenhof:circleimageview:$rootProject.circleimageview"
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"

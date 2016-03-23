@@ -36,6 +36,7 @@ ext {
     retrofit = '2.0.0'
     gson = '2.6.1'
     converterGson = '2.0.0'
+    circleimageview = '2.0.0'
 
     // App dependencies
     supportLibraryVersion = '23.2.0'
