@@ -51,7 +51,11 @@
         <activity
             android:name=".base_preferences.BudgetActivity"
             android:label="@string/title_activity_budget"
-            android:theme="@style/BudgetTheme"></activity>
+            android:theme="@style/BudgetTheme" />
+        <activity
+            android:name=".base_preferences.LocationActivity"
+            android:label="@string/title_activity_location"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

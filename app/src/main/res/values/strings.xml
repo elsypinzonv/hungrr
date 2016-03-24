@@ -64,4 +64,11 @@
     <string name="lbl_btn_search_options">Buscar opciones</string>
     <string name="lbl_min_budget">MX$100</string>
     <string name="lbl_max_budget">MX$1030</string>
+    <string name="title_activity_location">LocationActivity</string>
+
+    <!-- Location Activity-->
+    <string name="lbl_location">Ubicación</string>
+    <string name="lbl_location_description">¿Donde quieres buscar?</string>
+    <string name="lbl_btn_location">Mi ubicación</string>
+    <string name="lbl_btn_other_location">Otra ubicación</string>
 </resources>
