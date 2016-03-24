@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBlue"
     android:padding="15dp"
-    tools:context="com.snotsoft.hungrr.base_preferences.HugryLevelActivity">
+    tools:context=".base_preferences.HungryLevelActivity">
 
 
     <LinearLayout

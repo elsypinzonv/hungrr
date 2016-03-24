@@ -37,6 +37,7 @@ ext {
     gson = '2.6.1'
     converterGson = '2.0.0'
     circleimageview = '2.0.0'
+    edmodo = '1.0.0'
 
     // App dependencies
     supportLibraryVersion = '23.2.0'

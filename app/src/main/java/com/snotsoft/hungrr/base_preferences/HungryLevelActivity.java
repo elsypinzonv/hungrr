@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 
-public class HugryLevelActivity extends AppCompatActivity {
+public class HungryLevelActivity extends AppCompatActivity {
 
     private ImageView img_low_level;
     private ImageView img_medium_level;

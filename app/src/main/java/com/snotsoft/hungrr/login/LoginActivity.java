@@ -12,8 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import com.snotsoft.hungrr.R;
-import com.snotsoft.hungrr.base_preferences.BudgetActivity;
-import com.snotsoft.hungrr.base_preferences.HugryLevelActivity;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 
 

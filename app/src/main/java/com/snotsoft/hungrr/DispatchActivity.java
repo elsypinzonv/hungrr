@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.snotsoft.hungrr.login.LoginActivity;
 import com.snotsoft.hungrr.register.RegisterActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class DispatchActivity extends AppCompatActivity {
 
     private Button btn_login;
     private Button btn_register;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_dispatch);
         initUI();
         setTypeface();
         btn_login.setOnClickListener(new View.OnClickListener() {
