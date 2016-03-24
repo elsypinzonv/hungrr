@@ -15,7 +15,7 @@ import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.base_preferences.BudgetActivity;
 import com.snotsoft.hungrr.base_preferences.HugryLevelActivity;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
-import com.snotsoft.hungrr.restaurants.RestaurantsActivity;
+
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 

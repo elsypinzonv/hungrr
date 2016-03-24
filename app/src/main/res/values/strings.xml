@@ -3,6 +3,7 @@
     <!-- Application -->
     <string name="app_name">HunGrr</string>
     <string name="action_settings">Settings</string>
+    <string name="action_filter">Filter</string>
     <string name="facebook_app_id">592704597565085</string>
 
     <!-- Splash Activity -->
@@ -49,6 +50,15 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_restaurant_profile">RestaurantProfile</string>
 
+    <!-- Main Drawer Activity -->
+    <string name="title_activity_main_drawer">MainDrawerActivity</string>
+    <string name="menu_item_search">Search</string>
+    <string name="menu_item_favorites">Favorites</string>
+    <string name="menu_item_settings">Settings</string>
+    <string name="menu_item_logout">Logout</string>
+    <string name="menu_item_about_hungrr">About HunGrr</string>
+    <string name="openDrawer">Open</string>
+    <string name="closeDrawer">Close</string>
 
     <!--Hungry Level Activity-->
     <string name="lbl_hungry">Hambre</string>
@@ -71,4 +81,5 @@
     <string name="lbl_location_description">¿Donde quieres buscar?</string>
     <string name="lbl_btn_location">Mi ubicación</string>
     <string name="lbl_btn_other_location">Otra ubicación</string>
+
 </resources>

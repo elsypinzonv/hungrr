@@ -13,7 +13,7 @@ public class RestaurantsResponse {
     @SerializedName("items")
     ArrayList<Restaurant> restaurants;
 
-    public ArrayList<Restaurant> getArtists() {
+    public ArrayList<Restaurant> getRestaurants() {
         return restaurants;
     }
 

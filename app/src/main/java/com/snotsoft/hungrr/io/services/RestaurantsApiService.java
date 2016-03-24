@@ -2,6 +2,7 @@ package com.snotsoft.hungrr.io.services;
 
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.io.HunGrrApiConstants;
+import com.snotsoft.hungrr.io.model.RestaurantsResponse;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import retrofit2.http.Query;
 public interface RestaurantsApiService {
 
     @GET(HunGrrApiConstants.RESTAURANTS_URL)
-    Call<List<Restaurant>> getRestaurants();
+    Call<RestaurantsResponse> getRestaurants();
 
     @GET(HunGrrApiConstants.RESTAURANT_SEARCH_URL)
     Call<Restaurant> getRestaurant(@Query("id") String restaurantID);

@@ -38,12 +38,12 @@
             android:label="@string/title_activity_register"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".restaurants.RestaurantsActivity"
-            android:label="@string/title_activity_restaunrant_list"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".restaurant.RestaurantProfile"
             android:label="@string/title_activity_restaurant_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".restaurants.MainDrawerActivity"
+            android:label="@string/title_activity_main_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".base_preferences.HugryLevelActivity"
@@ -55,7 +55,7 @@
         <activity
             android:name=".base_preferences.LocationActivity"
             android:label="@string/title_activity_location"
-            android:theme="@style/BudgetTheme"></activity>
+            android:theme="@style/BudgetTheme"/>
     </application>
 
 </manifest>
