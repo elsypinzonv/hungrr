@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorTeal"
+    android:padding="15dp"
+    tools:context="com.snotsoft.hungrr.base_preferences.LocationActivity">
+
+    <ImageView
+        android:id="@+id/mark"
+        android:layout_marginTop="15dp"
+        android:layout_width="1900dp"
+        android:layout_height="190dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_location_green"/>
+
+
+    <LinearLayout
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/mark"
+        android:layout_above="@+id/my_location"
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_location"
+            android:textColor="@android:color/white"
+            android:layout_margin="15dp"
+            android:textSize="26dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_location_description"
+            android:textColor="@android:color/white"
+            android:layout_margin="15dp"
+            android:textSize="24dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/my_location"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorRed"
+        android:layout_marginBottom="10dp"
+        android:text="@string/lbl_btn_location"
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/other_location"
+        android:textSize="20dp"
+        />
+
+    <Button
+        android:id="@+id/other_location"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorRed"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/lbl_btn_other_location"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        />
+
+
+
+</RelativeLayout>

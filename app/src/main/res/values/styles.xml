@@ -25,6 +25,18 @@
         <item name="android:windowActionBarOverlay">true</item>-->
     </style>
 
+    <style name="HungryLevelTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorBlue</item>
+        <item name="colorPrimaryDark">@color/colorBlueDark</item>
+        <item name="colorAccent">@color/colorGreen</item>
+    </style>
+
+    <style name="BudgetTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorTeal</item>
+        <item name="colorPrimaryDark">@color/colorTealDark</item>
+        <item name="colorAccent">@color/colorRed</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
