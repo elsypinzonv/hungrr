@@ -49,4 +49,26 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_restaurant_profile">RestaurantProfile</string>
 
+
+    <!--Hungry Level Activity-->
+    <string name="lbl_hungry">Hambre</string>
+    <string name="lbl_hungry_level">¿Cúanta hambre tienes?</string>
+    <string name="lbl_btn_explorer">Explorar opciones</string>
+    <string name="lbl_btn_see_restaurants">Ver restaurantes</string>
+    <string name="lbl_btn_give_me_combinations">¡Dame combinaciones!</string>
+    <string name="title_activity_budget">BudgetActivity</string>
+
+    <!-- Budget Activity-->
+    <string name="lbl_budget">Presupuesto</string>
+    <string name="lbl_budget_description">Determina cuanto dinero puedes gastar</string>
+    <string name="lbl_btn_search_options">Buscar opciones</string>
+    <string name="lbl_min_budget">MX$100</string>
+    <string name="lbl_max_budget">MX$1030</string>
+    <string name="title_activity_location">LocationActivity</string>
+
+    <!-- Location Activity-->
+    <string name="lbl_location">Ubicación</string>
+    <string name="lbl_location_description">¿Donde quieres buscar?</string>
+    <string name="lbl_btn_location">Mi ubicación</string>
+    <string name="lbl_btn_other_location">Otra ubicación</string>
 </resources>
