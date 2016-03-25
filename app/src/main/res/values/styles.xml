@@ -2,10 +2,28 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:windowActionBarOverlay">true</item>-->
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:windowActionBarOverlay">true</item>-->
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
+
+    <!-- CUSTOM APP THEMES -->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--<item name="android:windowBackground">@drawable/splash_background</item>-->
     </style>
 
     <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -14,11 +32,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--<item name="android:windowBackground">@drawable/splash_background</item>-->
-    </style>
-
-    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="TranslucentStatusTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--<item name="android:windowBackground">@drawable/splash_background</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -37,20 +51,6 @@
         <item name="colorAccent">@color/colorRed</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <!--<item name="android:windowActionBarOverlay">true</item>-->
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <!--<item name="android:windowActionBarOverlay">true</item>-->
-    </style>
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
-
     <style name="FacebookLoginButton">
         <item name="android:textSize">16sp</item>
         <item name="android:layout_marginTop">10dp</item>
@@ -58,6 +58,14 @@
         <item name="android:layout_width">249dp</item>
         <item name="android:layout_height">45dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <!-- Widget Custom Styles-->
+    <style name="DispatchButtons">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">.5</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColorHint">@android:color/white</item>
     </style>
 
 </resources>

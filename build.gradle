@@ -38,6 +38,7 @@ ext {
     converterGson = '2.0.0'
     circleimageview = '2.0.0'
     edmodo = '1.0.0'
+    butterknife = '7.0.1'
 
     // App dependencies
     supportLibraryVersion = '23.2.0'

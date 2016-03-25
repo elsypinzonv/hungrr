@@ -36,3 +36,4 @@ Las siguientes bibliotecas de terceros son la base para el funcionamiento de est
 - GSON (https://github.com/google/gson)
 - RangeBar (https://github.com/edmodo/range-bar)
 - CircleImageView (https://github.com/hdodenhof/CircleImageView)
+- ButterKnife (http://jakewharton.github.io/butterknife/)

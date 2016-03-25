@@ -64,7 +64,7 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_restaunrants_low_level, container, false);
+        View root = inflater.inflate(R.layout.fragment_restaurants_low_level, container, false);
 
         mRecyclerView = (RecyclerView) root.findViewById(R.id.restaurants);
         mRecyclerView.setAdapter(mAdapter);

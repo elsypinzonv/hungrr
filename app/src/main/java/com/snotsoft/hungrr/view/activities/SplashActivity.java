@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
+import com.snotsoft.hungrr.utils.TextViewUtils;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 import com.snotsoft.hungrr.R;
 
@@ -22,10 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         mMainMessage = (TextView) findViewById(R.id.splash_message);
-        Typeface lobster = Typeface.createFromAsset(getAssets(), "fonts/lobster.otf");
-        if(mMainMessage != null){
-            mMainMessage.setTypeface(lobster);
-        }
+        TextViewUtils.setLobsterTypeface(this, mMainMessage);
 
         final UserSessionManager sessionManager = new UserSessionManager(SplashActivity.this);
         new Handler().postDelayed(new Runnable() {

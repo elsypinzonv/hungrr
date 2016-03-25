@@ -33,6 +33,7 @@ dependencies {
     compile "com.google.code.gson:gson:$rootProject.gson"
     compile "de.hdodenhof:circleimageview:$rootProject.circleimageview"
     compile "com.edmodo:rangebar:$rootProject.edmodo"
+    compile "com.jakewharton:butterknife:$rootProject.butterknife"
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"

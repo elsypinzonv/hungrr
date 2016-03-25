@@ -7,14 +7,14 @@
         <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
     </style>
 
-    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="TranslucentStatusTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="SplashTheme" parent="MainTheme">
+    <style name="SplashTheme" parent="TranslucentStatusTheme">
         <!--<item name="android:windowBackground">@drawable/splash_background</item>-->
     </style>
 

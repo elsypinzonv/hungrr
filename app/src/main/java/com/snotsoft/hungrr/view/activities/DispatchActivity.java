@@ -11,59 +11,37 @@ import android.widget.TextView;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.login.LoginActivity;
 import com.snotsoft.hungrr.register.RegisterActivity;
+import com.snotsoft.hungrr.utils.TextViewUtils;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DispatchActivity extends AppCompatActivity {
 
-    private Button btn_login;
-    private Button btn_register;
-    private TextView tx_appname;
+    @Bind(R.id.login) Button btnLogin;
+    @Bind(R.id.register) Button btnRegister;
+    @Bind(R.id.appname) TextView appNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_dispatch);
-        initUI();
-        setTypeface();
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionLogin();
-            }
-        });
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionRegister();
-            }
-        });
-
+        ButterKnife.bind(this);
+        TextViewUtils.setLobsterTypeface(this, appNameTextView);
     }
 
-    private  void actionLogin(){
+    @OnClick(R.id.login) public void actionLogin(){
         sendTo(LoginActivity.class);
     }
 
-    private void actionRegister(){
+    @OnClick(R.id.register) public void actionRegister(){
         sendTo(RegisterActivity.class);
     }
 
-    private void setTypeface(){
-        Typeface robotoBoldCondensedItalic = Typeface.createFromAsset(getAssets(), "fonts/lobster.otf");
-        if(tx_appname != null){
-            tx_appname.setTypeface(robotoBoldCondensedItalic);
-        }
-    }
-
-    private void sendTo(Class clas){
-        Intent intent = new Intent().setClass(getApplication(), clas);
+    private void sendTo(Class classTo){
+        Intent intent = new Intent().setClass(getApplication(), classTo);
         startActivity(intent);
     }
 
-
-    private void initUI(){
-        btn_login = (Button) findViewById(R.id.login);
-        btn_register = (Button) findViewById(R.id.register);
-        tx_appname = (TextView) findViewById(R.id.appname);
-    }
 }

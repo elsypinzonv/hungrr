@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.snotsoft.hungrr.restaurants.Main2Activity"
-    tools:showIn="@layout/fragment_restaunrants_low_level">
+    tools:showIn="@layout/fragment_restaurants_low_level">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/restaurants"
