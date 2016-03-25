@@ -8,7 +8,7 @@
 
     <!-- Splash Activity -->
     <string name="title_activity_splash">Splash Screen</string>
-    <string name="lbl_app_description_message">This is an app description for the user\n</string>
+    <string name="lbl_app_description_message">Calma el monstruo que llevas dentro\n</string>
     <string name="splash_footer">Make with love by SnotSoft</string>
 
     <!-- Login Activity -->

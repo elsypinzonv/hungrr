@@ -1,4 +1,4 @@
-package com.snotsoft.hungrr;
+package com.snotsoft.hungrr.view.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.login.LoginActivity;
 import com.snotsoft.hungrr.register.RegisterActivity;
 
