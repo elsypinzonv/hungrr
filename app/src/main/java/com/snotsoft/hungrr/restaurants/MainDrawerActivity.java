@@ -1,5 +1,6 @@
 package com.snotsoft.hungrr.restaurants;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
@@ -16,13 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.snotsoft.hungrr.R;
+import com.snotsoft.hungrr.view.activities.DispatchActivity;
+import com.snotsoft.hungrr.view.widgets.LogoutDialog;
 
 public class MainDrawerActivity extends AppCompatActivity {
 
     private CoordinatorLayout mCoordinator;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +128,8 @@ public class MainDrawerActivity extends AppCompatActivity {
             case R.id.menu_item_favorites:
                 fragmentClass = RestaurantsFragment.class;
                 break;
+            case R.id.menu_item_logout:
+                requestLogoutConfirmation();
             default:
                 fragmentClass = RestaurantsFragment.class;
         }
@@ -142,6 +146,19 @@ public class MainDrawerActivity extends AppCompatActivity {
         mDrawerLayout.closeDrawers();
     }
 
+    private void requestLogoutConfirmation() {
+        new LogoutDialog(this, new LogoutDialog.OnConfirmationLogout() {
+            @Override
+            public void onConfirmation() {
+                doLogout();
+            }
+        }).show();
+    }
+
+    private void doLogout() {
+        finish();
+        startActivity(new Intent(this, DispatchActivity.class));
+    }
 
 
 }

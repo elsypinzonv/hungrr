@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
+import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                         usernameWrapper.getEditText().getText().toString().trim(),
                         passwordWrapper.getEditText().getText().toString().trim()
                 );
-                sendTo(LocationActivity.class);
+                sendTo(MainDrawerActivity.class);
             }
         });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

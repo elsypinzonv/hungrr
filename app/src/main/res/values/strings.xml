@@ -8,8 +8,8 @@
 
     <!-- Splash Activity -->
     <string name="title_activity_splash">Splash Screen</string>
-    <string name="lbl_app_description_message">Calma el monstruo que llevas dentro\n</string>
-    <string name="splash_footer">Make with love by SnotSoft</string>
+    <string name="lbl_app_description_message">Para saciar al monstruo que llevas dentro\n</string>
+    <string name="splash_footer">Hecho con amor por <b>SnotSoft</b></string>
 
     <!-- Login Activity -->
     <string name="title_activity_login">Login</string>
@@ -32,6 +32,7 @@
     <string name="lbl_username_prefix"><b>"Username: "</b></string>
     <string name="lbl_password_hint">Password</string>
     <string name="lbl_username_hint">Username</string>
+    <string name="lbl_no_account_yet">¿Aún no tienes cuenta? Regístrate</string>
 
     <!-- Register Activity -->
     <string name="title_activity_register">Registrarse</string>
@@ -41,7 +42,7 @@
     <string name="lbl_repeat_password_hint">Volver a ingresar la constraseña</string>
     <string name="lbl_gender_hint">Género</string>
     <string name="lbl_alredy_account">¿Ya tienes cuenta?</string>
-    <string name="lbl_login">Inicia Sesión</string>
+    <string name="lbl_login">Iniciar Sesión</string>
 
     <!-- Main Activity-->
     <string name="lbl_btn_login_hint">Iniciar Sesión</string>
@@ -81,5 +82,12 @@
     <string name="lbl_location_description">¿Donde quieres buscar?</string>
     <string name="lbl_btn_location">Mi ubicación</string>
     <string name="lbl_btn_other_location">Otra ubicación</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="lbl_register">Registrarse</string>
+    <string name="lbl_logout">Cerrar Sesión</string>
+    <string name="lbl_logout_dialog_message">¿Estás seguro de cerrar sesión? Lamentamos verte partir</string>
 
 </resources>

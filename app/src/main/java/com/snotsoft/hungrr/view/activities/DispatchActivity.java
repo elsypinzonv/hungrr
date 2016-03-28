@@ -19,9 +19,9 @@ import butterknife.OnClick;
 
 public class DispatchActivity extends AppCompatActivity {
 
-    @Bind(R.id.login) Button btnLogin;
-    @Bind(R.id.register) Button btnRegister;
-    @Bind(R.id.appname) TextView appNameTextView;
+    @Bind(R.id.btn_login) Button btnLogin;
+    @Bind(R.id.btn_register) Button btnRegister;
+    @Bind(R.id.tv_app_name) TextView appNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,11 @@ public class DispatchActivity extends AppCompatActivity {
         TextViewUtils.setLobsterTypeface(this, appNameTextView);
     }
 
-    @OnClick(R.id.login) public void actionLogin(){
+    @OnClick(R.id.btn_login) public void actionLogin(){
         sendTo(LoginActivity.class);
     }
 
-    @OnClick(R.id.register) public void actionRegister(){
+    @OnClick(R.id.btn_register) public void actionRegister(){
         sendTo(RegisterActivity.class);
     }
 

@@ -64,6 +64,50 @@
             android:textColor="@android:color/white"
             android:text="@string/lbl_btn_login"/>
 
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="7">
+
+            <View
+                android:layout_gravity="center_vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="3"
+                android:background="@color/colorDividerGroup"/>
+
+            <TextView
+                android:text="ó"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_gravity="center_vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="3"
+                android:background="@color/colorDividerGroup"/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/login_button"
+            android:background="@color/colorFacebookBlue"
+            android:textColor="@color/colorFacebookText"
+            android:text="Iniciar Sesión con Facebook"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/FacebookLoginButton"/>
+
     </LinearLayout>
 
 </LinearLayout>

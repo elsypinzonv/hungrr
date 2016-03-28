@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
-import com.snotsoft.hungrr.restaurant.RestaurantProfile;
+import com.snotsoft.hungrr.restaurants.restaurant.RestaurantProfile;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.adapters.RestaurantsAdapter;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
