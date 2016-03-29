@@ -15,6 +15,7 @@ public class LogoutDialog extends Dialog implements View.OnClickListener {
     private OnConfirmationLogout mListener;
     private Dialog mDialog;
     private Button btnConfirmation;
+    private Button btnCancel;
 
     public LogoutDialog(Context context, OnConfirmationLogout listener) {
         super(context);
@@ -28,17 +29,24 @@ public class LogoutDialog extends Dialog implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog_logout);
         btnConfirmation = (Button) findViewById(R.id.btn_confirmation);
+        btnCancel = (Button) findViewById(R.id.btn_cancel);
+        btnCancel.setOnClickListener(this);
         btnConfirmation.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        this.dismiss();
-        mListener.onConfirmation();
+        if(v.getId() == R.id.btn_confirmation){
+            mListener.onConfirmation();
+        }else if (v.getId() == R.id.btn_cancel){
+            this.dismiss();
+            mListener.onCancel();
+        }
     }
 
     public interface OnConfirmationLogout {
         void onConfirmation();
+        void onCancel();
     }
 
 }
