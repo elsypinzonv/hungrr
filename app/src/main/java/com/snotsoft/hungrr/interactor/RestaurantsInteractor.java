@@ -3,6 +3,7 @@ package com.snotsoft.hungrr.interactor;
 import android.support.v4.util.ArrayMap;
 
 import com.snotsoft.hungrr.domain.Restaurant;
+import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
 import com.snotsoft.hungrr.io.services.RestaurantsApiServiceEndpoint;
 import com.snotsoft.hungrr.io.services.RestaurantsApiService;
@@ -21,7 +22,6 @@ public class RestaurantsInteractor {
     /**
      * DUMMY for TEST
      */
-    private static final int SERVICE_LATENCY_IN_MILLIS = 500;
     private static final ArrayMap<Long, Restaurant> RESTAURANTS_SERVICE_DATA =
             RestaurantsApiServiceEndpoint.loadPersistentRestaurants();
 
@@ -52,6 +52,6 @@ public class RestaurantsInteractor {
                 ArrayList<Restaurant> restaurants = new ArrayList<>(RESTAURANTS_SERVICE_DATA.values());
                 callback.onRestaurantsLoaded(restaurants);
             }
-        }, SERVICE_LATENCY_IN_MILLIS);
+        }, HunGrrApiConstants.SERVICE_LATENCY_IN_MILLIS);
     }
 }

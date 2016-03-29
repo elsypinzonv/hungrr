@@ -1,5 +1,9 @@
 package com.snotsoft.hungrr.login;
 
+import com.mobsandgeeks.saripaar.ValidationError;
+
+import java.util.List;
+
 /**
  * Created by luisburgos on 6/02/16.
  */
@@ -22,6 +26,8 @@ public interface LoginContract {
         void showUserNonExistingMessage();
 
         void showPasswordNotMatchMessage();
+
+        void showValidationErrors(List<ValidationError> errors);
     }
 
     interface UserActionsListener {

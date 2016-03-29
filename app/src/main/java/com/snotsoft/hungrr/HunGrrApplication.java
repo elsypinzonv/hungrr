@@ -9,6 +9,8 @@ import com.facebook.FacebookSdk;
  */
 public class HunGrrApplication extends Application {
 
+    public static final String TAG = "HunGrrApp";
+
     @Override
     public void onCreate() {
         super.onCreate();

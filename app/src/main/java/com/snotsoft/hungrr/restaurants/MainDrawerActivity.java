@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.snotsoft.hungrr.R;
+import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.activities.DispatchActivity;
 import com.snotsoft.hungrr.view.widgets.LogoutDialog;
 
@@ -34,7 +35,6 @@ public class MainDrawerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mCoordinator = (CoordinatorLayout) findViewById(R.id.main_coordinator);
-        //mActionsListener = new MainPresenter(this, Injection.provideBluetoothWrapper());
 
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
 
@@ -73,19 +73,14 @@ public class MainDrawerActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_drawer, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // s handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_filter) {
             return true;
         }
@@ -156,6 +151,7 @@ public class MainDrawerActivity extends AppCompatActivity {
     }
 
     private void doLogout() {
+        Injection.provideUserSessionManager(this).logoutUser();
         finish();
         startActivity(new Intent(this, DispatchActivity.class));
     }

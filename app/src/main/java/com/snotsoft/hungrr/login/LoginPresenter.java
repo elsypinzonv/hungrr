@@ -6,124 +6,83 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.interactor.UserLoginInteractor;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by luisburgos on 6/02/16.
  */
-public class LoginPresenter implements LoginContract.UserActionsListener, LoginCallback {
+public class LoginPresenter implements LoginContract.UserActionsListener, LoginCallback, Validator.ValidationListener {
 
     private LoginContract.View mLoginView;
-    private Handler handler;
     private UserSessionManager mSessionManager;
-    //private UserDataSource mDataSource;
-    private UserLoginInteractor loginInteractor;
+    private UserLoginInteractor mInteractor;
+    private Validator mValidator;
 
-    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
-    private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-    private Matcher matcher;
+    private String tempUsername;
+    private String tempPassword;
 
-    public LoginPresenter(LoginContract.View mLoginView) { //, UserDataSource dataSource) {
+    public LoginPresenter(
+            LoginContract.View mLoginView,
+            UserLoginInteractor interactor,
+            UserSessionManager sessionManager,
+            Validator validator
+    ) {
         this.mLoginView = mLoginView;
-        handler = new Handler(Looper.getMainLooper());
-        mSessionManager = new UserSessionManager(((AppCompatActivity)mLoginView).getApplicationContext());
-        //mDataSource = dataSource;
+        mInteractor = interactor;
+        mSessionManager = sessionManager;
+        mValidator = validator;
+        mValidator.setValidationListener(this);
     }
 
     @Override
     public void doLogin(final String username, final String password) {
+        tempUsername = username;
+        tempPassword = password;
+        mValidator.validate();
+    }
+
+    @Override
+    public void onValidationSucceeded() {
         mLoginView.setProgressIndicator(true);
-        if(validateDataForLogin(username, password)){
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    /*User user = getUserFromDataSource(username);
-                    mDataSource.close();
-                    if(user != null){
-                        if(user.getPassword().equals(password)){
-                            mSessionManager.createUserLoginSession(user.getUsername(), user.getPassword());
-                            mLoginView.onLoginResult(true, 0);
-                        }else{
-                            mLoginView.showPasswordNotMatchMessage();
-                            mLoginView.setProgressIndicator(false);
-                        }
-                    } else {
-                        mLoginView.showUserNonExistingMessage();
-                        mLoginView.setProgressIndicator(false);
-                    }*/
-                }
-            }, 1000);
-        }else {
-            mLoginView.setProgressIndicator(false);
-        }
-
-    }
-
-    private User getUserFromDataSource(String username) {
-        /*mDataSource.open();
-        return mDataSource.getUser(username);*/
-        return new User();
-    }
-
-    private int checkUserValidity(String username, String password) {
-        if (username == null || password == null){
-            return -1;
-        }
-        return 0;
-    }
-
-    private boolean validateEmail(String email) {
-        //matcher = pattern.matcher(email);
-        //return matcher.matches();
-        return true;
-    }
-
-    private boolean validatePassword(String password) {
-        //return password.length() > 5;
-        return true;
-    }
-
-    private boolean validateDataForLogin(String username, String password) {
-
-        if(TextUtils.isEmpty(username) && TextUtils.isEmpty(password)){
-            mLoginView.showEmptyDataMessage();
-            return false;
-        }
-
-        if (!validateEmail(username)) {
-            mLoginView.setUsernameErrorMessage();
-            return false;
-        } else if (!validatePassword(password)) {
-            mLoginView.setPasswordErrorMessage();
-            return false;
-        } else {
-            return true;
-        }
+        mInteractor.doLogin(this, tempUsername, tempPassword);
     }
 
     @Override
-    public void onLoginSuccess() {
-        Toast.makeText(((AppCompatActivity)mLoginView).getApplicationContext(), "Login Success", Toast.LENGTH_LONG).show();
+    public void onValidationFailed(List<ValidationError> errors) {
+        mLoginView.showValidationErrors(errors);
     }
 
     @Override
-    public void onFailedLogin() {
-        Toast.makeText(((AppCompatActivity)mLoginView).getApplicationContext(), "Login faile", Toast.LENGTH_LONG).show();
+    public void onLoginSuccess(User user) {
+        mLoginView.setProgressIndicator(false);
+        mSessionManager.createUserLoginSession(user.getUsername(), user.getPassword());
+        mLoginView.onLoginResult(true, 1);
+    }
+
+    @Override
+    public void onFailedLogin(String message) {
+        mLoginView.showLoginFailedMessage(message);
+        mLoginView.setProgressIndicator(false);
     }
 
     @Override
     public void onNetworkError() {
-        Toast.makeText(((AppCompatActivity)mLoginView).getApplicationContext(), "Network Err", Toast.LENGTH_LONG).show();
+        mLoginView.setProgressIndicator(false);
+        mLoginView.showLoginFailedMessage("Network error");
     }
 
     @Override
     public void onServerError() {
-        Toast.makeText(((AppCompatActivity)mLoginView).getApplicationContext(), "Server Err", Toast.LENGTH_LONG).show();
+        mLoginView.setProgressIndicator(false);
+        mLoginView.showLoginFailedMessage("Server error");
     }
 }

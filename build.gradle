@@ -39,6 +39,7 @@ ext {
     circleimageview = '2.0.0'
     edmodo = '1.0.0'
     butterknife = '7.0.1'
+    saripaar = '2.0.3'
 
     // App dependencies
     supportLibraryVersion = '23.2.0'

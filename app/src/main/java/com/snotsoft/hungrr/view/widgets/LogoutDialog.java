@@ -26,7 +26,7 @@ public class LogoutDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.custom_alert_dialog);
+        setContentView(R.layout.custom_dialog_logout);
         btnConfirmation = (Button) findViewById(R.id.btn_confirmation);
         btnConfirmation.setOnClickListener(this);
     }

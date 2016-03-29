@@ -10,18 +10,37 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.Min;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Password;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
+import com.snotsoft.hungrr.utils.Injection;
+
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
-    private Toolbar toolbar;
-    private Button btnLogin;
-    private TextInputLayout usernameWrapper;
-    private TextInputLayout passwordWrapper;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.btn_login) Button btnLogin;
+    @Bind(R.id.usernameWrapper) TextInputLayout usernameWrapper;
+    @Bind(R.id.passwordWrapper) TextInputLayout passwordWrapper;
+
+    @NotEmpty (message = "Ingresa un correo")
+    @Email (message =  "Correo inválido")
+    @Bind(R.id.username) EditText usernameEditText;
+
+    @Password(min = 5, scheme = Password.Scheme.ANY, message = "Mínimo 5 caracteres")
+    @Bind(R.id.password) EditText passwordEditText;
 
     private LoginContract.UserActionsListener mActionsListener;
 
@@ -29,12 +48,15 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mActionsListener = new LoginPresenter(this); //, Injection.provideUsersDataSource(this));
-
-        initUI();
-        initToolbar();
-
+        mActionsListener = new LoginPresenter(this,
+                Injection.provideLoginInteractor(),
+                Injection.provideUserSessionManager(getApplicationContext()),
+                Injection.provideSaripaarValidator(this)
+        );
         usernameWrapper.setHint(getString(R.string.lbl_username_hint));
         passwordWrapper.setHint(getString(R.string.lbl_password_hint));
 
@@ -46,7 +68,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                         usernameWrapper.getEditText().getText().toString().trim(),
                         passwordWrapper.getEditText().getText().toString().trim()
                 );
-                sendTo(MainDrawerActivity.class);
             }
         });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -60,8 +81,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void onLoginResult(Boolean result, int code) {
         if(result){
-            //sendTo(StudentsActivity.class);
             finish();
+            sendTo(MainDrawerActivity.class);
         } else {
             showLoginFailedMessage(getString(R.string.error_failed_login));
         }
@@ -83,12 +104,13 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void setUsernameErrorMessage() {
+        usernameWrapper.setError(null);
         usernameWrapper.setError(getString(R.string.error_invalid_username));
     }
 
     @Override
     public void setPasswordErrorMessage() {
-
+        passwordWrapper.setError(null);
         passwordWrapper.setError(getString(R.string.error_invalid_password));
     }
     
@@ -112,6 +134,21 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         Snackbar.make(passwordWrapper, getString(R.string.error_password_not_match), Snackbar.LENGTH_LONG).show();
     }
 
+    @Override
+    public void showValidationErrors(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                showLoginFailedMessage(message);
+            }
+        }
+    }
+
     private void sendTo(Class classTo) {
         Intent intent = new Intent(LoginActivity.this, classTo);
         startActivity(intent);
@@ -123,17 +160,5 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
                     hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
-    }
-
-    private void initToolbar(){
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    private void initUI(){
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
-        passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
-        btnLogin = (Button) findViewById(R.id.btn_login);
     }
 }

@@ -26,4 +26,8 @@ public class HunGrrApiConstants {
     public static final String LOGIN_URL = API_PATH + VERSION_PATH + LOGIN_PATH;
     public static final String RESTAURANTS_URL = API_PATH + VERSION_PATH + RESTAURANTS;
     public static final String TOKEN_URL = "/token";
+
+
+    public static final int SERVICE_LATENCY_IN_MILLIS = 500;
+    public static final int LOGIN_SERVICE_LATENCY_IN_MILLIS = 2000;
 }

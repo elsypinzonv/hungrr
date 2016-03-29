@@ -34,6 +34,7 @@ dependencies {
     compile "de.hdodenhof:circleimageview:$rootProject.circleimageview"
     compile "com.edmodo:rangebar:$rootProject.edmodo"
     compile "com.jakewharton:butterknife:$rootProject.butterknife"
+    compile "com.mobsandgeeks:android-saripaar:$rootProject.saripaar"
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"

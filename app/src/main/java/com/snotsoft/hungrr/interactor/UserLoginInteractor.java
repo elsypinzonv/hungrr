@@ -1,9 +1,13 @@
 package com.snotsoft.hungrr.interactor;
 
+import android.os.Handler;
+
 import com.snotsoft.hungrr.domain.User;
+import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
 import com.snotsoft.hungrr.io.model.LoginResponse;
 import com.snotsoft.hungrr.io.services.LoginApiService;
+import com.snotsoft.hungrr.io.services.LoginApiServiceEndpoint;
 import com.snotsoft.hungrr.io.services.ServiceGenerator;
 
 import java.io.IOException;
@@ -25,8 +29,8 @@ public class UserLoginInteractor {
         this.apiService = apiService;
     }
 
-    public void doLogin(final LoginCallback callback, String username, String password){
-        Call<LoginResponse> call = apiService.loginResult();
+    public void doLogin(final LoginCallback callback, final String username, final String password){
+        /*Call<LoginResponse> call = apiService.loginResult();
         call.enqueue(new Callback<LoginResponse>() {
 
             @Override
@@ -44,7 +48,21 @@ public class UserLoginInteractor {
 
                 callback.onFailedLogin();
             }
-        });
+        });*/
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LoginResponse response = LoginApiServiceEndpoint.validateUser(username, password);
+
+                if(response.getUser() != null){
+                    callback.onLoginSuccess(response.getUser());
+                } else {
+                    callback.onFailedLogin(response.getStatus());
+                }
+
+            }
+        }, HunGrrApiConstants.LOGIN_SERVICE_LATENCY_IN_MILLIS);
     }
 
 }

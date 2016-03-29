@@ -12,7 +12,7 @@
     <string name="splash_footer">Hecho con amor por <b>SnotSoft</b></string>
 
     <!-- Login Activity -->
-    <string name="title_activity_login">Login</string>
+    <string name="title_activity_login">Iniciar Sesión</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -30,8 +30,8 @@
     <string name="empty_data_message">Empty Fields</string>
     <string name="error_failed_login">Error on login</string>
     <string name="lbl_username_prefix"><b>"Username: "</b></string>
-    <string name="lbl_password_hint">Password</string>
-    <string name="lbl_username_hint">Username</string>
+    <string name="lbl_password_hint">Contraseña</string>
+    <string name="lbl_username_hint">Nombre de Usuario</string>
     <string name="lbl_no_account_yet">¿Aún no tienes cuenta? Regístrate</string>
 
     <!-- Register Activity -->
@@ -52,7 +52,7 @@
     <string name="title_activity_restaurant_profile">RestaurantProfile</string>
 
     <!-- Main Drawer Activity -->
-    <string name="title_activity_main_drawer">MainDrawerActivity</string>
+    <string name="title_activity_main_drawer">Principal</string>
     <string name="menu_item_search">Search</string>
     <string name="menu_item_favorites">Favorites</string>
     <string name="menu_item_settings">Settings</string>
@@ -60,6 +60,10 @@
     <string name="menu_item_about_hungrr">About HunGrr</string>
     <string name="openDrawer">Open</string>
     <string name="closeDrawer">Close</string>
+    <string name="lbl_register">Registrarse</string>
+    <string name="lbl_logout">Cerrar Sesión</string>
+    <string name="lbl_logout_dialog_message">¿Estás seguro de cerrar sesión? Lamentamos verte partir</string>
+
 
     <!--Hungry Level Activity-->
     <string name="lbl_hungry">Hambre</string>
@@ -82,12 +86,5 @@
     <string name="lbl_location_description">¿Donde quieres buscar?</string>
     <string name="lbl_btn_location">Mi ubicación</string>
     <string name="lbl_btn_other_location">Otra ubicación</string>
-
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="lbl_register">Registrarse</string>
-    <string name="lbl_logout">Cerrar Sesión</string>
-    <string name="lbl_logout_dialog_message">¿Estás seguro de cerrar sesión? Lamentamos verte partir</string>
 
 </resources>
