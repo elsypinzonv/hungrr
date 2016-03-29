@@ -142,10 +142,16 @@ public class MainDrawerActivity extends AppCompatActivity {
     }
 
     private void requestLogoutConfirmation() {
+
         new LogoutDialog(this, new LogoutDialog.OnConfirmationLogout() {
             @Override
             public void onConfirmation() {
                 doLogout();
+            }
+
+            @Override
+            public void onCancel() {
+
             }
         }).show();
     }

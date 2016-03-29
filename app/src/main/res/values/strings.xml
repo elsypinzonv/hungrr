@@ -86,5 +86,6 @@
     <string name="lbl_location_description">¿Donde quieres buscar?</string>
     <string name="lbl_btn_location">Mi ubicación</string>
     <string name="lbl_btn_other_location">Otra ubicación</string>
+    <string name="lbl_cancel">Cancelar</string>
 
 </resources>
