@@ -8,28 +8,43 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.login.LoginActivity;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
 
-    private Toolbar toolbar;
-    private TextInputLayout edit_username;
-    private TextInputLayout edit_email;
-    private TextInputLayout edit_password;
-    private TextInputLayout edit_repeat_password;
-    private TextInputLayout edit_gender;
-    private RelativeLayout rl_go_login;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.usernameWrapper) TextInputLayout usernameWrapper;
+    @Bind(R.id.et_username) EditText usernameEditText;
+    @Bind(R.id.emailWrapper) TextInputLayout emailWrapper;
+    @Bind(R.id.et_email) EditText emailEditText;
+    @Bind(R.id.passwordWrapper) TextInputLayout passwordWrapper;
+    @Bind(R.id.et_password) EditText passwordEditText;
+    @Bind(R.id.confirmWrapper) TextInputLayout confirmWrapper;
+    @Bind(R.id.et_confirm_password) EditText confirmEditText;
+    @Bind(R.id.spinner_gender) Spinner spinnerGender;
+    @Bind(R.id.bottom_bar_already_account)
+    LinearLayout rl_go_login;
+
     private RegisterContract.UserActionListener mActionsListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        initUI();
-        initToolbar();
+        ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mActionsListener = new RegisterPresenter();
         rl_go_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,13 +78,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         return super.onOptionsItemSelected(item);
     }
 
-    private void actionRegister(){
+    private void actionRegister() {
         mActionsListener.doRegister(
-                edit_username.getEditText().getText().toString(),
-                edit_email.getEditText().getText().toString(),
-                edit_password.getEditText().getText().toString(),
-                edit_repeat_password.getEditText().getText().toString(),
-                edit_gender.getEditText().getText().toString()
+                usernameWrapper.getEditText().getText().toString(),
+                emailWrapper.getEditText().getText().toString(),
+                passwordWrapper.getEditText().getText().toString(),
+                spinnerGender.getSelectedItem().toString()
         );
     }
 
@@ -81,20 +95,5 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         Intent intent = new Intent().setClass(getApplication(), clas);
         finish();
         startActivity(intent);
-    }
-
-    private void initToolbar(){
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    private void initUI(){
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        edit_username = (TextInputLayout) findViewById(R.id.username);
-        edit_email = (TextInputLayout) findViewById(R.id.email);
-        edit_password = (TextInputLayout) findViewById(R.id.password);
-        edit_repeat_password = (TextInputLayout) findViewById(R.id.repeat_password);
-        edit_gender = (TextInputLayout) findViewById(R.id.gender);
-        rl_go_login = (RelativeLayout) findViewById(R.id.go_login);
     }
 }

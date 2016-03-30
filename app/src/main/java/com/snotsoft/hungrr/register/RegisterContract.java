@@ -12,7 +12,7 @@ public interface RegisterContract {
     }
 
     interface UserActionListener{
-        void doRegister(String username, String email, String password, String repeatPassword, String gender);
+        void doRegister(String username, String email, String password, String gender);
     }
 
 }
