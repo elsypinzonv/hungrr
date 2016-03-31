@@ -12,12 +12,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.utils.Injection;
+import com.snotsoft.hungrr.utils.UserSessionManager;
 import com.snotsoft.hungrr.view.activities.DispatchActivity;
 import com.snotsoft.hungrr.view.widgets.LogoutDialog;
 
@@ -101,6 +104,7 @@ public class MainDrawerActivity extends AppCompatActivity {
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
+        setupHeaderContent();
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -111,6 +115,16 @@ public class MainDrawerActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+    private void setupHeaderContent() {
+
+        View header = mNavigationView.getHeaderView(0);
+        TextView username = (TextView) header.findViewById(R.id.header_username);
+        username.setText(Injection.provideUserSessionManager(this).getUsername());
+
+        TextView email = (TextView) header.findViewById(R.id.header_email);
+        email.setText(Injection.provideUserSessionManager(this).getEmail());
     }
 
     public void selectDrawerItem(MenuItem menuItem) {

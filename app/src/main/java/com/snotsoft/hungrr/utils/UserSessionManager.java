@@ -40,6 +40,10 @@ public class UserSessionManager {
         return userPreferences.getString(KEY_USERNAME, null);
     }
 
+    public String getEmail(){
+        return userPreferences.getString(KEY_EMAIL, null);
+    }
+
     public User getCurrentUserLogin(){
         User user = new User();
         user.setEmail(userPreferences.getString(KEY_EMAIL, null));
