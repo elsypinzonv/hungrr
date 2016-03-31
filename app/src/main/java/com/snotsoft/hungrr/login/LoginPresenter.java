@@ -1,21 +1,13 @@
 package com.snotsoft.hungrr.login;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.widget.Toast;
-
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.snotsoft.hungrr.domain.User;
-import com.snotsoft.hungrr.interactor.UserLoginInteractor;
+import com.snotsoft.hungrr.interactor.LoginInteractor;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by luisburgos on 6/02/16.
@@ -24,15 +16,15 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
 
     private LoginContract.View mLoginView;
     private UserSessionManager mSessionManager;
-    private UserLoginInteractor mInteractor;
+    private LoginInteractor mInteractor;
     private Validator mValidator;
 
-    private String tempUsername;
+    private String tempEmail;
     private String tempPassword;
 
     public LoginPresenter(
             LoginContract.View mLoginView,
-            UserLoginInteractor interactor,
+            LoginInteractor interactor,
             UserSessionManager sessionManager,
             Validator validator
     ) {
@@ -44,8 +36,8 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
     }
 
     @Override
-    public void doLogin(final String username, final String password) {
-        tempUsername = username;
+    public void doLogin(final String email, final String password) {
+        tempEmail = email;
         tempPassword = password;
         mValidator.validate();
     }
@@ -53,7 +45,7 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
     @Override
     public void onValidationSucceeded() {
         mLoginView.setProgressIndicator(true);
-        mInteractor.doLogin(this, tempUsername, tempPassword);
+        mInteractor.doLogin(this, tempEmail, tempPassword);
     }
 
     @Override

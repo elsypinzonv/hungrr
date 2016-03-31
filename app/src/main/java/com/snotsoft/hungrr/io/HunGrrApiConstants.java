@@ -14,6 +14,7 @@ public class HunGrrApiConstants {
 
     public static final String SEARCH_PATH = "/search";
     public static final String LOGIN_PATH = "/login";
+    public static final String REGISTER_PATH = "/register";
 
     public static final String TYPE_QUERY = "type";
     public static final String QUERY_TO_SEARCH = "q";
@@ -23,6 +24,7 @@ public class HunGrrApiConstants {
 
     public static final String RESTAURANT_SEARCH_URL = VERSION_PATH + SEARCH_PATH + "?"+ TYPE_QUERY + "=" + RESTAURANT;
 
+    public static final String REGISTER_URL = API_PATH + VERSION_PATH + REGISTER_PATH;
     public static final String LOGIN_URL = API_PATH + VERSION_PATH + LOGIN_PATH;
     public static final String RESTAURANTS_URL = API_PATH + VERSION_PATH + RESTAURANTS;
     public static final String TOKEN_URL = "/token";
