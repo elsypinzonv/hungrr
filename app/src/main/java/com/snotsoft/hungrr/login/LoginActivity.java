@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public void onLoginResult(Boolean result, int code) {
         if(result){
             finish();
-            ActivityHelper.sendTo(LoginActivity.this, MainDrawerActivity.class);
+            ActivityHelper.sendTo(LoginActivity.this, LocationActivity.class);
         } else {
             showLoginFailedMessage(getString(R.string.error_failed_login));
         }

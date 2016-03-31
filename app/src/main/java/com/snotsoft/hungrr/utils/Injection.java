@@ -3,6 +3,7 @@ package com.snotsoft.hungrr.utils;
 import android.content.Context;
 
 import com.mobsandgeeks.saripaar.Validator;
+import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.interactor.RegisterInteractor;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
 import com.snotsoft.hungrr.interactor.LoginInteractor;
@@ -43,5 +44,9 @@ public class Injection {
 
     public static Validator provideSaripaarValidator(Context context) {
         return new Validator(context);
+    }
+
+    public static LocationPreferencesManager provideLocationPreferencesManager(Context context) {
+        return new LocationPreferencesManager(context);
     }
 }

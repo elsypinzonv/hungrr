@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.login.LoginActivity;
 import com.snotsoft.hungrr.register.RegisterActivity;
+import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.TextViewUtils;
 
 import butterknife.Bind;
