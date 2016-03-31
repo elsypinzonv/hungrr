@@ -58,7 +58,11 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
-        mActionsListener = new RestaurantsPresenter(Injection.provideRestaurantsInteractor(), this);
+        mActionsListener = new RestaurantsPresenter(
+                this,
+                Injection.provideRestaurantsInteractor(),
+                Injection.provideLocationPreferencesManager(getActivity())
+        );
     }
 
     @Override
