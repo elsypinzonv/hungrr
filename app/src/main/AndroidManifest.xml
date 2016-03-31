@@ -28,33 +28,41 @@
         <activity
             android:name=".view.activities.DispatchActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/TranslucentStatusTheme" />
         <activity
             android:name=".login.LoginActivity"
             android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
         <activity
             android:name=".register.RegisterActivity"
             android:label="@string/title_activity_register"
+            android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
         <activity
             android:name=".restaurants.restaurant.RestaurantProfile"
             android:label="@string/title_activity_restaurant_profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".restaurants.MainDrawerActivity"
             android:label="@string/title_activity_main_drawer"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".base_preferences.HungryLevelActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/HungryLevelTheme" />
         <activity
             android:name=".base_preferences.BudgetActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_budget"
             android:theme="@style/BudgetTheme" />
         <activity
             android:name=".base_preferences.LocationActivity"
             android:label="@string/title_activity_location"
+            android:screenOrientation="portrait"
             android:theme="@style/BudgetTheme" />
     </application>
 
