@@ -1,17 +1,15 @@
 package com.snotsoft.hungrr.utils;
 
 import android.content.Context;
-import android.database.SQLException;
 
 import com.mobsandgeeks.saripaar.Validator;
 import com.snotsoft.hungrr.interactor.RegisterInteractor;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
-import com.snotsoft.hungrr.interactor.UserLoginInteractor;
+import com.snotsoft.hungrr.interactor.LoginInteractor;
 import com.snotsoft.hungrr.io.services.LoginApiService;
 import com.snotsoft.hungrr.io.services.RegisterApiService;
 import com.snotsoft.hungrr.io.services.RestaurantsApiService;
 import com.snotsoft.hungrr.io.services.ServiceGenerator;
-import com.snotsoft.hungrr.login.LoginActivity;
 
 public class Injection {
 
@@ -23,8 +21,8 @@ public class Injection {
         return ServiceGenerator.createService(RegisterApiService.class);
     }
 
-    public static UserLoginInteractor provideLoginInteractor(){
-        return new UserLoginInteractor(provideLoginApiService());
+    public static LoginInteractor provideLoginInteractor(){
+        return new LoginInteractor(provideLoginApiService());
     }
 
     private static LoginApiService provideLoginApiService() {

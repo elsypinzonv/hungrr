@@ -5,6 +5,10 @@ package com.snotsoft.hungrr.io.callbacks;
  */
 public interface RegisterCallback extends ServerCallback {
 
+    void onEmailAlreadyInUse();
+
+    void onUsernameAlreadyTaken();
+
     void onRegisterSuccess();
 
     void onFailedRegister(String message);

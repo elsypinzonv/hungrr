@@ -3,7 +3,7 @@ package com.snotsoft.hungrr.login;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.snotsoft.hungrr.domain.User;
-import com.snotsoft.hungrr.interactor.UserLoginInteractor;
+import com.snotsoft.hungrr.interactor.LoginInteractor;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
@@ -16,7 +16,7 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
 
     private LoginContract.View mLoginView;
     private UserSessionManager mSessionManager;
-    private UserLoginInteractor mInteractor;
+    private LoginInteractor mInteractor;
     private Validator mValidator;
 
     private String tempEmail;
@@ -24,7 +24,7 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
 
     public LoginPresenter(
             LoginContract.View mLoginView,
-            UserLoginInteractor interactor,
+            LoginInteractor interactor,
             UserSessionManager sessionManager,
             Validator validator
     ) {

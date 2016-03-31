@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     @Password(min = 5, scheme = Password.Scheme.ANY, message = "Mínimo 5 caracteres")
     @Bind(R.id.et_password) EditText passwordEditText;
 
-    @ConfirmPassword
+    @ConfirmPassword(message = "Las contraseñas no coinciden")
     @Bind(R.id.et_confirm_password) EditText confirmEditText;
 
     @Select(defaultSelection = 3, message = "Especifíca tu género")

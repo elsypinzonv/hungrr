@@ -53,6 +53,20 @@ public class RegisterPresenter implements RegisterContract.UserActionListener, R
     }
 
     @Override
+    public void onEmailAlreadyInUse() {
+        mView.setProgressIndicator(false);
+        mView.onRegisterResult(false);
+        mView.showEmailAlreadyInUseMessage();
+    }
+
+    @Override
+    public void onUsernameAlreadyTaken() {
+        mView.setProgressIndicator(false);
+        mView.onRegisterResult(false);
+        mView.showUsernameAlreadyTakenMessage();
+    }
+
+    @Override
     public void onRegisterSuccess() {
         mView.setProgressIndicator(false);
         mView.onRegisterResult(true);

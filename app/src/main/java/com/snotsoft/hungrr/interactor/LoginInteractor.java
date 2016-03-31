@@ -2,30 +2,21 @@ package com.snotsoft.hungrr.interactor;
 
 import android.os.Handler;
 
-import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
 import com.snotsoft.hungrr.io.model.LoginResponse;
 import com.snotsoft.hungrr.io.services.LoginApiService;
-import com.snotsoft.hungrr.io.services.LoginApiServiceEndpoint;
-import com.snotsoft.hungrr.io.services.ServiceGenerator;
-
-import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
+import com.snotsoft.hungrr.io.services.UsersApiServiceEndpoint;
 
 
 /**
  * Created by luisburgos on 21/03/16.
  */
-public class UserLoginInteractor {
+public class LoginInteractor {
 
     public LoginApiService apiService;
 
-    public UserLoginInteractor(LoginApiService apiService) {
+    public LoginInteractor(LoginApiService apiService) {
         this.apiService = apiService;
     }
 
@@ -53,7 +44,7 @@ public class UserLoginInteractor {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                LoginResponse response = LoginApiServiceEndpoint.validateUser(username, password);
+                LoginResponse response = UsersApiServiceEndpoint.validateUser(username, password);
 
                 if(response.getUser() != null){
                     callback.onLoginSuccess(response.getUser());
