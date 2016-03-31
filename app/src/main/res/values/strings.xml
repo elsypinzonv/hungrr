@@ -43,6 +43,8 @@
     <string name="lbl_gender_hint">Género</string>
     <string name="lbl_alredy_account">¿Ya tienes cuenta?</string>
     <string name="lbl_login">Iniciar Sesión</string>
+    <string name="username_already_taken_message">Nombre de usuario ocupado</string>
+    <string name="email_already_in_use_message">Ya existen una cuenta con ese correo electrónico</string>
 
     <!-- Main Activity-->
     <string name="lbl_btn_login_hint">Iniciar Sesión</string>

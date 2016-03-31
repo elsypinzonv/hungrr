@@ -20,6 +20,7 @@ import com.mobsandgeeks.saripaar.annotation.Password;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
+import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Bind(R.id.passwordWrapper) TextInputLayout passwordWrapper;
 
     @NotEmpty (message = "Ingresa un correo")
-    @Email (message =  "Correo inválido")
+    @Email (message =  "Correo no válido")
     @Bind(R.id.username) EditText usernameEditText;
 
     @Password(min = 5, scheme = Password.Scheme.ANY, message = "Mínimo 5 caracteres")
@@ -82,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public void onLoginResult(Boolean result, int code) {
         if(result){
             finish();
-            sendTo(MainDrawerActivity.class);
+            ActivityHelper.sendTo(LoginActivity.this, MainDrawerActivity.class);
         } else {
             showLoginFailedMessage(getString(R.string.error_failed_login));
         }
@@ -147,11 +148,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 showLoginFailedMessage(message);
             }
         }
-    }
-
-    private void sendTo(Class classTo) {
-        Intent intent = new Intent(LoginActivity.this, classTo);
-        startActivity(intent);
     }
 
     private void hideKeyboard() {
