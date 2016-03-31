@@ -58,7 +58,6 @@
         android:id="@+id/btn_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:layout_marginRight="4dp"
         android:text="@string/lbl_cancel"
         android:textAllCaps="true"
