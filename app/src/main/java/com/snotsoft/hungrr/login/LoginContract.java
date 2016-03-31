@@ -34,6 +34,7 @@ public interface LoginContract {
 
         void doLogin(String username, String password);
 
+        void doFacebookLogin();
     }
 
 

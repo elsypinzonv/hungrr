@@ -20,7 +20,7 @@ public class LoginInteractor {
         this.apiService = apiService;
     }
 
-    public void doLogin(final LoginCallback callback, final String username, final String password){
+    public void doLogin(final LoginCallback callback, final String email, final String password){
         /*Call<LoginResponse> call = apiService.loginResult();
         call.enqueue(new Callback<LoginResponse>() {
 
@@ -44,7 +44,7 @@ public class LoginInteractor {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                LoginResponse response = UsersApiServiceEndpoint.validateUser(username, password);
+                LoginResponse response = UsersApiServiceEndpoint.validateUser(email, password);
 
                 if(response.getUser() != null){
                     callback.onLoginSuccess(response.getUser());

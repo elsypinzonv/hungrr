@@ -3,6 +3,7 @@ package com.snotsoft.hungrr.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -32,16 +34,18 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
     @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.login_layout) LinearLayout mLayout;
     @Bind(R.id.btn_login) Button btnLogin;
-    @Bind(R.id.usernameWrapper) TextInputLayout usernameWrapper;
+    @Bind(R.id.btn_facebook_login) Button btnFacebookLogin;
+    @Bind(R.id.emailWrapper) TextInputLayout emailWrapper;
     @Bind(R.id.passwordWrapper) TextInputLayout passwordWrapper;
 
     @NotEmpty (message = "Ingresa un correo")
     @Email (message =  "Correo no válido")
-    @Bind(R.id.username) EditText usernameEditText;
+    @Bind(R.id.et_email) EditText emailEditText;
 
     @Password(min = 5, scheme = Password.Scheme.ANY, message = "Mínimo 5 caracteres")
-    @Bind(R.id.password) EditText passwordEditText;
+    @Bind(R.id.et_password) EditText passwordEditText;
 
     private LoginContract.UserActionsListener mActionsListener;
 
@@ -58,19 +62,25 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 Injection.provideUserSessionManager(getApplicationContext()),
                 Injection.provideSaripaarValidator(this)
         );
-        usernameWrapper.setHint(getString(R.string.lbl_username_hint));
-        passwordWrapper.setHint(getString(R.string.lbl_password_hint));
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hideKeyboard();
                 mActionsListener.doLogin(
-                        usernameWrapper.getEditText().getText().toString().trim(),
+                        emailWrapper.getEditText().getText().toString().trim(),
                         passwordWrapper.getEditText().getText().toString().trim()
                 );
             }
         });
+
+        btnFacebookLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActionsListener.doFacebookLogin();
+            }
+        });
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,11 +101,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void setProgressIndicator(boolean loading) {
-        usernameWrapper.setEnabled(!loading);
+        emailWrapper.setEnabled(!loading);
         passwordWrapper.setEnabled(!loading);
         btnLogin.setEnabled(!loading);
         if(loading){
-            usernameWrapper.setError(null);
+            emailWrapper.setError(null);
             passwordWrapper.setError(null);
             btnLogin.setText(getString(R.string.lbl_loading_message));
         }else {
@@ -105,8 +115,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void setUsernameErrorMessage() {
-        usernameWrapper.setError(null);
-        usernameWrapper.setError(getString(R.string.error_invalid_username));
+        emailWrapper.setError(null);
+        emailWrapper.setError(getString(R.string.error_invalid_username));
     }
 
     @Override
@@ -117,22 +127,22 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     
     @Override
     public void showEmptyDataMessage() {
-        Snackbar.make(passwordWrapper, getString(R.string.empty_data_message), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mLayout, getString(R.string.empty_data_message), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void showLoginFailedMessage(String message) {
-        Snackbar.make(passwordWrapper, message, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void showUserNonExistingMessage() {
-        Snackbar.make(passwordWrapper, getString(R.string.error_non_existing_user), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mLayout, getString(R.string.error_non_existing_user), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void showPasswordNotMatchMessage() {
-        Snackbar.make(passwordWrapper, getString(R.string.error_password_not_match), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mLayout, getString(R.string.error_password_not_match), Snackbar.LENGTH_LONG).show();
     }
 
     @Override

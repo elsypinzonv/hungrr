@@ -43,6 +43,11 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
     }
 
     @Override
+    public void doFacebookLogin() {
+
+    }
+
+    @Override
     public void onValidationSucceeded() {
         mLoginView.setProgressIndicator(true);
         mInteractor.doLogin(this, tempEmail, tempPassword);
@@ -56,7 +61,9 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
     @Override
     public void onLoginSuccess(User user) {
         mLoginView.setProgressIndicator(false);
-        mSessionManager.createUserLoginSession(user.getUsername(), user.getPassword());
+        mSessionManager.createUserLoginSession(
+                user.getEmail(), user.getUsername(), user.getPassword(), user.getTokeSession()
+        );
         mLoginView.onLoginResult(true, 1);
     }
 
