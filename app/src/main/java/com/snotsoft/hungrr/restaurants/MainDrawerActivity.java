@@ -171,6 +171,7 @@ public class MainDrawerActivity extends AppCompatActivity {
     }
 
     private void doLogout() {
+        Injection.provideLocationPreferencesManager(this).clearLocation();
         Injection.provideUserSessionManager(this).logoutUser();
         finish();
         startActivity(new Intent(this, DispatchActivity.class));

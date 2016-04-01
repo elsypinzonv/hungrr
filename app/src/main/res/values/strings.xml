@@ -89,5 +89,6 @@
     <string name="lbl_btn_location">Usar ubicación actual</string>
     <string name="lbl_btn_other_location">Elegir otra ubicación</string>
     <string name="lbl_cancel">Cancelar</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
