@@ -15,7 +15,7 @@ public interface RestaurantsLowLevelContract {
 
         void showRestaurants(List<Restaurant> restaurants);
 
-        void showRestaurantProfileUI(long id);
+        void showRestaurantProfileUI(String id);
 
         void showErrorMessage(String message);
 

@@ -8,10 +8,16 @@ import com.google.gson.annotations.SerializedName;
 public class Restaurant {
 
     @SerializedName("id")
-    private Long id;
+    private String id;
 
     @SerializedName("name")
     private String name;
+
+    @SerializedName("latitude")
+    private double latitude;
+
+    @SerializedName("longitude")
+    private double longitude;
 
     @SerializedName("type")
     private String type;
@@ -19,20 +25,14 @@ public class Restaurant {
     @SerializedName("address")
     private String address;
 
-    @SerializedName("location_lat")
-    private double locationLat;
+    @SerializedName("image")
+    private String image;
 
-    @SerializedName("location_lng")
-    private double locationLng;
-
-    @SerializedName("profile_image")
-    private String profileImage;
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -61,26 +61,26 @@ public class Restaurant {
     }
 
     public double getLocationLat() {
-        return locationLat;
+        return latitude;
     }
 
-    public void setLocationLat(double locationLat) {
-        this.locationLat = locationLat;
+    public void setLocationLat(double latitude) {
+        this.latitude = latitude;
     }
 
     public double getLocationLng() {
-        return locationLng;
+        return longitude;
     }
 
-    public void setLocationLng(double locationLng) {
-        this.locationLng = locationLng;
+    public void setLocationLng(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getProfileImage() {
-        return profileImage;
+        return image;
     }
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
+    public void setProfileImage(String image) {
+        this.image = image;
     }
 }

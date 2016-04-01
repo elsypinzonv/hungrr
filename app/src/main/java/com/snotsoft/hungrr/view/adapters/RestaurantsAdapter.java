@@ -10,11 +10,10 @@ import android.view.ViewGroup;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
  * Created by luisburgos on 2/02/16.
@@ -42,11 +41,16 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
     public void onBindViewHolder(RestaurantsViewHolder holder, int position) {
 
         Restaurant restaurant = mRestaurants.get(position);
-        setLister(restaurant, holder);
-        /*
-        holder.tx_price.setText();
-        holder.img_restaurant.setImageDrawable();
-        holder.img_favorite.setImageDrawable(); */
+        setListener(restaurant, holder);
+
+        holder.tx_price.setText("$250");
+        //holder.tx_price.setText(restaurant.getPrice());
+        Picasso.with(mContext)
+                .load(restaurant.getProfileImage())
+                .placeholder(R.mipmap.ic_done)
+                .error(R.drawable.background_main_1) //TODO:Change this when fix image path from server
+                .into(holder.img_restaurant);
+
     }
 
     public void replaceData(List<Restaurant> restaurants) {
@@ -67,7 +71,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
         return mRestaurants.size();
     }
 
-    private void setLister(final Restaurant restaurant, RestaurantsViewHolder holder){
+    private void setListener(final Restaurant restaurant, RestaurantsViewHolder holder){
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
