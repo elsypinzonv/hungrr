@@ -55,7 +55,7 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
 
     @Override
     public void onFailedLoad() {
-        mView.showErrorMessage("Load restaurants fail");
+        mView.showErrorMessage("Ocurrió un error");
     }
 
     @Override

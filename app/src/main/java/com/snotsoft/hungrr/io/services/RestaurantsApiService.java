@@ -17,9 +17,9 @@ import retrofit2.http.Query;
 public interface RestaurantsApiService {
 
     @GET(HunGrrApiConstants.RESTAURANTS_URL)
-    Call<RestaurantsResponse> getRestaurants(@Path("lat") double lat, @Path("lng") double lng);
-
-    @GET(HunGrrApiConstants.RESTAURANT_SEARCH_URL)
-    Call<Restaurant> getRestaurant(@Query("id") String restaurantID);
+    Call<RestaurantsResponse> getRestaurants(
+            @Path(HunGrrApiConstants.KEY_LAT_PATH) double lat,
+            @Path(HunGrrApiConstants.KEY_LNG_PATH) double lng
+    );
 
 }

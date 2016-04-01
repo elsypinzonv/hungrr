@@ -22,7 +22,7 @@ public class ServiceGenerator {
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
-                    .baseUrl(HunGrrApiConstants.API_BASE_URL)
+                    .baseUrl(HunGrrApiConstants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
 
     public static <S> S createService(Class<S> serviceClass) {
