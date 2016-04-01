@@ -52,6 +52,7 @@ dependencies {
     compile "com.edmodo:rangebar:$rootProject.edmodo"
     compile "com.jakewharton:butterknife:$rootProject.butterknife"
     compile "com.mobsandgeeks:android-saripaar:$rootProject.saripaar"
+    compile "com.squareup.picasso:picasso:$rootProject.picasso"
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"

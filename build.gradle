@@ -44,6 +44,7 @@ ext {
     playServicesLocation = '8.4.0'
     rxjava = '1.0.14'
     reactiveLocation = '0.8@aar'
+    picasso = '2.5.2'
 
     // App dependencies
     supportLibraryVersion = '23.2.1'
