@@ -34,9 +34,6 @@ public class LocationActivity extends AppCompatActivity {
 
     private GPSDataLoader mGPSLoader;
 
-    int PLACE_PICKER_REQUEST = 1;
-    PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,28 +57,6 @@ public class LocationActivity extends AppCompatActivity {
     @OnClick(R.id.btn_choose_location)
     public void chooseOtherLocation(){
         ActivityHelper.sendTo(LocationActivity.this, MapsActivity.class);
-        /*mGPSLoader.loadLastKnownLocation(new GPSDataLoader.OnLocationLoaded() {
-            @Override
-            public void onLocationLoadFinished(double lat, double lng) {
-                ActivityHelper.sendTo(LocationActivity.this, MapsActivity.class);
-            }
-        });*/
-        /*try {
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }*/
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(data, this);
-                String toastMsg = String.format("Place: %s", place.getName());
-                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 }

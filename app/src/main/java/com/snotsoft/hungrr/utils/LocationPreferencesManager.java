@@ -2,6 +2,9 @@ package com.snotsoft.hungrr.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import com.snotsoft.hungrr.HunGrrApplication;
 
 /**
  * Created by luisburgos on 31/03/16.
@@ -27,9 +30,10 @@ public class LocationPreferencesManager {
     }
 
     public void registerLocationValues(double lat, double lng){
+        Log.d(HunGrrApplication.TAG, "SAVING: LAT: " + String.valueOf(lat) + " - LNG " + String.valueOf(lng));
         registerPreferences(KEY_IS_LOCATION_SET, true);
-        registerPreferences(KEY_LAT, Double.doubleToLongBits(lat));
-        registerPreferences(KEY_LNG, Double.doubleToLongBits(lng));
+        registerPreferences(KEY_LAT, lat);
+        registerPreferences(KEY_LNG, lng);
     }
 
     public void registerPreferences(String preference, boolean value){

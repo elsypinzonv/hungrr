@@ -31,8 +31,8 @@ public class RestaurantsInteractor {
         this.apiService = apiService;
     }
 
-    public void getRestaurants(final RestaurantsCallback callback, String lat, String lng) {
-        Log.d(HunGrrApplication.TAG, "Getting restaurants from: LAT: " + lat + " - LNG " + lng);
+    public void getRestaurants(final RestaurantsCallback callback, double lat, double lng) {
+        Log.d(HunGrrApplication.TAG, "Getting restaurants from: LAT: " + String.valueOf(lat) + " - LNG " + String.valueOf(lng));
         /*Call<RestaurantsResponse> call = apiService.getRestaurants();
         call.enqueue(new Callback<RestaurantsResponse>() {
             @Override

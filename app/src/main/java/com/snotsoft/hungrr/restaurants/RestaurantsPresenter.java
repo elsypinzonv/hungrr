@@ -37,8 +37,7 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
             //mInteractor.refreshData();
         }
         mInteractor.getRestaurants(this,
-                String.valueOf(mLocationManager.getLatitude()),
-                String.valueOf(mLocationManager.getLongitude())
+                mLocationManager.getLatitude(), mLocationManager.getLongitude()
         );
     }
 

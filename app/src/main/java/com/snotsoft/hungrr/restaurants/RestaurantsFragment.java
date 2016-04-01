@@ -61,7 +61,7 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
         mActionsListener = new RestaurantsPresenter(
                 this,
                 Injection.provideRestaurantsInteractor(),
-                Injection.provideLocationPreferencesManager(getActivity())
+                Injection.provideLocationPreferencesManager(getActivity().getApplicationContext())
         );
     }
 

@@ -15,19 +15,37 @@ public class GPSDataLoader {
     private Context mContext;
     private LocationPreferencesManager mLocationManager;
     private OnLocationLoaded mListener;
+    private boolean mEnableAutoSave;
 
     public GPSDataLoader(Context context, LocationPreferencesManager manager) {
         this(context, manager, null);
     }
 
+    public GPSDataLoader(Context context, LocationPreferencesManager manager, boolean autoSave) {
+        this(context, manager, null, autoSave);
+    }
+
     public GPSDataLoader(Context context, LocationPreferencesManager manager, OnLocationLoaded listener) {
+        this(context, manager, listener, true);
+    }
+
+    public GPSDataLoader(Context context, LocationPreferencesManager manager, OnLocationLoaded listener, boolean autoSave) {
         mContext = context;
         mLocationManager = manager;
+        mListener = listener;
+        mEnableAutoSave = autoSave;
+    }
+
+    public void enableAutoSaveLocation(boolean enabled){
+        mEnableAutoSave = enabled;
+    }
+
+    public void setOnLocationLoadedListener(OnLocationLoaded listener){
         mListener = listener;
     }
 
     public void loadLastKnownLocation(OnLocationLoaded listener){
-        mListener = listener;
+        setOnLocationLoadedListener(listener);
         loadLastKnownLocation();
     }
 
@@ -40,9 +58,13 @@ public class GPSDataLoader {
                     public void call(Location location) {
                         double lat = location.getLatitude();
                         double lng = location.getLongitude();
-                        mLocationManager.registerLocationValues(lat, lng);
-                        Log.d(HunGrrApplication.TAG,
-                                "LOAD LOCATION: LAT " + String.valueOf(lat) + " - LNG " + String.valueOf(lng));
+
+                        Log.d(HunGrrApplication.TAG, "LOAD LOCATION: LAT " + String.valueOf(lat) + " - LNG " + String.valueOf(lng));
+
+                        if(mEnableAutoSave){
+                            mLocationManager.registerLocationValues(lat, lng);
+                        }
+
                         if(mListener != null){
                             mListener.onLocationLoadFinished(lat, lng);
                         }
