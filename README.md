@@ -38,3 +38,5 @@ Las siguientes bibliotecas de terceros son la base para el funcionamiento de est
 - CircleImageView (https://github.com/hdodenhof/CircleImageView)
 - ButterKnife (http://jakewharton.github.io/butterknife/)
 - Android Saripaar (https://github.com/ragunathjawahar/android-saripaar)
+- Android Reactive Location (https://github.com/mcharmas/Android-ReactiveLocation)
+- RxAndroid: Reactive Extensions for Android (https://github.com/ReactiveX/RxAndroid)
