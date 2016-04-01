@@ -10,11 +10,11 @@ import java.util.ArrayList;
  */
 public class RestaurantsResponse {
 
-    @SerializedName("items")
-    ArrayList<Restaurant> restaurants;
+    @SerializedName("data")
+    ArrayList<Restaurant> data;
 
     public ArrayList<Restaurant> getRestaurants() {
-        return restaurants;
+        return data;
     }
 
 }

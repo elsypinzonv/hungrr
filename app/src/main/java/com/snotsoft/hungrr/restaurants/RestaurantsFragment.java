@@ -90,7 +90,7 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
     }
 
     @Override
-    public void showRestaurantProfileUI(long id) {
+    public void showRestaurantProfileUI(String id) {
         Intent intent = new Intent().setClass(getActivity().getApplicationContext(), RestaurantProfile.class);
         intent.putExtra("restaurantID", id);
         startActivity(intent);

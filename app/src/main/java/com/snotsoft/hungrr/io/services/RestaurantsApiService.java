@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -16,9 +17,9 @@ import retrofit2.http.Query;
 public interface RestaurantsApiService {
 
     @GET(HunGrrApiConstants.RESTAURANTS_URL)
-    Call<RestaurantsResponse> getRestaurants();
-
-    @GET(HunGrrApiConstants.RESTAURANT_SEARCH_URL)
-    Call<Restaurant> getRestaurant(@Query("id") String restaurantID);
+    Call<RestaurantsResponse> getRestaurants(
+            @Path(HunGrrApiConstants.KEY_LAT_PATH) double lat,
+            @Path(HunGrrApiConstants.KEY_LNG_PATH) double lng
+    );
 
 }
