@@ -3,6 +3,8 @@
     package="com.snotsoft.hungrr">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".HunGrrApplication"
@@ -11,9 +13,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
 
         <activity
             android:name=".view.activities.SplashActivity"
@@ -56,14 +67,19 @@
             android:theme="@style/HungryLevelTheme" />
         <activity
             android:name=".base_preferences.BudgetActivity"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_budget"
+            android:screenOrientation="portrait"
             android:theme="@style/BudgetTheme" />
         <activity
             android:name=".base_preferences.LocationActivity"
             android:label="@string/title_activity_location"
             android:screenOrientation="portrait"
             android:theme="@style/BudgetTheme" />
+
+        <activity
+            android:name=".base_preferences.MapsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_maps" />
     </application>
 
 </manifest>

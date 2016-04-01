@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
-
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.4.3'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -40,9 +40,15 @@ ext {
     edmodo = '1.0.0'
     butterknife = '7.0.1'
     saripaar = '2.0.3'
+    playServices = '8.4.0'
+    playServicesLocation = '8.4.0'
+    rxjava = '1.0.14'
+    reactiveLocation = '0.8@aar'
 
     // App dependencies
-    supportLibraryVersion = '23.2.0'
+    supportLibraryVersion = '23.2.1'
+    supportV4 = '23.2.1'
+    multidex = '1.0.1'
     guavaVersion = '18.0'
     //glideVersion = '3.6.1'
     junitVersion = '4.12'

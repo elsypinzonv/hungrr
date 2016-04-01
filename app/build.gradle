@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     compileSdkVersion 23
@@ -10,7 +11,15 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        // Enabling multidex support.
+        multiDexEnabled true
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,6 +33,14 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:palette-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-v4:$rootProject.supportV4"
+    compile "com.google.android.gms:play-services-maps:$rootProject.playServices"
+    compile "com.android.support:multidex:$rootProject.multidex"
+
+    //ReactiveLocation for Android
+    compile "pl.charmas.android:android-reactive-location:$rootProject.reactiveLocation"
+    compile "com.google.android.gms:play-services-location:$rootProject.playServices"
+    compile "io.reactivex:rxjava:$rootProject.rxjava"
 
     //Third party libs and SDKs
     compile "com.facebook.android:facebook-android-sdk:$rootProject.facebook"
@@ -38,5 +55,4 @@ dependencies {
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
-    compile 'com.android.support:support-v4:23.2.1'
 }

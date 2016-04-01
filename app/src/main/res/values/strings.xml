@@ -85,9 +85,11 @@
 
     <!-- Location Activity-->
     <string name="lbl_location">Ubicación</string>
-    <string name="lbl_location_description">¿Donde quieres buscar?</string>
-    <string name="lbl_btn_location">Mi ubicación</string>
-    <string name="lbl_btn_other_location">Otra ubicación</string>
+    <string name="lbl_location_description">Te ofreceremos resultados de restaurantes cercanos a la ubicación que especifiques</string>
+    <string name="lbl_btn_location">Usar ubicación actual</string>
+    <string name="lbl_btn_other_location">Elegir otra ubicación</string>
     <string name="lbl_cancel">Cancelar</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="lbl_choose_new_location">Elegir ubicación</string>
 
 </resources>

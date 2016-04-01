@@ -2,6 +2,7 @@ package com.snotsoft.hungrr.interactor;
 
 import android.support.v4.util.ArrayMap;
 
+import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
@@ -9,6 +10,7 @@ import com.snotsoft.hungrr.io.services.RestaurantsApiServiceEndpoint;
 import com.snotsoft.hungrr.io.services.RestaurantsApiService;
 
 import android.os.Handler;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -29,7 +31,8 @@ public class RestaurantsInteractor {
         this.apiService = apiService;
     }
 
-    public void getRestaurants(final RestaurantsCallback callback) {
+    public void getRestaurants(final RestaurantsCallback callback, double lat, double lng) {
+        Log.d(HunGrrApplication.TAG, "Getting restaurants from: LAT: " + String.valueOf(lat) + " - LNG " + String.valueOf(lng));
         /*Call<RestaurantsResponse> call = apiService.getRestaurants();
         call.enqueue(new Callback<RestaurantsResponse>() {
             @Override

@@ -7,14 +7,16 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
+import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.TextViewUtils;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 import com.snotsoft.hungrr.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 2000;
+    private static int SPLASH_TIME_OUT = 1500;
     private TextView mMainMessage;
 
     @Override
@@ -31,7 +33,11 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Class classTo;
                 if(sessionManager.isUserLoggedIn()){
-                    classTo = MainDrawerActivity.class;
+                    if(!Injection.provideLocationPreferencesManager(SplashActivity.this).hasAlreadyChooseLocation()){
+                        classTo = LocationActivity.class;
+                    }else {
+                        classTo = MainDrawerActivity.class;
+                    }
                 }else{
                     classTo = DispatchActivity.class;
                 }

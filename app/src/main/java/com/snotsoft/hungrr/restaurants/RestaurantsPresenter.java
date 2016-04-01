@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
+import com.snotsoft.hungrr.utils.LocationPreferencesManager;
 
 import java.util.ArrayList;
 
@@ -17,11 +18,16 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
 
     private RestaurantsInteractor mInteractor;
     private RestaurantsLowLevelContract.View mView;
+    private LocationPreferencesManager mLocationManager;
 
-    public RestaurantsPresenter(@NonNull RestaurantsInteractor interactor,
-                                @NonNull RestaurantsLowLevelContract.View view) {
+    public RestaurantsPresenter(
+            @NonNull RestaurantsLowLevelContract.View view,
+            @NonNull RestaurantsInteractor interactor,
+            @NonNull LocationPreferencesManager manager
+    ) {
         mInteractor = checkNotNull(interactor);
         mView = checkNotNull(view);
+        mLocationManager = manager;
     }
 
     @Override
@@ -30,7 +36,9 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
         if (forceUpdate) {
             //mInteractor.refreshData();
         }
-        mInteractor.getRestaurants(this);
+        mInteractor.getRestaurants(this,
+                mLocationManager.getLatitude(), mLocationManager.getLongitude()
+        );
     }
 
     @Override
