@@ -31,6 +31,10 @@ public class User {
     public User() {
     }
 
+    public User(String tempUsername, String tempEmail, String tempPassword, String tempGender) {
+
+    }
+
     public Long getId() {
         return id;
     }

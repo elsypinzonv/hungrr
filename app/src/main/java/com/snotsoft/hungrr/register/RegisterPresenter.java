@@ -44,7 +44,7 @@ public class RegisterPresenter implements RegisterContract.UserActionListener, R
     @Override
     public void onValidationSucceeded() {
         mView.setProgressIndicator(true);
-        mInteractor.doRegister(this, tempUsername, tempEmail, tempPassword, tempGender);
+        //mInteractor.doFacebookRegister(this, tempUsername, tempEmail, tempPassword, tempGender);
     }
 
     @Override

@@ -5,9 +5,8 @@ import android.util.Log;
 
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
-import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.model.LoginResponse;
-import com.snotsoft.hungrr.io.model.RegisterResponse;
+import com.snotsoft.hungrr.io.model.FakeRegisterResponse;
 
 import java.util.ArrayList;
 
@@ -35,19 +34,19 @@ public class UsersApiServiceEndpoint {
         DATA.put(id, user);
     }
 
-    public static RegisterResponse tryToAddUser(String tempUsername, String tempEmail, String tempGender, String tempPassword){
-        RegisterResponse result = new RegisterResponse();
+    public static FakeRegisterResponse tryToAddUser(String tempUsername, String tempEmail, String tempGender, String tempPassword){
+        FakeRegisterResponse result = new FakeRegisterResponse();
 
         if(emailInUse(tempEmail)){
-            result.setResponseCode(RegisterResponse.ResponseCode.EMAIL_TAKEN);
+            result.setResponseCode(FakeRegisterResponse.ResponseCode.EMAIL_TAKEN);
             return result;
         }else{
             if(isUsernameAlreadyTaken(tempUsername)){
-                result.setResponseCode(RegisterResponse.ResponseCode.USERNAME_TAKEN);
+                result.setResponseCode(FakeRegisterResponse.ResponseCode.USERNAME_TAKEN);
                 return result;
             }else {
                 addUser(DATA.size()+1,tempUsername, tempEmail, tempPassword, "asdasd", tempGender);
-                result.setResponseCode(RegisterResponse.ResponseCode.SUCCESS);
+                result.setResponseCode(FakeRegisterResponse.ResponseCode.SUCCESS);
                 return result;
             }
         }

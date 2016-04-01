@@ -8,23 +8,40 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Min;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
+import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -48,6 +65,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Bind(R.id.et_password) EditText passwordEditText;
 
     private LoginContract.UserActionsListener mActionsListener;
+
+    private CallbackManager mCallbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +96,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         btnFacebookLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActionsListener.doFacebookLogin();
+                //mActionsListener.doFacebookLogin();
+
+                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "email", "user_friends"));
             }
         });
 
@@ -87,6 +108,92 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 onBackPressed();
             }
         });
+
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(mCallbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        //Injection.provideRegisterInteractor().doFacebookRegister(this, );
+                        String accessToken = loginResult.getAccessToken().getToken();
+                        Log.i(HunGrrApplication.TAG, accessToken);
+
+                        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.i(HunGrrApplication.TAG, response.toString());
+                                // Get facebook data from login
+                                Bundle bFacebookData = getFacebookData(object);
+
+                                if(bFacebookData != null){
+                                    Log.i(HunGrrApplication.TAG, bFacebookData.toString());
+                                }
+
+                            }
+                        });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
+                        request.setParameters(parameters);
+                        request.executeAsync();
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+
+                    }
+                });
+    }
+
+    private Bundle getFacebookData(JSONObject object) {
+
+        Bundle bundle = null;
+        try {
+            bundle = new Bundle();
+            String id = object.getString("id");
+
+            try {
+                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                Log.i("profile_pic", profile_pic + "");
+                bundle.putString("profile_pic", profile_pic.toString());
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            }
+
+            bundle.putString("idFacebook", id);
+            if (object.has("first_name"))
+                bundle.putString("first_name", object.getString("first_name"));
+            if (object.has("last_name"))
+                bundle.putString("last_name", object.getString("last_name"));
+            if (object.has("email"))
+                bundle.putString("email", object.getString("email"));
+            if (object.has("gender"))
+                bundle.putString("gender", object.getString("gender"));
+            if (object.has("birthday"))
+                bundle.putString("birthday", object.getString("birthday"));
+            if (object.has("location"))
+                bundle.putString("location", object.getJSONObject("location").getString("name"));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return bundle;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(mCallbackManager.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
     }
 
     @Override

@@ -1,12 +1,21 @@
 package com.snotsoft.hungrr.login;
 
+import android.support.v7.app.AppCompatActivity;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.interactor.LoginInteractor;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
+import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**

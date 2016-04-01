@@ -15,7 +15,7 @@ public class HunGrrApiConstants {
 
     public static final String SEARCH_PATH = "/search";
     public static final String LOGIN_PATH = "/login";
-    public static final String REGISTER_PATH = "/register";
+    public static final String REGISTER_PATH = "/signup";
     public static final String RESTAURANTS_PATH = "/restaurants";
 
     public static final String KEY_LAT_PATH = "lat";

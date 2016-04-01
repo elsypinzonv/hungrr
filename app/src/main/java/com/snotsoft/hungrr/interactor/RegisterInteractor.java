@@ -1,12 +1,12 @@
 package com.snotsoft.hungrr.interactor;
 
-import android.os.Handler;
+import android.util.Log;
 
-import com.snotsoft.hungrr.io.HunGrrApiConstants;
+import com.snotsoft.hungrr.HunGrrApplication;
+import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.io.callbacks.RegisterCallback;
 import com.snotsoft.hungrr.io.model.RegisterResponse;
 import com.snotsoft.hungrr.io.services.RegisterApiService;
-import com.snotsoft.hungrr.io.services.UsersApiServiceEndpoint;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,15 +23,15 @@ public class RegisterInteractor {
         this.apiService = apiService;
     }
 
-    public void doRegister(
+    public void doFacebookRegister(
             final RegisterCallback callback,
             final String tempUsername,
             final String tempEmail,
             final String tempPassword,
             final String tempGender
     ) {
-
-        /*Call<RegisterResponse> call = apiService.registerResult();
+        User user = new User(tempUsername, tempEmail, tempPassword, tempGender);
+        Call<RegisterResponse> call = apiService.registerWithFacebookResult(user);
         call.enqueue(new Callback<RegisterResponse>() {
 
             @Override
@@ -39,54 +39,16 @@ public class RegisterInteractor {
                 int statusCode = response.code();
                 RegisterResponse registerResponse = response.body();
 
-                if(registerResponse.getError() == 0){
-                    callback.onRegisterSuccess();
-                    return;
-                }
-
-                if(registerResponse.getError() == 1){
-                    callback.onEmailAlreadyInUse();
-                    return;
-                }
-
-                if(registerResponse.getError() == 2){
-                    callback.onUsernameAlreadyTaken();
-                    return;
-                }
+                Log.d(HunGrrApplication.TAG, "FB REGISTER: " + response.message());
+                callback.onRegisterSuccess();
             }
 
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                t.printStackTrace();
                 callback.onFailedRegister(t.getMessage());
             }
-        });*/
-
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                RegisterResponse registerResponse = UsersApiServiceEndpoint.tryToAddUser(
-                        tempUsername, tempEmail, tempGender, tempPassword
-                );
-
-                if(registerResponse.getResponseCode() == RegisterResponse.ResponseCode.SUCCESS){
-                    callback.onRegisterSuccess();
-                    return;
-                }
-
-                if(registerResponse.getResponseCode() == RegisterResponse.ResponseCode.EMAIL_TAKEN){
-                    callback.onEmailAlreadyInUse();
-                    return;
-                }
-
-                if(registerResponse.getResponseCode() == RegisterResponse.ResponseCode.USERNAME_TAKEN){
-                    callback.onUsernameAlreadyTaken();
-                    return;
-                }
-            }
-        }, HunGrrApiConstants.LOGIN_SERVICE_LATENCY_IN_MILLIS);
+        });
     }
 
 }
