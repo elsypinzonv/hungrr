@@ -31,8 +31,11 @@ public class User {
     public User() {
     }
 
-    public User(String tempUsername, String tempEmail, String tempPassword, String tempGender) {
-
+    public User(String name, String lastName, String email, String username) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
     }
 
     public Long getId() {

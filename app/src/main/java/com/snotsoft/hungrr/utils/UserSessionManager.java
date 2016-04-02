@@ -61,4 +61,13 @@ public class UserSessionManager {
     public boolean isUserLoggedIn(){
         return userPreferences.getBoolean(IS_USER_LOGIN, false);
     }
+
+    public void setSessionToken(String sessionToken) {
+        editor.putString(KEY_SESSION_TOKEN, sessionToken);
+        editor.commit();
+    }
+
+    public void createUserLoginSession(User user) {
+        createUserLoginSession(user.getEmail(), user.getUsername(), null, null);
+    }
 }

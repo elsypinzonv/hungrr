@@ -33,8 +33,6 @@ public interface LoginContract {
     interface UserActionsListener {
 
         void doLogin(String username, String password);
-
-        void doFacebookLogin();
     }
 
 

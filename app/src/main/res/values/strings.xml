@@ -91,5 +91,6 @@
     <string name="lbl_cancel">Cancelar</string>
     <string name="title_activity_maps">Map</string>
     <string name="lbl_choose_new_location">Elegir ubicación</string>
+    <string name="lbl_facebook_signup">Iniciar Sesión con Facebook</string>
 
 </resources>

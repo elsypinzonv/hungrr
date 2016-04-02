@@ -25,12 +25,12 @@ public class RegisterInteractor {
 
     public void doFacebookRegister(
             final RegisterCallback callback,
-            final String tempUsername,
+            final String tempFistName,
+            final String tempLastName,
             final String tempEmail,
-            final String tempPassword,
-            final String tempGender
+            final String tempUsername
     ) {
-        User user = new User(tempUsername, tempEmail, tempPassword, tempGender);
+        User user = new User(tempFistName, tempLastName, tempEmail, tempUsername);
         Call<RegisterResponse> call = apiService.registerWithFacebookResult(user);
         call.enqueue(new Callback<RegisterResponse>() {
 

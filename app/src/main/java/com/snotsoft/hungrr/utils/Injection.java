@@ -4,9 +4,11 @@ import android.content.Context;
 
 import com.mobsandgeeks.saripaar.Validator;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
+import com.snotsoft.hungrr.interactor.FacebookSignUpInteractor;
 import com.snotsoft.hungrr.interactor.RegisterInteractor;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
 import com.snotsoft.hungrr.interactor.LoginInteractor;
+import com.snotsoft.hungrr.io.services.FacebookRegisterApiService;
 import com.snotsoft.hungrr.io.services.LoginApiService;
 import com.snotsoft.hungrr.io.services.RegisterApiService;
 import com.snotsoft.hungrr.io.services.RestaurantsApiService;
@@ -48,5 +50,13 @@ public class Injection {
 
     public static LocationPreferencesManager provideLocationPreferencesManager(Context context) {
         return new LocationPreferencesManager(context);
+    }
+
+    public static FacebookSignUpInteractor provideFacebookSignUpInteractor() {
+        return new FacebookSignUpInteractor(provideFacebookRegisterApiService());
+    }
+
+    private static FacebookRegisterApiService provideFacebookRegisterApiService() {
+        return ServiceGenerator.createService(FacebookRegisterApiService.class);
     }
 }
