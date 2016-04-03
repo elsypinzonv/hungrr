@@ -1,7 +1,10 @@
 package com.snotsoft.hungrr.login;
 
+import android.util.Log;
+
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.interactor.LoginInteractor;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
@@ -23,6 +26,7 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
 
     private String tempEmail;
     private String tempPassword;
+    private String tempSigUpToken;
 
     public LoginPresenter(
             LoginContract.View mLoginView,
@@ -38,16 +42,17 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
     }
 
     @Override
-    public void doLogin(final String email, final String password) {
+    public void doLogin(final String email, final String password, final String sigUpToken) {
         tempEmail = email;
         tempPassword = password;
+        tempSigUpToken = sigUpToken;
         mValidator.validate();
     }
 
     @Override
     public void onValidationSucceeded() {
         mLoginView.setProgressIndicator(true);
-        mInteractor.doLogin(this, tempEmail, tempPassword);
+        mInteractor.doLogin(this, tempEmail, tempPassword, tempSigUpToken);
     }
 
     @Override
@@ -58,10 +63,15 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
     @Override
     public void onLoginSuccess(User user) {
         mLoginView.setProgressIndicator(false);
-        mSessionManager.createUserLoginSession(
-                user.getEmail(), user.getUsername(), user.getPassword(), user.getTokeSession()
-        );
+        mSessionManager.createUserLoginSession(user.getEmail(), user.getPassword(), user.getTokeSession());
+        Log.d(HunGrrApplication.TAG, "SAVING LOGIN TOKEN: " + user.getTokeSession());
         mLoginView.onLoginResult(true, 1);
+    }
+
+    @Override
+    public void onWrongCredentials() {
+        mLoginView.showLoginFailedMessage("Correo o contraseña incorrecta");
+        mLoginView.setProgressIndicator(false);
     }
 
     @Override

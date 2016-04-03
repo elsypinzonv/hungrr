@@ -38,5 +38,6 @@ public class HunGrrApiConstants {
     public static final int LOGIN_SERVICE_LATENCY_IN_MILLIS = 2000;
 
     //Headers from Response
-    public static final String HEADER_TOKEN = "token";
+    public static final String HEADER_REQUEST_TOKEN = "auth_token";
+    public static final String HEADER_RESPONSE_TOKEN = "token";
 }

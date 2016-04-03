@@ -79,11 +79,11 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
     }
 
     @OnClick(R.id.btn_login) public void actionLogin(){
-        ActivityHelper.sendTo(DispatchActivity.this, LoginActivity.class);
+        ActivityHelper.begin(DispatchActivity.this, LoginActivity.class);
     }
 
     @OnClick(R.id.btn_register) public void actionRegister(){
-        ActivityHelper.sendTo(DispatchActivity.this, SignUpActivity.class);
+        ActivityHelper.begin(DispatchActivity.this, SignUpActivity.class);
     }
 
     @Override
@@ -114,8 +114,8 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
     private void doFacebookLogin(String first_name, String last_name, String email) {
         Injection.provideFacebookSignUpInteractor().doFacebookRegister(new FacebookRegisterCallback() {
             @Override
-            public void onRegisterSuccess(User user) {
-                mSessionManager.createUserLoginSession(user);
+            public void onRegisterSuccess(User user, String token) {
+                mSessionManager.createFbUserLoginSession(user, token);
                 ActivityHelper.sendTo(DispatchActivity.this, LocationActivity.class);
             }
 

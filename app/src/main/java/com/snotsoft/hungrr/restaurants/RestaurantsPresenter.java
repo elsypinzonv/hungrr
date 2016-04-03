@@ -6,6 +6,7 @@ import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
 import com.snotsoft.hungrr.utils.LocationPreferencesManager;
+import com.snotsoft.hungrr.utils.UserSessionManager;
 
 import java.util.ArrayList;
 
@@ -18,16 +19,19 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
 
     private RestaurantsInteractor mInteractor;
     private RestaurantsLowLevelContract.View mView;
-    private LocationPreferencesManager mLocationManager;
+    private UserSessionManager mSessionManager;
+    private LocationPreferencesManager mLocationPreferences;
 
     public RestaurantsPresenter(
             @NonNull RestaurantsLowLevelContract.View view,
             @NonNull RestaurantsInteractor interactor,
-            @NonNull LocationPreferencesManager manager
+            @NonNull UserSessionManager sessionManager,
+            @NonNull LocationPreferencesManager locationPreferences
     ) {
         mInteractor = checkNotNull(interactor);
         mView = checkNotNull(view);
-        mLocationManager = manager;
+        mSessionManager = checkNotNull(sessionManager);
+        mLocationPreferences = checkNotNull(locationPreferences);
     }
 
     @Override
@@ -37,7 +41,7 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
             //mInteractor.refreshData();
         }
         mInteractor.getRestaurants(this,
-                mLocationManager.getLatitude(), mLocationManager.getLongitude()
+                mLocationPreferences.getLatitude(), mLocationPreferences.getLongitude(), mSessionManager.getTokenSession()
         );
     }
 
@@ -50,7 +54,11 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
     @Override
     public void onRestaurantsLoaded(ArrayList<Restaurant> restaurants) {
         mView.setProgressIndicator(false);
-        mView.showRestaurants(restaurants);
+        if(restaurants != null && !restaurants.isEmpty()){
+            mView.showRestaurants(restaurants);
+        } else {
+            mView.showErrorMessage("No hay restaurantes para mostrar");
+        }
     }
 
     @Override

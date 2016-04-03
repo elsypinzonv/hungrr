@@ -59,11 +59,4 @@ public class Injection {
         return ServiceGenerator.createService(FacebookSignUpApiService.class);
     }
 
-    public static TokenSessionManager provideTokenSessionManager(Context context) {
-        return new TokenSessionManager(context);
-    }
-
-    public static SignUpDataManager provideSignUpDataManager(Context context) {
-        return new SignUpDataManager(context);
-    }
 }

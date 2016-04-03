@@ -15,6 +15,8 @@ public class UserSessionManager {
 
     private static final String USER_PREFERENCES = "userPreferences";
     private static final String IS_USER_LOGIN = "IS_USER_LOGIN";
+    private static final String IS_USER_SIGN_UP_RECENTLY = "IS_USER_SIGN_UP_RECENTLY";
+    private static final String KEY_SIGN_UP_TOKEN = "KEY_SIGN_UP_TOKEN";
 
     public static final String KEY_NAME = "KEY_NAME";
     public static final String KEY_LAST_NAME = "KEY_LAST_NAME";
@@ -29,14 +31,26 @@ public class UserSessionManager {
         editor = userPreferences.edit();
     }
 
-    public void createUserLoginSession(String email, String username, String password, String token){
+    public void createUserLoginSession(String email, String password, String token){
         editor.putBoolean(IS_USER_LOGIN, true);
         editor.putString(KEY_EMAIL, email);
-        editor.putString(KEY_USERNAME, username);
         editor.putString(KEY_PASSWORD, password);
         editor.putString(KEY_SESSION_TOKEN, token);
         editor.commit();
     }
+
+    public void saveNewSignUpUser(User newUser, String signUpToken){
+        editor.putBoolean(IS_USER_SIGN_UP_RECENTLY, true);
+        editor.putString(KEY_NAME, newUser.getName());
+        editor.putString(KEY_LAST_NAME, newUser.getLastName());
+        editor.putString(KEY_EMAIL, newUser.getEmail());
+        editor.putString(KEY_USERNAME, newUser.getUsername());
+        editor.putString(KEY_PASSWORD, newUser.getPassword());
+
+        editor.putString(KEY_SIGN_UP_TOKEN, signUpToken);
+        editor.commit();
+    }
+
 
     public String getUsername(){
         return userPreferences.getString(KEY_USERNAME, null);
@@ -56,7 +70,13 @@ public class UserSessionManager {
     }
 
     public void logoutUser(){
-        editor.clear();
+        editor.remove(IS_USER_LOGIN);
+        editor.remove(KEY_NAME);
+        editor.remove(KEY_LAST_NAME);
+        //editor.remove(KEY_EMAIL);
+        editor.remove(KEY_USERNAME);
+        editor.remove(KEY_PASSWORD);
+        //editor.clear();
         editor.commit();
     }
 
@@ -64,12 +84,42 @@ public class UserSessionManager {
         return userPreferences.getBoolean(IS_USER_LOGIN, false);
     }
 
+    public void saveSignUpToken(String signUpToken) {
+        editor.putString(KEY_SIGN_UP_TOKEN, signUpToken);
+        editor.commit();
+    }
+
+    public void createFbUserLoginSession(User user, String token) {
+        editor.putBoolean(IS_USER_LOGIN, true);
+        editor.putString(KEY_NAME, user.getName());
+        editor.putString(KEY_LAST_NAME, user.getLastName());
+        editor.putString(KEY_EMAIL, user.getEmail());
+        editor.putString(KEY_USERNAME, user.getUsername());
+        editor.putString(KEY_SESSION_TOKEN, token);
+        editor.commit();
+    }
+
+    public boolean isRecentlyUserSignUp(){
+        return userPreferences.getBoolean(IS_USER_SIGN_UP_RECENTLY, false);
+    }
+
     public void setSessionToken(String sessionToken) {
         editor.putString(KEY_SESSION_TOKEN, sessionToken);
         editor.commit();
     }
 
-    public void createUserLoginSession(User user) {
-        createUserLoginSession(user.getEmail(), user.getUsername(), null, null);
+    public User getLastSignUpUser() {
+        User user = new User();
+        user.setName(userPreferences.getString(KEY_NAME, null));
+        user.setLastName(userPreferences.getString(KEY_LAST_NAME, null));
+        user.setEmail(userPreferences.getString(KEY_EMAIL, null));
+        user.setUsername(userPreferences.getString(KEY_USERNAME, null));
+        user.setPassword(userPreferences.getString(KEY_PASSWORD, null));
+        user.setTokeSession(userPreferences.getString(KEY_SIGN_UP_TOKEN, null));
+        return user;
+    }
+
+    public String getTokenSession() {
+        return userPreferences.getString(KEY_SESSION_TOKEN, null);
     }
 }

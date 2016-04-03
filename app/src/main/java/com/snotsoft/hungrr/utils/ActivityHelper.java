@@ -14,6 +14,11 @@ import com.snotsoft.hungrr.signup.SignUpActivity;
  */
 public class ActivityHelper {
 
+    public static void begin(Activity activity, Class classTo) {
+        Intent intent = new Intent().setClass(activity, classTo);
+        activity.startActivity(intent);
+    }
+
     public static void sendTo(Activity activity, Class classTo) {
         Intent intent = new Intent().setClass(activity, classTo);
         activity.finish();

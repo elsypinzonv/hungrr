@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
-import com.snotsoft.hungrr.io.model.LoginResponse;
+import com.snotsoft.hungrr.io.model.FakeLoginResponse;
 import com.snotsoft.hungrr.io.model.FakeSignUpResponse;
 
 import java.util.ArrayList;
@@ -74,8 +74,8 @@ public class UsersApiServiceEndpoint {
         return isTaken;
     }
 
-    public static LoginResponse validateUser(String username, String password) {
-        LoginResponse response = new LoginResponse();
+    public static FakeLoginResponse validateUser(String username, String password) {
+        FakeLoginResponse response = new FakeLoginResponse();
         ArrayList<User> users = new ArrayList<>(DATA.values());
         for(User user : users) {
             Log.d(HunGrrApplication.TAG, user.getEmail() + user.getPassword());

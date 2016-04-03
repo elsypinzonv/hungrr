@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.UserSessionManager;
@@ -173,6 +174,7 @@ public class MainDrawerActivity extends AppCompatActivity {
     private void doLogout() {
         Injection.provideLocationPreferencesManager(this).clearLocation();
         Injection.provideUserSessionManager(this).logoutUser();
+        LoginManager.getInstance().logOut();
         finish();
         startActivity(new Intent(this, DispatchActivity.class));
     }

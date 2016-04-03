@@ -9,6 +9,8 @@ public interface LoginCallback extends ServerCallback {
 
     void onLoginSuccess(User user);
 
+    void onWrongCredentials();
+
     void onFailedLogin(String message);
 
 }

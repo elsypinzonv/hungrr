@@ -25,7 +25,7 @@ public class User {
     @SerializedName("password")
     private String password;
 
-    @SerializedName("token_session")
+    @SerializedName("auth_token")
     private String tokeSession;
 
     public User() {
@@ -44,6 +44,12 @@ public class User {
         this.email = email;
         this.password = password;
         this.username = username;
+    }
+
+    public User(String email, String password, String token) {
+        this.email = email;
+        this.password = password;
+        this.tokeSession = token;
     }
 
     public Long getId() {

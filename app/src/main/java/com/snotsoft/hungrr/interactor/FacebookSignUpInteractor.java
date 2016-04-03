@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
+import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.callbacks.FacebookRegisterCallback;
 import com.snotsoft.hungrr.io.model.FacebookSignUpResponse;
 import com.snotsoft.hungrr.io.services.FacebookSignUpApiService;
@@ -39,8 +40,10 @@ public class FacebookSignUpInteractor {
                 int statusCode = response.code();
                 FacebookSignUpResponse registerResponse = response.body();
 
+                String registerToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
+
                 Log.d(HunGrrApplication.TAG, "FB REGISTER: " + response.message());
-                callback.onRegisterSuccess(user);
+                callback.onRegisterSuccess(user, registerToken);
             }
 
             @Override

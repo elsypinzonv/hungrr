@@ -80,8 +80,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
         mActionsListener = new SignUpPresenter(
                 this,
                 Injection.provideRegisterInteractor(),
-                Injection.provideTokenSessionManager(this),
-                Injection.provideSignUpDataManager(this),
+                Injection.provideUserSessionManager(this),
                 Injection.provideSaripaarValidator(this)
         );
 
@@ -93,7 +92,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
         });
 
         setupProgressDialog();
-        //setupSpinner();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

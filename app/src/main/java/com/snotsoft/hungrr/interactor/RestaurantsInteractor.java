@@ -2,6 +2,7 @@ package com.snotsoft.hungrr.interactor;
 
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
+import com.snotsoft.hungrr.io.model.RestaurantsRequest;
 import com.snotsoft.hungrr.io.model.RestaurantsResponse;
 import com.snotsoft.hungrr.io.services.RestaurantsApiService;
 
@@ -22,12 +23,16 @@ public class RestaurantsInteractor {
         this.apiService = apiService;
     }
 
-    public void getRestaurants(final RestaurantsCallback callback, double lat, double lng) {
+    public void getRestaurants(final RestaurantsCallback callback, final double lat, final double lng, final String token) {
 
-        Log.d(HunGrrApplication.TAG, "Getting restaurants from: LAT: " + String.valueOf(lat) + " - LNG " + String.valueOf(lng));
+        Log.d(HunGrrApplication.TAG,
+                "Getting restaurants from: LAT: "
+                        + String.valueOf(lat)
+                        + " - LNG " + String.valueOf(lng)
+                        + " with token " + token);
 
-        Call<RestaurantsResponse> call = apiService.getRestaurants(lat, lng);
-        Log.d(HunGrrApplication.TAG, "ORIGINAL REQ: " + call.request().url().toString());
+        Call<RestaurantsResponse> call = apiService.getRestaurants(lat, lng, token);
+        Log.d(HunGrrApplication.TAG, "ORIGINAL REQ: " + call.request().toString());
 
         call.enqueue(new Callback<RestaurantsResponse>() {
             @Override
@@ -35,6 +40,7 @@ public class RestaurantsInteractor {
 
                 int statusCode = response.code();
                 Log.d(HunGrrApplication.TAG, "Status code: " + String.valueOf(statusCode));
+                Log.d(HunGrrApplication.TAG, "ORIGINAL RESTAURANTS RESPONSE: " + response.raw().toString());
 
                 RestaurantsResponse restaurantsResponse = response.body();
                 callback.onRestaurantsLoaded(restaurantsResponse.getRestaurants());

@@ -1,14 +1,11 @@
 package com.snotsoft.hungrr.login;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -19,12 +16,12 @@ import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
-import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
-import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
+import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
+import com.snotsoft.hungrr.utils.UserSessionManager;
 
 import java.util.List;
 
@@ -69,10 +66,16 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 hideKeyboard();
                 mActionsListener.doLogin(
                         emailWrapper.getEditText().getText().toString().trim(),
-                        passwordWrapper.getEditText().getText().toString().trim()
+                        passwordWrapper.getEditText().getText().toString().trim(),
+                        Injection.provideUserSessionManager(LoginActivity.this).getLastSignUpUser().getTokeSession()
                 );
             }
         });
+
+        UserSessionManager dataManager = Injection.provideUserSessionManager(this);
+        if(dataManager.isRecentlyUserSignUp()){
+            setupPreLoginUserData(dataManager.getLastSignUpUser());
+        }
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,5 +163,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
                     hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    private void setupPreLoginUserData(User preLoggedUser) {
+        emailEditText.setText(preLoggedUser.getEmail());
+        passwordEditText.setText(preLoggedUser.getPassword());
     }
 }

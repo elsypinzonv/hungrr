@@ -1,12 +1,14 @@
 package com.snotsoft.hungrr.signup;
 
+import android.util.Log;
+
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.interactor.SignUpInteractor;
 import com.snotsoft.hungrr.io.callbacks.RegisterCallback;
-import com.snotsoft.hungrr.utils.SignUpDataManager;
-import com.snotsoft.hungrr.utils.TokenSessionManager;
+import com.snotsoft.hungrr.utils.UserSessionManager;
 
 import java.util.List;
 
@@ -18,8 +20,7 @@ public class SignUpPresenter implements SignUpContract.UserActionListener, Regis
     private SignUpContract.View mView;
     private SignUpInteractor mInteractor;
     private Validator mValidator;
-    private TokenSessionManager mTokenSessionManager;
-    private SignUpDataManager mSignUpDataManager;
+    private UserSessionManager mSessionManager;
 
     private String tempName;
     private String tempLastName;
@@ -31,14 +32,12 @@ public class SignUpPresenter implements SignUpContract.UserActionListener, Regis
     public SignUpPresenter(
             SignUpContract.View view,
             SignUpInteractor interactor,
-            TokenSessionManager tokenSessionManager,
-            SignUpDataManager signUpDataManager,
+            UserSessionManager sessionManager,
             Validator validator
     ) {
         mView = view;
         mInteractor = interactor;
-        mTokenSessionManager = tokenSessionManager;
-        mSignUpDataManager = signUpDataManager;
+        mSessionManager = sessionManager;
         mValidator = validator;
         mValidator.setValidationListener(this);
     }
@@ -67,8 +66,8 @@ public class SignUpPresenter implements SignUpContract.UserActionListener, Regis
     @Override
     public void onRegisterSuccess(User newUser, String token) {
         mView.setProgressIndicator(false);
-        mSignUpDataManager.saveNewSignUpUser(newUser);
-        mTokenSessionManager.saveSignUpToken(token);
+        mSessionManager.saveNewSignUpUser(newUser, token);
+        Log.d(HunGrrApplication.TAG, "SAVING SIGNUP TOKEN: " + token);
         mView.onRegisterResult(true);
     }
 

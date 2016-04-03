@@ -1,12 +1,19 @@
 package com.snotsoft.hungrr.interactor;
 
-import android.os.Handler;
+import android.util.Log;
 
-import com.snotsoft.hungrr.io.HunGrrApiConstants;
+import com.snotsoft.hungrr.HunGrrApplication;
+import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
+import com.snotsoft.hungrr.io.model.FakeLoginResponse;
 import com.snotsoft.hungrr.io.model.LoginResponse;
 import com.snotsoft.hungrr.io.services.LoginApiService;
-import com.snotsoft.hungrr.io.services.endpoints.UsersApiServiceEndpoint;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -20,40 +27,62 @@ public class LoginInteractor {
         this.apiService = apiService;
     }
 
-    public void doLogin(final LoginCallback callback, final String email, final String password){
-        /*Call<LoginResponse> call = apiService.loginResult();
+    public void doLogin(final LoginCallback callback, final String email, final String password, final String token){
+
+        Log.d(HunGrrApplication.TAG,
+                "DOING LOGIN: "
+                        + email
+                        + " with token " + token);
+
+        final User user = new User(email, password, token);
+        Call<LoginResponse> call = apiService.loginResult(user);
+        Log.d(HunGrrApplication.TAG, "ORIGINAL URL LOGIN REQ: " + call.request().url().toString());
+
         call.enqueue(new Callback<LoginResponse>() {
 
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                Log.d(HunGrrApplication.TAG, "ORIGINAL LOGIN RESPONSE: " + response.raw().toString());
+
                 int statusCode = response.code();
                 LoginResponse loginResponse = response.body();
 
-                loginResponse.getSessionToken();
+                if(response.isSuccessful()){
+                    String tokenSession = response.headers().get("token");
 
-                callback.onLoginSuccess();
+                    if(tokenSession != null){
+                        callback.onLoginSuccess(new User(email, password, tokenSession));
+                    }else{
+                        if(response.message().equals("Wrong credentials!")){
+                            callback.onWrongCredentials();
+                        } else {
+                            callback.onFailedLogin("Ha ocurrido un error");
+                        }
+                    }
+
+                } else {
+                    try {
+                        callback.onFailedLogin(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-
-                callback.onFailedLogin();
-            }
-        });*/
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                LoginResponse response = UsersApiServiceEndpoint.validateUser(email, password);
-
-                if(response.getUser() != null){
-                    callback.onLoginSuccess(response.getUser());
+                //TODO: Change to better implementation
+                //callback.onFailedLogin(t.getMessage());
+                if(t.getMessage().equals("Token error!")){
+                    callback.onFailedLogin(t.getMessage());
+                } else if (t.getMessage().equals("Wrong credentials!")) {
+                    callback.onWrongCredentials();
                 } else {
-                    callback.onFailedLogin(response.getStatus());
+                    callback.onNetworkError();
                 }
-
             }
-        }, HunGrrApiConstants.LOGIN_SERVICE_LATENCY_IN_MILLIS);
+        });
     }
 
 }
