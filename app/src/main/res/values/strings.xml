@@ -23,12 +23,12 @@
     <string name="error_invalid_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="lbl_btn_login">Login</string>
-    <string name="lbl_btn_logout">Log out</string>
+    <string name="lbl_btn_logout">Cerrar sesión</string>
     <string name="lbl_main_message">Current session</string>
-    <string name="lbl_welcome_message">Welcome</string>
-    <string name="lbl_loading_message">Loading...</string>
+    <string name="lbl_welcome_message">Bienvenido</string>
+    <string name="lbl_loading_message">Cargando...</string>
     <string name="empty_data_message">Empty Fields</string>
-    <string name="error_failed_login">Error on login</string>
+    <string name="error_failed_login">Error al iniciar sesión</string>
     <string name="lbl_username_prefix"><b>"Username: "</b></string>
     <string name="lbl_password_hint">Contraseña</string>
     <string name="lbl_username_hint">Nombre de Usuario</string>
@@ -92,5 +92,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="lbl_choose_new_location">Elegir ubicación</string>
     <string name="lbl_facebook_signup">Iniciar Sesión con Facebook</string>
+    <string name="lbl_name_hint">Nombre</string>
+    <string name="lbl_last_name_hint">Apellido</string>
 
 </resources>

@@ -5,11 +5,8 @@ import android.util.Log;
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.io.callbacks.FacebookRegisterCallback;
-import com.snotsoft.hungrr.io.callbacks.RegisterCallback;
-import com.snotsoft.hungrr.io.model.FacebookRegisterResponse;
-import com.snotsoft.hungrr.io.model.RegisterResponse;
-import com.snotsoft.hungrr.io.services.FacebookRegisterApiService;
-import com.snotsoft.hungrr.io.services.RegisterApiService;
+import com.snotsoft.hungrr.io.model.FacebookSignUpResponse;
+import com.snotsoft.hungrr.io.services.FacebookSignUpApiService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,10 +17,10 @@ import retrofit2.Response;
  */
 public class FacebookSignUpInteractor {
 
-    FacebookRegisterApiService apiService;
+    FacebookSignUpApiService apiService;
 
-    public FacebookSignUpInteractor(FacebookRegisterApiService facebookRegisterApiService) {
-        this.apiService = facebookRegisterApiService;
+    public FacebookSignUpInteractor(FacebookSignUpApiService facebookSignUpApiService) {
+        this.apiService = facebookSignUpApiService;
     }
 
     public void doFacebookRegister(
@@ -34,20 +31,20 @@ public class FacebookSignUpInteractor {
             final String tempUsername
     ) {
         final User user = new User(tempFistName, tempLastName, tempEmail, tempUsername);
-        Call<FacebookRegisterResponse> call = apiService.registerWithFacebookResult(user);
-        call.enqueue(new Callback<FacebookRegisterResponse>() {
+        Call<FacebookSignUpResponse> call = apiService.registerWithFacebookResult(user);
+        call.enqueue(new Callback<FacebookSignUpResponse>() {
 
             @Override
-            public void onResponse(Call<FacebookRegisterResponse> call, Response<FacebookRegisterResponse> response) {
+            public void onResponse(Call<FacebookSignUpResponse> call, Response<FacebookSignUpResponse> response) {
                 int statusCode = response.code();
-                FacebookRegisterResponse registerResponse = response.body();
+                FacebookSignUpResponse registerResponse = response.body();
 
                 Log.d(HunGrrApplication.TAG, "FB REGISTER: " + response.message());
                 callback.onRegisterSuccess(user);
             }
 
             @Override
-            public void onFailure(Call<FacebookRegisterResponse> call, Throwable t) {
+            public void onFailure(Call<FacebookSignUpResponse> call, Throwable t) {
                 t.printStackTrace();
                 callback.onFailedRegister(t.getMessage());
             }

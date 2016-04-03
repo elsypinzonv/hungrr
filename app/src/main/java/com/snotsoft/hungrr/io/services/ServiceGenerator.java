@@ -79,7 +79,7 @@ public class ServiceGenerator {
         return retrofit.create(serviceClass);
     }
 
-    public static <S> S createService(Class<S> serviceClass, final AccessToken token) {
+   /* public static <S> S createService(Class<S> serviceClass, final AccessToken token) {
         if (token != null) {
             httpClient.addInterceptor(new Interceptor() {
                 @Override
@@ -101,6 +101,6 @@ public class ServiceGenerator {
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);
-    }
+    }*/
 
 }

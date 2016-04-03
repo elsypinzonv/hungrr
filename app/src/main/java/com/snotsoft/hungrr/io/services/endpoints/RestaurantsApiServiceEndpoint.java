@@ -1,4 +1,4 @@
-package com.snotsoft.hungrr.io.services;
+package com.snotsoft.hungrr.io.services.endpoints;
 
 import android.support.v4.util.ArrayMap;
 

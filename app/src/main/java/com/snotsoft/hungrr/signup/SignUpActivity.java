@@ -1,6 +1,6 @@
-package com.snotsoft.hungrr.register;
+package com.snotsoft.hungrr.signup;
 
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -11,39 +11,43 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
-import com.mobsandgeeks.saripaar.annotation.Select;
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.login.LoginActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
+public class SignUpActivity extends AppCompatActivity implements SignUpContract.View {
 
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.register_coordinator) CoordinatorLayout mCoordinator;
+    @Bind(R.id.nameWrapper) TextInputLayout nameWrapper;
+    @Bind(R.id.lastNameWrapper) TextInputLayout lastNameWrapper;
     @Bind(R.id.usernameWrapper) TextInputLayout usernameWrapper;
     @Bind(R.id.emailWrapper) TextInputLayout emailWrapper;
     @Bind(R.id.passwordWrapper) TextInputLayout passwordWrapper;
     @Bind(R.id.confirmWrapper) TextInputLayout confirmWrapper;
     @Bind(R.id.bottom_bar_already_account) LinearLayout alreadyHaveAccount;
+
+    @NotEmpty(message = "Ingresa tu primer nombre")
+    @Bind(R.id.et_name) EditText nameEditText;
+
+    @NotEmpty(message = "Ingresa tu apellido")
+    @Bind(R.id.et_lastName) EditText lastNameEditText;
 
     @NotEmpty(message = "Ingresa un nombre de usuario")
     @Bind(R.id.et_username) EditText usernameEditText;
@@ -58,34 +62,38 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     @ConfirmPassword(message = "Las contraseñas no coinciden")
     @Bind(R.id.et_confirm_password) EditText confirmEditText;
 
-    @Select(defaultSelection = 3, message = "Especifíca tu género")
-    @Bind(R.id.spinner_gender) Spinner spinnerGender;
+    //@Select(defaultSelection = 3, message = "Especifíca tu género")
+    //@Bind(R.id.spinner_gender) Spinner spinnerGender;
+    private ProgressDialog mProgressDialog;
 
-    private RegisterContract.UserActionListener mActionsListener;
+    private SignUpContract.UserActionListener mActionsListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mActionsListener = new RegisterPresenter(
+        mActionsListener = new SignUpPresenter(
                 this,
                 Injection.provideRegisterInteractor(),
+                Injection.provideTokenSessionManager(this),
+                Injection.provideSignUpDataManager(this),
                 Injection.provideSaripaarValidator(this)
         );
 
         alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityHelper.sendTo(RegisterActivity.this, LoginActivity.class);
+                ActivityHelper.sendTo(SignUpActivity.this, LoginActivity.class);
             }
         });
 
-        setupSpinner();
+        setupProgressDialog();
+        //setupSpinner();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,10 +122,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     private void actionRegister() {
         mActionsListener.doRegister(
-                usernameWrapper.getEditText().getText().toString(),
+                nameWrapper.getEditText().getText().toString(),
+                lastNameWrapper.getEditText().getText().toString(),
                 emailWrapper.getEditText().getText().toString(),
-                passwordWrapper.getEditText().getText().toString(),
-                spinnerGender.getSelectedItem().toString()
+                usernameWrapper.getEditText().getText().toString(),
+                passwordWrapper.getEditText().getText().toString()
         );
     }
 
@@ -130,7 +139,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     @Override
     public void setProgressIndicator(boolean active) {
-
+        if(active){
+            mProgressDialog.show();
+        }else {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override
@@ -154,9 +167,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
             if (view instanceof EditText) {
                 ((EditText) view).setError(message);
             } else if(view instanceof Spinner){
-                //showRegisterFailedMessage("Especifíca tu género");
-
-                ((TextView)spinnerGender.getSelectedView()).setError(message);
+                //((TextView)spinnerGender.getSelectedView()).setError(message);
             } else {
                 showRegisterFailedMessage(message);
             }
@@ -168,8 +179,16 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         Snackbar.make(mCoordinator, message, Snackbar.LENGTH_LONG).show();
     }
 
+    private void setupProgressDialog() {
+        mProgressDialog = new ProgressDialog(SignUpActivity.this);
+        mProgressDialog.setMessage("Registrándote");
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(false);
+    }
+
+    //TODO: Uncomment when API accepts GENDER field
     private void setupSpinner() {
-        String[] myResArray = getResources().getStringArray(R.array.genders);
+        /*String[] myResArray = getResources().getStringArray(R.array.genders);
         final List<String> list = Arrays.asList(myResArray);
         final int listSize = list.size() -1;
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list) {
@@ -181,5 +200,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(dataAdapter);
         spinnerGender.setSelection(listSize); // Hidden item to appear in the spinner
+        */
     }
 }

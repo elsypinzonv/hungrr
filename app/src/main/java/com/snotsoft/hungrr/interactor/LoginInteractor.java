@@ -6,7 +6,7 @@ import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
 import com.snotsoft.hungrr.io.model.LoginResponse;
 import com.snotsoft.hungrr.io.services.LoginApiService;
-import com.snotsoft.hungrr.io.services.UsersApiServiceEndpoint;
+import com.snotsoft.hungrr.io.services.endpoints.UsersApiServiceEndpoint;
 
 
 /**

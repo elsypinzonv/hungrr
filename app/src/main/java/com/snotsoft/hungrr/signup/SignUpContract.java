@@ -1,6 +1,4 @@
-package com.snotsoft.hungrr.register;
-
-import android.content.Context;
+package com.snotsoft.hungrr.signup;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 
@@ -9,7 +7,7 @@ import java.util.List;
 /**
  * Created by Elsy on 13/03/2016.
  */
-public interface RegisterContract {
+public interface SignUpContract {
 
     interface View{
 
@@ -27,7 +25,7 @@ public interface RegisterContract {
     }
 
     interface UserActionListener{
-        void doRegister(String username, String email, String password, String gender);
+        void doRegister(String name, String lastName, String email, String username, String password);
     }
 
 }

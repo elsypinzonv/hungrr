@@ -1,19 +1,11 @@
 package com.snotsoft.hungrr.interactor;
 
-import android.support.v4.util.ArrayMap;
-
 import com.snotsoft.hungrr.HunGrrApplication;
-import com.snotsoft.hungrr.domain.Restaurant;
-import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
 import com.snotsoft.hungrr.io.model.RestaurantsResponse;
-import com.snotsoft.hungrr.io.services.RestaurantsApiServiceEndpoint;
 import com.snotsoft.hungrr.io.services.RestaurantsApiService;
 
-import android.os.Handler;
 import android.util.Log;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;

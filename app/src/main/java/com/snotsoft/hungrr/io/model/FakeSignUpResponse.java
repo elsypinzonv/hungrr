@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by luisburgos on 30/03/16.
  */
-public class FakeRegisterResponse {
+public class FakeSignUpResponse {
 
     @SerializedName("code")
     ResponseCode code;

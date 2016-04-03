@@ -1,11 +1,9 @@
 package com.snotsoft.hungrr.view.activities;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,11 +21,9 @@ import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.io.callbacks.FacebookRegisterCallback;
 import com.snotsoft.hungrr.login.LoginActivity;
-import com.snotsoft.hungrr.register.RegisterActivity;
-import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
+import com.snotsoft.hungrr.signup.SignUpActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
-import com.snotsoft.hungrr.utils.LocationPreferencesManager;
 import com.snotsoft.hungrr.utils.TextViewUtils;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
@@ -87,7 +83,7 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
     }
 
     @OnClick(R.id.btn_register) public void actionRegister(){
-        ActivityHelper.sendTo(DispatchActivity.this, RegisterActivity.class);
+        ActivityHelper.sendTo(DispatchActivity.this, SignUpActivity.class);
     }
 
     @Override

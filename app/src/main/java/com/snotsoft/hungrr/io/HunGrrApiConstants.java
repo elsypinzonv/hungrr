@@ -15,7 +15,7 @@ public class HunGrrApiConstants {
 
     public static final String SEARCH_PATH = "/search";
     public static final String LOGIN_PATH = "/login";
-    public static final String REGISTER_PATH = "/signup";
+    public static final String SIGN_UP_PATH = "/signup";
     public static final String RESTAURANTS_PATH = "/restaurants";
 
     public static final String KEY_LAT_PATH = "lat";
@@ -29,7 +29,7 @@ public class HunGrrApiConstants {
     public static final String RESTAURANT_SEARCH_URL = VERSION_PATH + SEARCH_PATH + "?" + TYPE_QUERY + "=" + RESTAURANT;
 
     public static final String TOKEN_URL = "/token";
-    public static final String REGISTER_URL = BASE_API_URL + REGISTER_PATH;
+    public static final String SIGN_UP_URL = BASE_API_URL + SIGN_UP_PATH;
     public static final String LOGIN_URL = BASE_API_URL + LOGIN_PATH;
     public static final String RESTAURANTS_URL = BASE_API_URL + RESTAURANTS_PATH + LATITUDE_RELATIVE_PATH + LONGITUDE_RELATIVE_PATH;
 
@@ -37,4 +37,6 @@ public class HunGrrApiConstants {
     public static final int SERVICE_LATENCY_IN_MILLIS = 500;
     public static final int LOGIN_SERVICE_LATENCY_IN_MILLIS = 2000;
 
+    //Headers from Response
+    public static final String HEADER_TOKEN = "token";
 }

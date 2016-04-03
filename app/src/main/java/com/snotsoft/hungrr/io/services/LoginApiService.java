@@ -20,10 +20,4 @@ public interface LoginApiService {
     @POST(HunGrrApiConstants.LOGIN_URL)
     Call<LoginResponse> loginResult();
 
-    @FormUrlEncoded
-    @POST(HunGrrApiConstants.TOKEN_URL)
-    Call<AccessToken> getAccessToken(
-            @Field("code") String code,
-            @Field("grant_type") String grantType);
-
 }

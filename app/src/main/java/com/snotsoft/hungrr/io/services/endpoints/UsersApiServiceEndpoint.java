@@ -1,4 +1,4 @@
-package com.snotsoft.hungrr.io.services;
+package com.snotsoft.hungrr.io.services.endpoints;
 
 import android.support.v4.util.ArrayMap;
 import android.util.Log;
@@ -6,7 +6,7 @@ import android.util.Log;
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.io.model.LoginResponse;
-import com.snotsoft.hungrr.io.model.FakeRegisterResponse;
+import com.snotsoft.hungrr.io.model.FakeSignUpResponse;
 
 import java.util.ArrayList;
 
@@ -34,19 +34,19 @@ public class UsersApiServiceEndpoint {
         DATA.put(id, user);
     }
 
-    public static FakeRegisterResponse tryToAddUser(String tempUsername, String tempEmail, String tempGender, String tempPassword){
-        FakeRegisterResponse result = new FakeRegisterResponse();
+    public static FakeSignUpResponse tryToAddUser(String tempUsername, String tempEmail, String tempGender, String tempPassword){
+        FakeSignUpResponse result = new FakeSignUpResponse();
 
         if(emailInUse(tempEmail)){
-            result.setResponseCode(FakeRegisterResponse.ResponseCode.EMAIL_TAKEN);
+            result.setResponseCode(FakeSignUpResponse.ResponseCode.EMAIL_TAKEN);
             return result;
         }else{
             if(isUsernameAlreadyTaken(tempUsername)){
-                result.setResponseCode(FakeRegisterResponse.ResponseCode.USERNAME_TAKEN);
+                result.setResponseCode(FakeSignUpResponse.ResponseCode.USERNAME_TAKEN);
                 return result;
             }else {
                 addUser(DATA.size()+1,tempUsername, tempEmail, tempPassword, "asdasd", tempGender);
-                result.setResponseCode(FakeRegisterResponse.ResponseCode.SUCCESS);
+                result.setResponseCode(FakeSignUpResponse.ResponseCode.SUCCESS);
                 return result;
             }
         }

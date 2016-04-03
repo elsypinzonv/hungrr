@@ -16,6 +16,8 @@ public class UserSessionManager {
     private static final String USER_PREFERENCES = "userPreferences";
     private static final String IS_USER_LOGIN = "IS_USER_LOGIN";
 
+    public static final String KEY_NAME = "KEY_NAME";
+    public static final String KEY_LAST_NAME = "KEY_LAST_NAME";
     public static final String KEY_EMAIL = "KEY_EMAIL";
     public static final String KEY_USERNAME = "KEY_USERNAME";
     public static final String KEY_PASSWORD = "KEY_PASSWORD";

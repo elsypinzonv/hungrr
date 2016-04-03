@@ -3,25 +3,24 @@ package com.snotsoft.hungrr.utils;
 import android.content.Context;
 
 import com.mobsandgeeks.saripaar.Validator;
-import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.interactor.FacebookSignUpInteractor;
-import com.snotsoft.hungrr.interactor.RegisterInteractor;
+import com.snotsoft.hungrr.interactor.SignUpInteractor;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
 import com.snotsoft.hungrr.interactor.LoginInteractor;
-import com.snotsoft.hungrr.io.services.FacebookRegisterApiService;
+import com.snotsoft.hungrr.io.services.FacebookSignUpApiService;
 import com.snotsoft.hungrr.io.services.LoginApiService;
-import com.snotsoft.hungrr.io.services.RegisterApiService;
+import com.snotsoft.hungrr.io.services.SignUpApiService;
 import com.snotsoft.hungrr.io.services.RestaurantsApiService;
 import com.snotsoft.hungrr.io.services.ServiceGenerator;
 
 public class Injection {
 
-    public static RegisterInteractor provideRegisterInteractor(){
-        return new RegisterInteractor(provideRegisterApiService());
+    public static SignUpInteractor provideRegisterInteractor(){
+        return new SignUpInteractor(provideRegisterApiService());
     }
 
-    private static RegisterApiService provideRegisterApiService() {
-        return ServiceGenerator.createService(RegisterApiService.class);
+    private static SignUpApiService provideRegisterApiService() {
+        return ServiceGenerator.createService(SignUpApiService.class);
     }
 
     public static LoginInteractor provideLoginInteractor(){
@@ -56,7 +55,15 @@ public class Injection {
         return new FacebookSignUpInteractor(provideFacebookRegisterApiService());
     }
 
-    private static FacebookRegisterApiService provideFacebookRegisterApiService() {
-        return ServiceGenerator.createService(FacebookRegisterApiService.class);
+    private static FacebookSignUpApiService provideFacebookRegisterApiService() {
+        return ServiceGenerator.createService(FacebookSignUpApiService.class);
+    }
+
+    public static TokenSessionManager provideTokenSessionManager(Context context) {
+        return new TokenSessionManager(context);
+    }
+
+    public static SignUpDataManager provideSignUpDataManager(Context context) {
+        return new SignUpDataManager(context);
     }
 }

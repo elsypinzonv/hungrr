@@ -47,7 +47,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".register.RegisterActivity"
+            android:name=".signup.SignUpActivity"
             android:label="@string/title_activity_register"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
