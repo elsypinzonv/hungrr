@@ -32,7 +32,7 @@ public class SignUpInteractor {
             final String tempUsername,
             final String tempPassword
     ) {
-        final User user = new User(tempName, tempLastName, tempEmail, tempUsername, tempPassword);
+        final User user = new User(tempName, tempLastName, tempEmail, tempPassword, tempUsername);
         Call<SignUpResponse> call = apiService.registerResult(user);
         Log.d(HunGrrApplication.TAG, "ORIGINAL URL SIGN UP REQ: " + call.request().url().toString());
         call.enqueue(new Callback<SignUpResponse>() {
