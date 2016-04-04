@@ -24,7 +24,7 @@ public class FacebookSignUpInteractor {
         this.apiService = facebookSignUpApiService;
     }
 
-    public void doFacebookRegister(
+    public void doFacebookSignUp(
             final FacebookSignUpCallback callback,
             final String tempFistName,
             final String tempLastName,

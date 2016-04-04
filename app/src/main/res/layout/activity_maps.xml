@@ -24,6 +24,7 @@
         android:layout_marginBottom="32dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:background="@color/colorGreen"
         style="@style/Widget.AppCompat.Button.Colored"/>
 
 </RelativeLayout>

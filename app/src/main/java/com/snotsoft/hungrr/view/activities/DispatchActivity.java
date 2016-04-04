@@ -88,10 +88,7 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
 
     @Override
     public void onSuccess(LoginResult loginResult) {
-
         String accessToken = loginResult.getAccessToken().getToken();
-        mSessionManager.setSessionToken(accessToken);
-
         Log.i(HunGrrApplication.TAG, "ACCESS TOKEN from FB: " + accessToken);
 
         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), this);
@@ -112,7 +109,7 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
     }
 
     private void doFacebookLogin(String first_name, String last_name, String email) {
-        Injection.provideFacebookSignUpInteractor().doFacebookRegister(new FacebookSignUpCallback() {
+        Injection.provideFacebookSignUpInteractor().doFacebookSignUp(new FacebookSignUpCallback() {
             @Override
             public void onSignUpSuccess(User user, String signUpToken) {
                 mSessionManager.createFbUserLoginSession(user, signUpToken);

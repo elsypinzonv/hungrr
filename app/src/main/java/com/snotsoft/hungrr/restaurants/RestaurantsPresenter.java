@@ -52,8 +52,11 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
     }
 
     @Override
-    public void onRestaurantsLoaded(ArrayList<Restaurant> restaurants) {
+    public void onRestaurantsLoaded(ArrayList<Restaurant> restaurants, String newToken) {
         mView.setProgressIndicator(false);
+
+        mSessionManager.updateSessionToken(newToken);
+
         if(restaurants != null && !restaurants.isEmpty()){
             mView.showRestaurants(restaurants);
         } else {

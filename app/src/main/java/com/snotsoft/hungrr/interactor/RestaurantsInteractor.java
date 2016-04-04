@@ -1,8 +1,8 @@
 package com.snotsoft.hungrr.interactor;
 
 import com.snotsoft.hungrr.HunGrrApplication;
+import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
-import com.snotsoft.hungrr.io.model.RestaurantsRequest;
 import com.snotsoft.hungrr.io.model.RestaurantsResponse;
 import com.snotsoft.hungrr.io.services.RestaurantsApiService;
 
@@ -39,11 +39,20 @@ public class RestaurantsInteractor {
             public void onResponse(Call<RestaurantsResponse> call, Response<RestaurantsResponse> response) {
 
                 int statusCode = response.code();
-                Log.d(HunGrrApplication.TAG, "Status code: " + String.valueOf(statusCode));
                 Log.d(HunGrrApplication.TAG, "ORIGINAL RESTAURANTS RESPONSE: " + response.raw().toString());
 
-                RestaurantsResponse restaurantsResponse = response.body();
-                callback.onRestaurantsLoaded(restaurantsResponse.getRestaurants());
+                if (response.isSuccessful()){
+                    final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
+                    Log.d(HunGrrApplication.TAG, "HunGrrSignUpSuccess: " + response.message()+ " with new token " + newToken);
+
+                    RestaurantsResponse restaurantsResponse = response.body();
+                    callback.onRestaurantsLoaded(restaurantsResponse.getRestaurants(), newToken);
+
+                } else {
+                    callback.onFailedLoad();
+                }
+
+
             }
 
             @Override

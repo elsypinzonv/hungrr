@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public interface RestaurantsCallback extends ServerCallback{
 
-    void onRestaurantsLoaded(ArrayList<Restaurant> restaurants);
+    void onRestaurantsLoaded(ArrayList<Restaurant> restaurants, String newToken);
 
     void onFailedLoad();
 

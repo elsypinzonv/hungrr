@@ -106,7 +106,7 @@ public class UserSessionManager {
         return userPreferences.getBoolean(IS_USER_SIGN_UP_RECENTLY, false);
     }
 
-    public void setSessionToken(String sessionToken) {
+    public void updateSessionToken(String sessionToken) {
         editor.putString(KEY_SESSION_TOKEN, sessionToken);
         editor.commit();
     }
