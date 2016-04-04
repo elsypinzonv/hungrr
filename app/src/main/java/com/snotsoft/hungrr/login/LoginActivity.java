@@ -66,8 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 hideKeyboard();
                 mActionsListener.doLogin(
                         emailWrapper.getEditText().getText().toString().trim(),
-                        passwordWrapper.getEditText().getText().toString().trim(),
-                        Injection.provideUserSessionManager(LoginActivity.this).getLastSignUpUser().getTokeSession()
+                        passwordWrapper.getEditText().getText().toString().trim()
                 );
             }
         });

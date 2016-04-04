@@ -71,11 +71,14 @@ public class UserSessionManager {
 
     public void logoutUser(){
         editor.remove(IS_USER_LOGIN);
+        editor.remove(IS_USER_SIGN_UP_RECENTLY);
         editor.remove(KEY_NAME);
         editor.remove(KEY_LAST_NAME);
         //editor.remove(KEY_EMAIL);
         editor.remove(KEY_USERNAME);
         editor.remove(KEY_PASSWORD);
+        editor.remove(KEY_SIGN_UP_TOKEN);
+        editor.remove(KEY_SESSION_TOKEN);
         //editor.clear();
         editor.commit();
     }

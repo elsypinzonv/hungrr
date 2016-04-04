@@ -24,7 +24,6 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
 
     private String tempEmail;
     private String tempPassword;
-    private String tempSigUpToken;
 
     public LoginPresenter(
             LoginContract.View mLoginView,
@@ -40,17 +39,16 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
     }
 
     @Override
-    public void doLogin(final String email, final String password, final String sigUpToken) {
+    public void doLogin(final String email, final String password) {
         tempEmail = email;
         tempPassword = password;
-        tempSigUpToken = sigUpToken;
         mValidator.validate();
     }
 
     @Override
     public void onValidationSucceeded() {
         mLoginView.setProgressIndicator(true);
-        mInteractor.doLogin(this, tempEmail, tempPassword, tempSigUpToken);
+        mInteractor.doLogin(this, tempEmail, tempPassword);
     }
 
     @Override

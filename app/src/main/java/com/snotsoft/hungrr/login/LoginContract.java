@@ -32,7 +32,7 @@ public interface LoginContract {
 
     interface UserActionsListener {
 
-        void doLogin(String email, String password, String sigUpToken);
+        void doLogin(String email, String password);
 
     }
 

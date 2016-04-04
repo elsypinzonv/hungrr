@@ -27,16 +27,13 @@ public class LoginInteractor {
         this.apiService = apiService;
     }
 
-    public void doLogin(final LoginCallback callback, final String email, final String password, final String token){
+    public void doLogin(final LoginCallback callback, final String email, final String password){
 
-        Log.d(HunGrrApplication.TAG,
-                "DOING LOGIN: "
-                        + email
-                        + " with token " + token);
+        Log.d(HunGrrApplication.TAG, "DOING LOGIN: " + email);
 
-        final User user = new User(email, password, token);
+        final User user = new User(email, password);
         Call<LoginResponse> call = apiService.loginResult(user);
-        Log.d(HunGrrApplication.TAG, "ORIGINAL URL LOGIN REQ: " + call.request().url().toString());
+        Log.d(HunGrrApplication.TAG, "ORIGINAL URL LOGIN REQ: " + call.request().toString());
 
         call.enqueue(new Callback<LoginResponse>() {
 
@@ -45,11 +42,12 @@ public class LoginInteractor {
                 Log.d(HunGrrApplication.TAG, "ORIGINAL LOGIN RESPONSE: " + response.raw().toString());
 
                 int statusCode = response.code();
-                LoginResponse loginResponse = response.body();
 
                 if(response.isSuccessful()){
-                    String tokenSession = response.headers().get("token");
+                    LoginResponse loginResponse = response.body();
+                    Log.d(HunGrrApplication.TAG, "LOGIN RESPONSE MSG: " + loginResponse.getMessage());
 
+                    String tokenSession = response.headers().get("token");
                     if(tokenSession != null){
                         callback.onLoginSuccess(new User(email, password, tokenSession));
                     }else{
@@ -62,6 +60,7 @@ public class LoginInteractor {
 
                 } else {
                     try {
+                        Log.d(HunGrrApplication.TAG, "LOGIN RESPONSE MSG: " + response.errorBody().string());
                         callback.onFailedLogin(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -75,6 +74,7 @@ public class LoginInteractor {
                 //TODO: Change to better implementation
                 //callback.onFailedLogin(t.getMessage());
                 if(t.getMessage().equals("Token error!")){
+                    Log.d(HunGrrApplication.TAG, "LOGIN FAILURE MSG: " + t.getMessage());
                     callback.onFailedLogin(t.getMessage());
                 } else if (t.getMessage().equals("Wrong credentials!")) {
                     callback.onWrongCredentials();

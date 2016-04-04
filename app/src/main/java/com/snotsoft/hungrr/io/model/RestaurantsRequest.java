@@ -13,7 +13,7 @@ public class RestaurantsRequest {
     @SerializedName("longitude")
     private double longitude;
 
-    @SerializedName("auth_token")
+    @SerializedName("Authorization")
     private String token;
 
     public RestaurantsRequest(double latitude, double longitude, String token) {
