@@ -34,12 +34,13 @@ public class SignUpInteractor {
     ) {
         final User user = new User(tempName, tempLastName, tempEmail, tempUsername, tempPassword);
         Call<SignUpResponse> call = apiService.registerResult(user);
-        Log.d(HunGrrApplication.TAG, "ORIGINAL URL SIGNUP REQ: " + call.request().url().toString());
+        Log.d(HunGrrApplication.TAG, "ORIGINAL URL SIGN UP REQ: " + call.request().url().toString());
         call.enqueue(new Callback<SignUpResponse>() {
 
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                Log.d(HunGrrApplication.TAG, "ORIGINAL SIGNUP RESPONSE: " + response.raw().toString());
+                Log.d(HunGrrApplication.TAG, "ORIGINAL SIGN UP RESPONSE: " + response.raw().toString());
+
                 int statusCode = response.code();
                 SignUpResponse signUpResponse = response.body();
 

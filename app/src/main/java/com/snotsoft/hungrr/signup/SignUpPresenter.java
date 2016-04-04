@@ -67,7 +67,7 @@ public class SignUpPresenter implements SignUpContract.UserActionListener, SignU
     public void onSignUpSuccess(User newUser, String signUpToken) {
         mView.setProgressIndicator(false);
         mSessionManager.saveNewSignUpUser(newUser, signUpToken);
-        Log.d(HunGrrApplication.TAG, "SAVING SIGNUP TOKEN: " + signUpToken);
+        Log.d(HunGrrApplication.TAG, "SAVING SIGN UP TOKEN: " + signUpToken);
         mView.onRegisterResult(true);
     }
 
