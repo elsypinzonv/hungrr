@@ -1,5 +1,6 @@
 package com.snotsoft.hungrr.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -19,6 +21,7 @@ import com.mobsandgeeks.saripaar.annotation.Password;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.domain.User;
+import com.snotsoft.hungrr.signup.SignUpActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.UserSessionManager;
@@ -36,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Bind(R.id.btn_login) Button btnLogin;
     @Bind(R.id.emailWrapper) TextInputLayout emailWrapper;
     @Bind(R.id.passwordWrapper) TextInputLayout passwordWrapper;
+    @Bind(R.id.link_sign_up) TextView mLinkToSignUpTextView;
 
     @NotEmpty (message = "Ingresa un correo")
     @Email (message =  "Correo no válido")
@@ -44,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Password(min = 5, scheme = Password.Scheme.ANY, message = "Mínimo 5 caracteres")
     @Bind(R.id.et_password) EditText passwordEditText;
 
+    private ProgressDialog mProgressDialog;
     private LoginContract.UserActionsListener mActionsListener;
 
     @Override
@@ -60,6 +65,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 Injection.provideSaripaarValidator(this)
         );
 
+        UserSessionManager dataManager = Injection.provideUserSessionManager(this);
+        if(dataManager.isRecentlyUserSignUp()){
+            setupPreLoginUserData(dataManager.getLastSignUpUser());
+        }
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,10 +81,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             }
         });
 
-        UserSessionManager dataManager = Injection.provideUserSessionManager(this);
-        if(dataManager.isRecentlyUserSignUp()){
-            setupPreLoginUserData(dataManager.getLastSignUpUser());
-        }
+        mLinkToSignUpTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityHelper.sendTo(LoginActivity.this, SignUpActivity.class);
+            }
+        });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             }
         });
 
+        setupProgressDialog();
     }
 
     @Override
@@ -101,10 +114,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         passwordWrapper.setEnabled(!loading);
         btnLogin.setEnabled(!loading);
         if(loading){
+            mProgressDialog.show();
             emailWrapper.setError(null);
             passwordWrapper.setError(null);
             btnLogin.setText(getString(R.string.lbl_loading_message));
         }else {
+            mProgressDialog.dismiss();
             btnLogin.setText(getString(R.string.lbl_btn_login));
         }
     }
@@ -167,5 +182,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private void setupPreLoginUserData(User preLoggedUser) {
         emailEditText.setText(preLoggedUser.getEmail());
         passwordEditText.setText(preLoggedUser.getPassword());
+    }
+
+    private void setupProgressDialog() {
+        mProgressDialog = new ProgressDialog(LoginActivity.this);
+        mProgressDialog.setMessage("Iniciando Sesión");
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(false);
     }
 }

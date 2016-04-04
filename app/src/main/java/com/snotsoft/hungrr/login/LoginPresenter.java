@@ -66,14 +66,15 @@ public class LoginPresenter implements LoginContract.UserActionsListener, LoginC
 
     @Override
     public void onWrongCredentials() {
-        mLoginView.showLoginFailedMessage("Correo o contraseña incorrecta");
         mLoginView.setProgressIndicator(false);
+        mLoginView.showLoginFailedMessage("Correo o contraseña incorrecta");
+
     }
 
     @Override
     public void onFailedLogin(String message) {
-        mLoginView.showLoginFailedMessage(message);
         mLoginView.setProgressIndicator(false);
+        mLoginView.showLoginFailedMessage(message);
     }
 
     @Override

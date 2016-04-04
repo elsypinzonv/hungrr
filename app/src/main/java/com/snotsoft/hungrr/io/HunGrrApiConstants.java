@@ -40,4 +40,5 @@ public class HunGrrApiConstants {
     //Headers from Response
     public static final String HEADER_REQUEST_TOKEN = "Authorization";
     public static final String HEADER_RESPONSE_TOKEN = "token";
+    public static final String FB_PASSWORD = "hungrr2016";
 }

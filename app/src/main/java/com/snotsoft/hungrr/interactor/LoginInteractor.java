@@ -60,8 +60,9 @@ public class LoginInteractor {
 
                 } else {
                     try {
-                        Log.d(HunGrrApplication.TAG, "LOGIN RESPONSE MSG: " + response.errorBody().string());
-                        callback.onFailedLogin(response.errorBody().string());
+                        String messageError = response.errorBody().string();
+                        callback.onFailedLogin("Ups! Verifica tus datos");
+                        Log.d(HunGrrApplication.TAG, "LOGIN RESPONSE MSG: " + messageError);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

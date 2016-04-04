@@ -31,7 +31,7 @@ public class FacebookSignUpInteractor {
             final String tempEmail,
             final String tempUsername
     ) {
-        final User user = new User(tempFistName, tempLastName, tempEmail, tempUsername);
+        final User user = new User(tempFistName, tempLastName, tempEmail, HunGrrApiConstants.FB_PASSWORD, tempUsername);
         Call<FacebookSignUpResponse> call = apiService.registerWithFacebookResult(user);
         call.enqueue(new Callback<FacebookSignUpResponse>() {
 

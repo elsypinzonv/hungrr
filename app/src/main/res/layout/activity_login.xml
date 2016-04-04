@@ -67,12 +67,13 @@
             android:textColor="@android:color/white"
             android:text="@string/lbl_login"/>
 
-        <TextView android:id="@+id/link_signup"
+        <TextView android:id="@+id/link_sign_up"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:text="@string/lbl_no_account_yet"
             android:gravity="center"
+            android:clickable="true"
             android:textSize="16sp"/>
 
         <!--
