@@ -7,7 +7,7 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.interactor.SignUpInteractor;
-import com.snotsoft.hungrr.io.callbacks.RegisterCallback;
+import com.snotsoft.hungrr.io.callbacks.SignUpCallback;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Elsy on 13/03/2016.
  */
-public class SignUpPresenter implements SignUpContract.UserActionListener, RegisterCallback, Validator.ValidationListener {
+public class SignUpPresenter implements SignUpContract.UserActionListener, SignUpCallback, Validator.ValidationListener {
 
     private SignUpContract.View mView;
     private SignUpInteractor mInteractor;
@@ -64,10 +64,10 @@ public class SignUpPresenter implements SignUpContract.UserActionListener, Regis
     }
 
     @Override
-    public void onRegisterSuccess(User newUser, String token) {
+    public void onSignUpSuccess(User newUser, String signUpToken) {
         mView.setProgressIndicator(false);
-        mSessionManager.saveNewSignUpUser(newUser, token);
-        Log.d(HunGrrApplication.TAG, "SAVING SIGNUP TOKEN: " + token);
+        mSessionManager.saveNewSignUpUser(newUser, signUpToken);
+        Log.d(HunGrrApplication.TAG, "SAVING SIGNUP TOKEN: " + signUpToken);
         mView.onRegisterResult(true);
     }
 

@@ -5,9 +5,9 @@ import com.snotsoft.hungrr.domain.User;
 /**
  * Created by luisburgos on 30/03/16.
  */
-public interface RegisterCallback extends ServerCallback {
+public interface SignUpCallback extends ServerCallback {
 
-    void onRegisterSuccess(User newUser, String registerToken);
+    void onSignUpSuccess(User newUser, String signUpToken);
 
     void onFailedRegister(String message);
 

@@ -8,8 +8,6 @@ import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.interactor.LoginInteractor;
 import com.snotsoft.hungrr.io.callbacks.LoginCallback;
-import com.snotsoft.hungrr.io.callbacks.RegisterCallback;
-import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
 import java.util.List;

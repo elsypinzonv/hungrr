@@ -19,7 +19,7 @@ import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.domain.User;
-import com.snotsoft.hungrr.io.callbacks.FacebookRegisterCallback;
+import com.snotsoft.hungrr.io.callbacks.FacebookSignUpCallback;
 import com.snotsoft.hungrr.login.LoginActivity;
 import com.snotsoft.hungrr.signup.SignUpActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
@@ -112,10 +112,10 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
     }
 
     private void doFacebookLogin(String first_name, String last_name, String email) {
-        Injection.provideFacebookSignUpInteractor().doFacebookRegister(new FacebookRegisterCallback() {
+        Injection.provideFacebookSignUpInteractor().doFacebookRegister(new FacebookSignUpCallback() {
             @Override
-            public void onRegisterSuccess(User user, String token) {
-                mSessionManager.createFbUserLoginSession(user, token);
+            public void onSignUpSuccess(User user, String signUpToken) {
+                mSessionManager.createFbUserLoginSession(user, signUpToken);
                 ActivityHelper.sendTo(DispatchActivity.this, LocationActivity.class);
             }
 

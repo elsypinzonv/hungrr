@@ -5,9 +5,9 @@ import com.snotsoft.hungrr.domain.User;
 /**
  * Created by luisburgos on 1/04/16.
  */
-public interface FacebookRegisterCallback {
+public interface FacebookSignUpCallback {
 
-    void onRegisterSuccess(User user, String registerToken);
+    void onSignUpSuccess(User user, String signUpToken);
 
     void onFailedRegister(String message);
 
