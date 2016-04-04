@@ -47,8 +47,8 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
         //holder.tx_price.setText(restaurant.getPrice());
         Picasso.with(mContext)
                 .load(restaurant.getProfileImage())
-                .placeholder(R.mipmap.ic_done)
-                .error(R.drawable.background_main_1) //TODO:Change this when fix image path from server
+                .placeholder(R.drawable.restaurant_image_placeholder)
+                .error(R.drawable.restaurant_image_error)
                 .into(holder.img_restaurant);
 
     }
