@@ -1,5 +1,6 @@
 package com.snotsoft.hungrr.view.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -45,6 +47,7 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
     @Bind(R.id.btn_facebook_login) Button btnFacebookLogin;
     @Bind(R.id.tv_app_name) TextView appNameTextView;
 
+    private ProgressDialog mProgressDialog;
     private CallbackManager mCallbackManager;
     private UserSessionManager mSessionManager;
 
@@ -54,6 +57,7 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
         setContentView(R.layout.activity_dispatch);
         ButterKnife.bind(this);
         TextViewUtils.setLobsterTypeface(this, appNameTextView);
+        setupProgressDialog();
 
         mSessionManager = Injection.provideUserSessionManager(this);
         mCallbackManager = CallbackManager.Factory.create();
@@ -70,12 +74,16 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
 
     @OnClick(R.id.btn_facebook_login)
     public void requestFacebookLogin(){
-        LoginManager
-                .getInstance()
-                .logInWithReadPermissions(
-                        DispatchActivity.this,
-                        Arrays.asList("public_profile", "email", "user_friends")
-                );
+        if(mSessionManager.isFacebookLoggedIn() && mSessionManager.getFbAccessToken() != null){
+            doFacebookInformationRequest();
+        } else {
+            LoginManager
+                    .getInstance()
+                    .logInWithReadPermissions(
+                            DispatchActivity.this,
+                            Arrays.asList("public_profile", "email", "user_friends")
+                    );
+        }
     }
 
     @OnClick(R.id.btn_login) public void actionLogin(){
@@ -89,9 +97,16 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
     @Override
     public void onSuccess(LoginResult loginResult) {
         String accessToken = loginResult.getAccessToken().getToken();
+        mSessionManager.saveFacebookAccessToken(loginResult.getAccessToken());
         Log.i(HunGrrApplication.TAG, "ACCESS TOKEN from FB: " + accessToken);
 
-        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), this);
+        if(mSessionManager.isFacebookLoggedIn()){
+            doFacebookInformationRequest();
+        }
+    }
+
+    private void doFacebookInformationRequest() {
+        GraphRequest request = GraphRequest.newMeRequest(mSessionManager.getFbAccessToken(), this);
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location");
         request.setParameters(parameters);
@@ -109,16 +124,19 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
     }
 
     private void doFacebookLogin(String first_name, String last_name, String email) {
+        mProgressDialog.show();
         Injection.provideFacebookSignUpInteractor().doFacebookSignUp(new FacebookSignUpCallback() {
             @Override
             public void onSignUpSuccess(User user, String signUpToken) {
                 mSessionManager.createFbUserLoginSession(user, signUpToken);
                 ActivityHelper.sendTo(DispatchActivity.this, LocationActivity.class);
+                mProgressDialog.dismiss();
             }
 
             @Override
             public void onFailedRegister(String message) {
                 Toast.makeText(DispatchActivity.this, message, Toast.LENGTH_LONG).show();
+                mProgressDialog.dismiss();
             }
         }, first_name, last_name, email, first_name + last_name);
     }
@@ -175,5 +193,12 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
                     bFacebookData.getString("email")
             );
         }
+    }
+
+    private void setupProgressDialog() {
+        mProgressDialog = new ProgressDialog(DispatchActivity.this);
+        mProgressDialog.setMessage("Iniciando Sesión con Facebook");
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(false);
     }
 }

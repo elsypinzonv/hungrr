@@ -33,17 +33,32 @@ public class FacebookSignUpInteractor {
     ) {
         final User user = new User(tempFistName, tempLastName, tempEmail, HunGrrApiConstants.FB_PASSWORD, tempUsername);
         Call<FacebookSignUpResponse> call = apiService.registerWithFacebookResult(user);
+        Log.d(HunGrrApplication.TAG, "ORIGINAL FACEBOOK SIGN UP REQ: " + call.request().toString());
+
         call.enqueue(new Callback<FacebookSignUpResponse>() {
 
             @Override
             public void onResponse(Call<FacebookSignUpResponse> call, Response<FacebookSignUpResponse> response) {
+                Log.d(HunGrrApplication.TAG, "ORIGINAL FACEBOOK SIGNUP RES: " + response.raw().toString());
+
                 int statusCode = response.code();
                 FacebookSignUpResponse registerResponse = response.body();
 
-                String registerToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
+                if (response.isSuccessful()){
+                    String registerToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
+                    if(registerToken != null){
+                        Log.d(HunGrrApplication.TAG, "FB REGISTER: " + response.message());
+                        Log.d(HunGrrApplication.TAG, "FB REGISTER TOKEN: " + registerToken);
+                        callback.onSignUpSuccess(user, registerToken);
+                    } else {
+                        //TODO: Improve message logging
+                        Log.d(HunGrrApplication.TAG, "FB REGISTER TOKEN IS NULL");
+                        callback.onFailedRegister("No hemos podido registrar tu cuenta de Facebook");
+                    }
+                } else {
+                    callback.onFailedRegister("No hemos podido registrar tu cuenta de Facebook");
+                }
 
-                Log.d(HunGrrApplication.TAG, "FB REGISTER: " + response.message());
-                callback.onSignUpSuccess(user, registerToken);
             }
 
             @Override

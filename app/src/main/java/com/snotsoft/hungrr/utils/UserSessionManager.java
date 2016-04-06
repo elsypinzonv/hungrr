@@ -3,6 +3,7 @@ package com.snotsoft.hungrr.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.facebook.AccessToken;
 import com.snotsoft.hungrr.domain.User;
 
 public class UserSessionManager {
@@ -16,6 +17,7 @@ public class UserSessionManager {
     private static final String USER_PREFERENCES = "userPreferences";
     private static final String IS_USER_LOGIN = "IS_USER_LOGIN";
     private static final String IS_USER_SIGN_UP_RECENTLY = "IS_USER_SIGN_UP_RECENTLY";
+    private static final String IS_FACEBOOK_LOGIN = "IS_FACEBOOK_LOGIN";
     private static final String KEY_SIGN_UP_TOKEN = "KEY_SIGN_UP_TOKEN";
 
     public static final String KEY_NAME = "KEY_NAME";
@@ -71,6 +73,7 @@ public class UserSessionManager {
 
     public void logoutUser(){
         editor.remove(IS_USER_LOGIN);
+        editor.remove(IS_FACEBOOK_LOGIN);
         editor.remove(IS_USER_SIGN_UP_RECENTLY);
         editor.remove(KEY_NAME);
         editor.remove(KEY_LAST_NAME);
@@ -124,5 +127,19 @@ public class UserSessionManager {
 
     public String getTokenSession() {
         return userPreferences.getString(KEY_SESSION_TOKEN, null);
+    }
+
+    public void saveFacebookAccessToken(AccessToken accessToken) {
+        AccessToken.setCurrentAccessToken(accessToken);
+        editor.putBoolean(IS_FACEBOOK_LOGIN, true);
+        editor.commit();
+    }
+
+    public AccessToken getFbAccessToken() {
+        return AccessToken.getCurrentAccessToken();
+    }
+
+    public boolean isFacebookLoggedIn() {
+        return userPreferences.getBoolean(IS_FACEBOOK_LOGIN, false);
     }
 }
