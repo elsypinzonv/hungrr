@@ -1,7 +1,30 @@
 <resources>
 
     <style name="AppTheme.NoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme.NoActionBar"/>
+
+    <style name="LoginTheme" parent="AppTheme.NoActionBar" />
+
+    <style name="TranslucentStatusTheme" parent="AppTheme.NoActionBar">
+        <!--<item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowActionBarOverlay">true</item>-->
+    </style>
+
+    <style name="HungryLevelTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/colorBlue</item>
+        <item name="colorPrimaryDark">@color/colorBlueDark</item>
+        <item name="colorAccent">@color/colorGreen</item>
+    </style>
+
+    <style name="BudgetTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/colorTeal</item>
+        <item name="colorPrimaryDark">@color/colorTealDark</item>
+        <item name="colorAccent">@color/colorRed</item>
     </style>
 
 </resources>
