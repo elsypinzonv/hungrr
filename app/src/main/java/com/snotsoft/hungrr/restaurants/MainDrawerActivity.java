@@ -150,7 +150,6 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Toast.makeText(getApplicationContext(),"Amiguito",Toast.LENGTH_LONG).show();
         selectDrawerItem(item);
         item.setChecked(true);
         mDrawerLayout.closeDrawers();

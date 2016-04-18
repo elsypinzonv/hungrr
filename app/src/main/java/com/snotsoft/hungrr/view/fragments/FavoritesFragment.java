@@ -7,21 +7,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.restaurants.RestaurantsLowLevelContract;
+import com.snotsoft.hungrr.restaurants.RestaurantsPresenter;
+import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.adapters.FavoritesAdapter;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Elsy on 17/04/2016.
  */
-public class FavoritesFragment extends Fragment {
+public class FavoritesFragment extends Fragment  implements RestaurantsLowLevelContract.View{
 
     private RecyclerView mRecyclerView;
     private FavoritesAdapter mAdapter;
@@ -56,12 +55,12 @@ public class FavoritesFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
-    /*    mActionsListener = new RestaurantsPresenter(
+       mActionsListener = new RestaurantsPresenter(
                 this,
                 Injection.provideRestaurantsInteractor(),
                 Injection.provideUserSessionManager(getActivity().getApplicationContext()),
                 Injection.provideLocationPreferencesManager(getActivity().getApplicationContext())
-        ); */
+        );
     }
 
     @Override
@@ -76,4 +75,24 @@ public class FavoritesFragment extends Fragment {
         return root;
     }
 
+
+    @Override
+    public void setProgressIndicator(boolean active) {
+
+    }
+
+    @Override
+    public void showRestaurants(List<Restaurant> restaurants) {
+        mAdapter.replaceData(restaurants);
+    }
+
+    @Override
+    public void showRestaurantProfileUI(String id) {
+
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+
+    }
 }
