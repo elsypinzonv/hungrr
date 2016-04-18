@@ -17,15 +17,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 import com.snotsoft.hungrr.view.activities.DispatchActivity;
+import com.snotsoft.hungrr.view.fragments.FavoritesFragment;
 import com.snotsoft.hungrr.view.widgets.LogoutDialog;
 
-public class MainDrawerActivity extends AppCompatActivity {
+public class MainDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private CoordinatorLayout mCoordinator;
     private NavigationView mNavigationView;
@@ -40,35 +42,15 @@ public class MainDrawerActivity extends AppCompatActivity {
 
         mCoordinator = (CoordinatorLayout) findViewById(R.id.main_coordinator);
 
-        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                return false;
-            }
-        });
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-                super.onDrawerClosed(drawerView);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-                super.onDrawerOpened(drawerView);
-            }
-        };
-
-        //Setting the actionbarToggle to drawer layout
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer);
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        setupDrawerContent(mNavigationView);
+
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        setupHeaderContent();
+        mNavigationView.setNavigationItemSelectedListener(this);
 
         if (null == savedInstanceState) {
             initFragment(RestaurantsFragment.newInstance());
@@ -104,22 +86,7 @@ public class MainDrawerActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        setupHeaderContent();
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
-    }
-
     private void setupHeaderContent() {
-
         View header = mNavigationView.getHeaderView(0);
         TextView username = (TextView) header.findViewById(R.id.header_username);
         username.setText(Injection.provideUserSessionManager(this).getUsername());
@@ -136,10 +103,11 @@ public class MainDrawerActivity extends AppCompatActivity {
                 fragmentClass = RestaurantsFragment.class;
                 break;
             case R.id.menu_item_favorites:
-                fragmentClass = RestaurantsFragment.class;
+                fragmentClass = FavoritesFragment.class;
                 break;
             case R.id.menu_item_logout:
                 requestLogoutConfirmation();
+
             default:
                 fragmentClass = RestaurantsFragment.class;
         }
@@ -180,4 +148,13 @@ public class MainDrawerActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        Toast.makeText(getApplicationContext(),"Amiguito",Toast.LENGTH_LONG).show();
+        selectDrawerItem(item);
+        item.setChecked(true);
+        mDrawerLayout.closeDrawers();
+
+        return true;
+    }
 }

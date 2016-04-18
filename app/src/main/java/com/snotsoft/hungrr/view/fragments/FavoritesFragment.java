@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.restaurants.RestaurantsLowLevelContract;
@@ -35,6 +37,7 @@ public class FavoritesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mAdapter = new FavoritesAdapter(getActivity(), new ArrayList<Restaurant>(0), new RestaurantItemListener() {
             @Override
             public void onRestaurantClick(Restaurant clickedRestaurant) {
