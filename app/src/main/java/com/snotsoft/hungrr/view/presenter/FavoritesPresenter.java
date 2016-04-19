@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
-import com.snotsoft.hungrr.restaurants.RestaurantsLowLevelContract;
 import com.snotsoft.hungrr.utils.LocationPreferencesManager;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 import com.snotsoft.hungrr.view.contracts.FavoritesContract;
@@ -24,6 +23,7 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
     private UserSessionManager mSessionManager;
     private LocationPreferencesManager mLocationPreferences;
 
+
     public FavoritesPresenter(
             @NonNull FavoritesContract.View view,
             @NonNull RestaurantsInteractor interactor,
@@ -34,6 +34,7 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
         mView = checkNotNull(view);
         mSessionManager = checkNotNull(sessionManager);
         mLocationPreferences = checkNotNull(locationPreferences);
+
     }
 
 
@@ -55,8 +56,15 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
     }
 
     @Override
-    public void selectFavorites(int position) {
+    public void selectFavorites(int position, Restaurant restaurant) {
+        mView.showSelectedItem(position);
+        mView.showFloatingMenu();
+    }
 
+    @Override
+    public void removeFavorites() {
+        mView.showFavorites();
+        mView.showFloatingMenu();
     }
 
     @Override

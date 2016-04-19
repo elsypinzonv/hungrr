@@ -2,20 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:id="@+id/container">
+<LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/restaurant"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@mipmap/ic_launcher"
        />
 
@@ -32,15 +30,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="name"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="marquee"/>
 
         <TextView
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="type"
-            android:textSize="18dp"/>
+            android:textSize="16dp"
+            android:singleLine="true"
+            android:ellipsize="end"/>
 
 
     </LinearLayout>
@@ -50,8 +52,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorGray"
-        android:layout_marginLeft="98dp"
-        android:layout_marginRight="5dp"></View>
+        android:background="@color/colorDividerGroup"
+        android:layout_marginLeft="80dp"
+        ></View>
 
 </LinearLayout>

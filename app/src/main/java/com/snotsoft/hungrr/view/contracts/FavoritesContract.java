@@ -15,9 +15,15 @@ public interface FavoritesContract {
 
         void showFavorites(List<Restaurant> restaurants);
 
+        void showFavorites();
+
         void showRestaurantProfileUI(String id);
 
         void showErrorMessage(String message);
+
+        void showSelectedItem(int position);
+
+        void showFloatingMenu();
 
     }
 
@@ -27,8 +33,9 @@ public interface FavoritesContract {
 
         void openRestaurantProfile(Restaurant restaurant);
 
-        void selectFavorites(int position);
+        void selectFavorites(int position, Restaurant restaurant);
 
+        void removeFavorites();
     }
 
 }

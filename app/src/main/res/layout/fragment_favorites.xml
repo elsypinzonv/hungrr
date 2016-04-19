@@ -13,4 +13,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <RelativeLayout
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_floating_menu"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:gravity="center_vertical"
+        android:layout_margin="15dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/elements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="1 elemento"/>
+
+        <ImageView
+            android:id="@+id/remove"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_delete"/>
+
+    </RelativeLayout>
+
 </RelativeLayout>

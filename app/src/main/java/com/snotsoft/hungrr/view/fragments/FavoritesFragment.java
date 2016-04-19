@@ -7,6 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.utils.Injection;
@@ -25,6 +29,9 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
     private RecyclerView mRecyclerView;
     private FavoritesAdapter mAdapter;
+    private RelativeLayout mFloatingMenu;
+    private TextView mElements;
+    private ImageView mRemove;
     private FavoritesContract.UserActionsListener mActionsListener;
 
     public FavoritesFragment() {
@@ -46,9 +53,11 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
             @Override
             public void onRestaurantLongClick(Restaurant clickedRestaurant, int position) {
-
+                mActionsListener.selectFavorites(position,clickedRestaurant);
             }
         });
+
+
     }
 
     @Override
@@ -73,11 +82,21 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
-
+        mFloatingMenu = (RelativeLayout) root.findViewById(R.id.menu);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.favorites);
+        mElements = (TextView) root.findViewById(R.id.elements);
+        mRemove = (ImageView) root.findViewById(R.id.remove);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActionsListener.removeFavorites();
+            }
+        });
+
         return root;
     }
 
@@ -92,6 +111,11 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
         mAdapter.replaceData(restaurants);
     }
 
+    @Override
+    public void showFavorites() {
+        mAdapter.removeData();
+    }
+
 
     @Override
     public void showRestaurantProfileUI(String id) {
@@ -101,5 +125,29 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
     @Override
     public void showErrorMessage(String message) {
 
+    }
+
+    @Override
+    public void showSelectedItem(int position) {
+        mAdapter.toggleSelection(position);
+    }
+
+    @Override
+    public void showFloatingMenu() {
+        final int NOTHING_SELECTED=0;
+        int itemsSelected =mAdapter.getSelectedItemCount();
+        if(itemsSelected==NOTHING_SELECTED){
+            mFloatingMenu.setVisibility(View.GONE);
+        }else{
+            mFloatingMenu.setVisibility(View.VISIBLE);
+            setData(itemsSelected);
+        }
+
+    }
+
+    private void setData(int itemsSelected){
+        if(itemsSelected ==1){
+            mElements.setText("1 elemento");
+        }else mElements.setText(itemsSelected+" elementos");
     }
 }
