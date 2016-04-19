@@ -28,7 +28,7 @@
             android:value="@string/google_maps_key"/>
 
         <activity
-            android:name=".view.activities.SplashActivity"
+            android:name="com.snotsoft.hungrr.view.activities.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -75,7 +75,9 @@
             android:name=".base_preferences.LocationActivity"
             android:label="@string/title_activity_location"
             android:screenOrientation="portrait"
-            android:theme="@style/BudgetTheme" />
+            android:theme="@style/BudgetTheme" >
+
+        </activity>
 
         <activity
             android:name=".base_preferences.MapsActivity"

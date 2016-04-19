@@ -9,22 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
-import com.snotsoft.hungrr.restaurants.RestaurantsLowLevelContract;
-import com.snotsoft.hungrr.restaurants.RestaurantsPresenter;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.adapters.FavoritesAdapter;
+import com.snotsoft.hungrr.view.contracts.FavoritesContract;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
+import com.snotsoft.hungrr.view.presenter.FavoritesPresenter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Elsy on 17/04/2016.
  */
-public class FavoritesFragment extends Fragment  implements RestaurantsLowLevelContract.View{
+public class FavoritesFragment extends Fragment  implements FavoritesContract.View{
 
     private RecyclerView mRecyclerView;
     private FavoritesAdapter mAdapter;
-    private RestaurantsLowLevelContract.UserActionsListener mActionsListener;
+    private FavoritesContract.UserActionsListener mActionsListener;
 
     public FavoritesFragment() {
     }
@@ -42,20 +43,25 @@ public class FavoritesFragment extends Fragment  implements RestaurantsLowLevelC
             public void onRestaurantClick(Restaurant clickedRestaurant) {
                 mActionsListener.openRestaurantProfile(clickedRestaurant);
             }
+
+            @Override
+            public void onRestaurantLongClick(Restaurant clickedRestaurant, int position) {
+
+            }
         });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mActionsListener.loadRestaurants(false);
+        mActionsListener.loadFavorites(false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
-       mActionsListener = new RestaurantsPresenter(
+       mActionsListener = new FavoritesPresenter(
                 this,
                 Injection.provideRestaurantsInteractor(),
                 Injection.provideUserSessionManager(getActivity().getApplicationContext()),
@@ -82,9 +88,10 @@ public class FavoritesFragment extends Fragment  implements RestaurantsLowLevelC
     }
 
     @Override
-    public void showRestaurants(List<Restaurant> restaurants) {
+    public void showFavorites(List<Restaurant> restaurants) {
         mAdapter.replaceData(restaurants);
     }
+
 
     @Override
     public void showRestaurantProfileUI(String id) {

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
@@ -39,7 +40,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
     public void onBindViewHolder(FavoritesViewHolder holder, int position) {
 
         Restaurant restaurant = mRestaurants.get(position);
-        setListener(restaurant, holder);
+        setListener(restaurant, holder,position);
 
         holder.tx_name.setText(restaurant.getName());
         holder.tx_type.setText(restaurant.getType());
@@ -47,7 +48,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
                 .load(restaurant.getProfileImage())
                 .transform(new RoundedTransformation())
                 .placeholder(R.drawable.restaurant_image_placeholder)
-                .error(R.drawable.restaurant_image_error)
+                .error(R.drawable.favorites_image_error)
                 .into(holder.img_restaurant);
 
     }
@@ -70,11 +71,20 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
         return mRestaurants.size();
     }
 
-    private void setListener(final Restaurant restaurant, FavoritesViewHolder holder){
+    private void setListener(final Restaurant restaurant, FavoritesViewHolder holder, final int position){
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // mItemListener.onRestaurantClick(restaurant);
+                mItemListener.onRestaurantClick(restaurant);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener( new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
+                mItemListener.onRestaurantLongClick(restaurant, position);
+                // Toast.makeText(mContext,"hola",Toast.LENGTH_LONG).show();
+                return true;
             }
         });
     }

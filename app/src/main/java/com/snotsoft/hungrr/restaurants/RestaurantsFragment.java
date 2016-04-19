@@ -45,6 +45,11 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
             public void onRestaurantClick(Restaurant clickedRestaurant) {
                 mActionsListener.openRestaurantProfile(clickedRestaurant);
             }
+
+            @Override
+            public void onRestaurantLongClick(Restaurant clickedRestaurant, int position) {
+
+            }
         });
     }
 
