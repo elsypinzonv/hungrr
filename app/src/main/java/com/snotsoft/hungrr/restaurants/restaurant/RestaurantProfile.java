@@ -21,6 +21,7 @@ public class RestaurantProfile extends AppCompatActivity {
     @Bind(R.id.adress) TextView tx_adress;
     @Bind(R.id.schedule) TextView tx_schedule;
     @Bind(R.id.type) TextView tx_type;
+    @Bind(R.id.phone) TextView tx_phone;
     @Bind(R.id.restaurant) ImageView img_restaurant;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsing_toolbar;
     private String restaurantID;
@@ -48,6 +49,7 @@ public class RestaurantProfile extends AppCompatActivity {
         tx_adress.setText(restaurant.getAddress());
         tx_type.setText(restaurant.getType());
         collapsing_toolbar.setTitle(restaurant.getName());
+        tx_phone.setText("2-86-22-61");
         tx_schedule.setText("No disponible");
         setImage();
     }
