@@ -14,7 +14,13 @@
         android:id="@+id/imageViewRestaurant"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_main_1"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:/>
 
     <TextView
         android:id="@+id/price"
