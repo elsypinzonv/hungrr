@@ -8,6 +8,8 @@ import com.snotsoft.hungrr.io.services.RestaurantsApiService;
 
 import android.util.Log;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,7 +41,7 @@ public class RestaurantsInteractor {
             public void onResponse(Call<RestaurantsResponse> call, Response<RestaurantsResponse> response) {
 
                 int statusCode = response.code();
-                Log.d(HunGrrApplication.TAG, "ORIGINAL RESTAURANTS RESPONSE: " + response.raw().toString());
+                Log.d(HunGrrApplication.TAG, "ORIGINAL RESTAURANTS RESPONSE RAW: " + response.raw().toString());
 
                 if (response.isSuccessful()){
                     final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
