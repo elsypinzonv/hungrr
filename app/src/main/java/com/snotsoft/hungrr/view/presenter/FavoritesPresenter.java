@@ -52,7 +52,7 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
     @Override
     public void openRestaurantProfile(@NonNull Restaurant restaurant) {
         checkNotNull(restaurant);
-        mView.showRestaurantProfileUI(restaurant.getId());
+        mView.showRestaurantProfileUI(restaurant.getId(),restaurant);
     }
 
     @Override

@@ -120,9 +120,10 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
 
     @Override
-    public void showRestaurantProfileUI(String id) {
+    public void showRestaurantProfileUI(String id, Restaurant restaurant) {
         Intent intent = new Intent().setClass(getActivity().getApplicationContext(), RestaurantProfile.class);
         intent.putExtra("restaurantID", id);
+        intent.putExtra("restaurant",restaurant);
         startActivity(intent);
     }
 
