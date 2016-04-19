@@ -1,5 +1,6 @@
 package com.snotsoft.hungrr.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
+import com.snotsoft.hungrr.restaurants.restaurant.RestaurantProfile;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.adapters.FavoritesAdapter;
 import com.snotsoft.hungrr.view.contracts.FavoritesContract;
@@ -119,7 +121,9 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
     @Override
     public void showRestaurantProfileUI(String id) {
-
+        Intent intent = new Intent().setClass(getActivity().getApplicationContext(), RestaurantProfile.class);
+        intent.putExtra("restaurantID", id);
+        startActivity(intent);
     }
 
     @Override
