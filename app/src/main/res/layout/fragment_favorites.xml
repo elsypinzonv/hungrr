@@ -13,35 +13,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <RelativeLayout
-        android:id="@+id/menu"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_floating_menu"
-        android:orientation="horizontal"
-        android:padding="15dp"
-        android:gravity="center_vertical"
-        android:layout_margin="15dp"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
+        android:id="@+id/menu"
+        android:background="@drawable/background_gradient"
         >
 
-        <TextView
-            android:id="@+id/elements"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:text="1 elemento"/>
+            android:background="@drawable/background_floating_menu"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            android:gravity="center_vertical"
+            android:layout_margin="15dp"
+            >
 
-        <ImageView
-            android:id="@+id/remove"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_delete"/>
+            <TextView
+                android:id="@+id/elements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorBlack"
+                android:text="1 elemento"/>
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/remove"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_delete"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>
