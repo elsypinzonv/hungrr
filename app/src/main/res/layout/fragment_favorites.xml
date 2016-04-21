@@ -20,6 +20,7 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/menu"
         android:background="@drawable/background_gradient"
+        android:visibility="gone"
         >
 
         <RelativeLayout
