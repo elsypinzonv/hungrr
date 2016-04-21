@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28dp"
+                android:text="Nombre del menu"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/lbl_tx_menu"
+                android:layout_margin="5dp"/>
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"
+                >
+
+                <ImageView
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:src="@drawable/background_main_1"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_overlay"
+                    android:text="Titulo de la comida"
+                    android:textSize="20dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#AAFFFFFF"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/colorGreen"
+                    android:textSize="23dp"
+                    android:text="$100"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_overlay"
+                android:text="soy una descripción"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:layout_margin="5dp"
+                />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_btn_view_menu"
+                android:background="@color/colorGreen"
+                android:textColor="@android:color/white"
+                android:layout_margin="5dp"
+                />
+
+
+        </LinearLayout>
+
+
+
+</android.support.v7.widget.CardView>

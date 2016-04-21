@@ -95,4 +95,8 @@
     <string name="lbl_name_hint">Nombre</string>
     <string name="lbl_last_name_hint">Apellido</string>
 
+    <!-- Adapter menu-->
+    <string name="lbl_btn_view_menu">Ver menu</string>
+    <string name="lbl_tx_menu">Menu</string>
+
 </resources>
