@@ -3,6 +3,7 @@ package com.snotsoft.hungrr.restaurants.restaurant;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +24,7 @@ public class RestaurantProfile extends AppCompatActivity {
     @Bind(R.id.type) TextView tx_type;
     @Bind(R.id.phone) TextView tx_phone;
     @Bind(R.id.restaurant) ImageView img_restaurant;
+    @Bind(R.id.menus) RecyclerView recy_menus;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsing_toolbar;
     private String restaurantID;
     private Restaurant restaurant;
