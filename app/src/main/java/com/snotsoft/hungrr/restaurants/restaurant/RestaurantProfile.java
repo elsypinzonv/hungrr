@@ -3,20 +3,17 @@ package com.snotsoft.hungrr.restaurants.restaurant;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.snotsoft.hungrr.R;
-import com.snotsoft.hungrr.domain.Menu;
 import com.snotsoft.hungrr.domain.Restaurant;
-import com.snotsoft.hungrr.view.adapters.MenusAdapter;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,11 +26,11 @@ public class RestaurantProfile extends AppCompatActivity {
     @Bind(R.id.type) TextView tx_type;
     @Bind(R.id.phone) TextView tx_phone;
     @Bind(R.id.restaurant) ImageView img_restaurant;
-    @Bind(R.id.menus) RecyclerView recy_menus;
+    @Bind(R.id.info)  LinearLayout ln_info;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsing_toolbar;
     private String restaurantID;
     private Restaurant restaurant;
-    private MenusAdapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +51,13 @@ public class RestaurantProfile extends AppCompatActivity {
         initMenus();
     }
 
+    //TODO:REMPLAZAR POR AGREGAR MENUS DINAMICAMENTE
     private void initMenus(){
-        mAdapter = new MenusAdapter(getApplicationContext(),getMenus());
-        recy_menus.setAdapter(mAdapter);
-        recy_menus.setHasFixedSize(true);
-        recy_menus.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.adapter_menu, null, false);
+        ln_info.addView(layout);
+        RelativeLayout layout2 = (RelativeLayout) inflater.inflate(R.layout.adapter_menu, null, false);
+        ln_info.addView(layout2);
     }
 
     private void setData() {
@@ -78,12 +77,4 @@ public class RestaurantProfile extends AppCompatActivity {
                 .into(img_restaurant);
     }
 
-    //TODO:BORRAR  DUMMY
-    public ArrayList<Menu> getMenus() {
-        ArrayList<Menu> menus= new ArrayList<>();
-        for(int i=0; i<2; i++){
-            menus.add(new Menu());
-        }
-        return menus;
-    }
 }

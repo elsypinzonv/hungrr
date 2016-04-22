@@ -15,9 +15,9 @@
 
 
     <LinearLayout
+        android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/restaurant"
         android:orientation="vertical"
         android:padding="5dp"
         android:layout_marginTop="5dp"
@@ -115,16 +115,6 @@
             android:textColor="@android:color/white"
             android:padding="5dp"
             android:layout_marginBottom="5dp"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/menus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            ></android.support.v7.widget.RecyclerView>
-
     </LinearLayout>
 
     </RelativeLayout>
