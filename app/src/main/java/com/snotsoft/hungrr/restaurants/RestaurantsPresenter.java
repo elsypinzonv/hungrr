@@ -48,7 +48,7 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
     @Override
     public void openRestaurantProfile(@NonNull Restaurant restaurant) {
         checkNotNull(restaurant);
-        mView.showRestaurantProfileUI(restaurant.getId());
+        mView.showRestaurantProfileUI(restaurant.getId(),restaurant);
     }
 
     @Override

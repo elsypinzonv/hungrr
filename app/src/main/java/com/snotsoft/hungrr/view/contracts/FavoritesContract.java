@@ -17,7 +17,7 @@ public interface FavoritesContract {
 
         void showFavorites();
 
-        void showRestaurantProfileUI(String id);
+        void showRestaurantProfileUI(String id, Restaurant restaurant);
 
         void showErrorMessage(String message);
 

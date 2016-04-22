@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
     private RecyclerView mRecyclerView;
     private FavoritesAdapter mAdapter;
-    private RelativeLayout mFloatingMenu;
+    private LinearLayout mFloatingMenu;
     private TextView mElements;
     private ImageView mRemove;
     private FavoritesContract.UserActionsListener mActionsListener;
@@ -59,7 +60,6 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
             }
         });
 
-
     }
 
     @Override
@@ -84,7 +84,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
-        mFloatingMenu = (RelativeLayout) root.findViewById(R.id.menu);
+        mFloatingMenu = (LinearLayout) root.findViewById(R.id.menu);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.favorites);
         mElements = (TextView) root.findViewById(R.id.elements);
         mRemove = (ImageView) root.findViewById(R.id.remove);
@@ -120,9 +120,10 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
 
     @Override
-    public void showRestaurantProfileUI(String id) {
+    public void showRestaurantProfileUI(String id, Restaurant restaurant) {
         Intent intent = new Intent().setClass(getActivity().getApplicationContext(), RestaurantProfile.class);
         intent.putExtra("restaurantID", id);
+        intent.putExtra("restaurant",restaurant);
         startActivity(intent);
     }
 
