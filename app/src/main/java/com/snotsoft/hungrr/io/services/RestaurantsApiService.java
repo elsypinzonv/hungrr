@@ -16,13 +16,21 @@ public interface RestaurantsApiService {
     @GET(HunGrrApiConstants.RESTAURANTS_URL)
     Call<RestaurantsResponse> getRestaurants(
             @Path(HunGrrApiConstants.KEY_LAT_PATH) double lat,
-            @Path(HunGrrApiConstants.KEY_LNG_PATH) double lng
+            @Path(HunGrrApiConstants.KEY_LNG_PATH) double lng,
+            @Header(HunGrrApiConstants.HEADER_REQUEST_TOKEN) String token
     );
 
-    @GET(HunGrrApiConstants.RESTAURANTS_URL)
+    @GET(HunGrrApiConstants.RESTAURANTS_LEVEL_2_URL)
     Call<RestaurantsResponse> getRestaurants(
             @Path(HunGrrApiConstants.KEY_LAT_PATH) double lat,
             @Path(HunGrrApiConstants.KEY_LNG_PATH) double lng,
+            @Path(HunGrrApiConstants.KEY_BUDGET_MIN_PATH) double budgetMin,
+            @Path(HunGrrApiConstants.KEY_BUDGET_MAX_PATH) double budgetMax,
+            @Header(HunGrrApiConstants.HEADER_REQUEST_TOKEN) String token
+    );
+
+    @GET(HunGrrApiConstants.RESTAURANTS_FAVORITES_URL)
+    Call<RestaurantsResponse> getFavoriteRestaurants(
             @Header(HunGrrApiConstants.HEADER_REQUEST_TOKEN) String token
     );
 

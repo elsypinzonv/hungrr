@@ -56,7 +56,7 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
     }
 
     @Override
-    public void selectFavorites(int position, Restaurant restaurant) {
+    public void selectFavorites(Restaurant restaurant, int position) {
         mView.showSelectedItem(position);
         mView.showFloatingMenu();
     }

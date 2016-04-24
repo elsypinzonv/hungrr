@@ -33,7 +33,7 @@ public interface FavoritesContract {
 
         void openRestaurantProfile(Restaurant restaurant);
 
-        void selectFavorites(int position, Restaurant restaurant);
+        void selectFavorites(Restaurant restaurant, int position);
 
         void removeFavorites();
     }

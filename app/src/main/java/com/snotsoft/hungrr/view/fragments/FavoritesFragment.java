@@ -56,7 +56,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
             @Override
             public void onRestaurantLongClick(Restaurant clickedRestaurant, int position) {
-                mActionsListener.selectFavorites(position,clickedRestaurant);
+                mActionsListener.selectFavorites(clickedRestaurant, position);
             }
         });
 
