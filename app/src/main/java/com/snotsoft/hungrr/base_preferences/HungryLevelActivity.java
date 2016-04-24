@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import com.snotsoft.hungrr.R;
+import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 
 public class HungryLevelActivity extends AppCompatActivity {
@@ -19,7 +19,9 @@ public class HungryLevelActivity extends AppCompatActivity {
     private static final int LOW_LEVEL=0;
     private static final int MEDIUM_LEVEL=1;
     private static final int HIGH_LEVEL=2;
+    private int selectedLevel=0;
     private ResourceCompatMethod rsc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +50,32 @@ public class HungryLevelActivity extends AppCompatActivity {
         btn_go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                goTo();
             }
         });
     }
 
+    private void goTo(){
+        Class targetClass=LocationActivity.class;
+        switch (selectedLevel) {
+            case LOW_LEVEL:
+                targetClass = LocationActivity.class;
+                break;
+            case MEDIUM_LEVEL:
+                targetClass = BudgetActivity.class;
+                break;
+
+            case HIGH_LEVEL:
+
+                break;
+        }
+        ActivityHelper.begin(
+                this,targetClass);
+
+    }
+
     private void selected(int selection){
+        selectedLevel=selection;
         Drawable low=null;
         Drawable medium=null;
         Drawable high=null;

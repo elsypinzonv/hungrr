@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.snotsoft.hungrr.base_preferences.HungryLevelActivity;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
 import com.snotsoft.hungrr.utils.Injection;
@@ -34,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
                 Class classTo;
                 if(sessionManager.isUserLoggedIn()){
                     if(!Injection.provideLocationPreferencesManager(SplashActivity.this).hasAlreadyChooseLocation()){
-                        classTo = LocationActivity.class;
+                        classTo = HungryLevelActivity.class;
                     }else {
                         classTo = MainDrawerActivity.class;
                     }

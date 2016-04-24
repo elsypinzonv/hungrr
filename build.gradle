@@ -45,6 +45,7 @@ ext {
     rxjava = '1.0.14'
     reactiveLocation = '0.8@aar'
     picasso = '2.5.2'
+    cardstack = '0.3.0'
 
     // App dependencies
     supportLibraryVersion = '23.2.1'

@@ -53,6 +53,7 @@ dependencies {
     compile "com.jakewharton:butterknife:$rootProject.butterknife"
     compile "com.mobsandgeeks:android-saripaar:$rootProject.saripaar"
     compile "com.squareup.picasso:picasso:$rootProject.picasso"
+    compile "com.daprlabs.aaron:cardstack:$rootProject.cardstack"
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
