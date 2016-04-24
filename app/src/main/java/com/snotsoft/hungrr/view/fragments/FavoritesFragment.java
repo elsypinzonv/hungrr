@@ -139,9 +139,9 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
     @Override
     public void showFloatingMenu() {
-        final int NOTHING_SELECTED=0;
+        final int NOTHING_SELECTED = 0;
         int itemsSelected =mAdapter.getSelectedItemCount();
-        if(itemsSelected==NOTHING_SELECTED){
+        if(itemsSelected == NOTHING_SELECTED){
             mFloatingMenu.setVisibility(View.GONE);
         }else{
             mFloatingMenu.setVisibility(View.VISIBLE);
@@ -151,8 +151,10 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
     }
 
     private void setData(int itemsSelected){
-        if(itemsSelected ==1){
+        if(itemsSelected == 1){
             mElements.setText("1 elemento");
-        }else mElements.setText(itemsSelected+" elementos");
+        }else {
+            mElements.setText(itemsSelected + " elementos");
+        }
     }
 }

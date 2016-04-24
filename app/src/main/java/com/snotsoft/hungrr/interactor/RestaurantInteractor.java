@@ -20,6 +20,10 @@ public class RestaurantInteractor {
 
     public RestaurantApiService apiService;
 
+    public RestaurantInteractor(RestaurantApiService apiService) {
+        this.apiService = apiService;
+    }
+
     public void getDetails(final RestaurantCallback callback, final int restaurantID, final String token){
 
         Call<RestaurantResponse> call = apiService.getRestaurantDetail(restaurantID, token);

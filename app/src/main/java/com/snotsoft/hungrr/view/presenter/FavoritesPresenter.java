@@ -23,7 +23,6 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
     private UserSessionManager mSessionManager;
     private LocationPreferencesManager mLocationPreferences;
 
-
     public FavoritesPresenter(
             @NonNull FavoritesContract.View view,
             @NonNull RestaurantsInteractor interactor,
@@ -34,7 +33,6 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
         mView = checkNotNull(view);
         mSessionManager = checkNotNull(sessionManager);
         mLocationPreferences = checkNotNull(locationPreferences);
-
     }
 
 
@@ -44,8 +42,13 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
         if (forceUpdate) {
             //mInteractor.refreshData();
         }
-        mInteractor.getRestaurants(this,
-                mLocationPreferences.getLatitude(), mLocationPreferences.getLongitude(), mSessionManager.getTokenSession()
+        mInteractor.getRestaurants(
+                this,
+                mLocationPreferences.getLatitude(),
+                mLocationPreferences.getLongitude(),
+                0, //TODO: Change for reference to Budget Manager
+                2000,
+                mSessionManager.getTokenSession()
         );
     }
 
