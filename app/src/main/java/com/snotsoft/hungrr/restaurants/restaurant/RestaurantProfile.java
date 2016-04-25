@@ -112,7 +112,9 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
     }
 
     private void setData(Restaurant restaurant) {
-        addressTextView.setText(restaurant.getAddress());
+        if(restaurant.getAddress() != null){
+            addressTextView.setText(restaurant.getAddress());
+        }
         typeTextView.setText(restaurant.getType());
         mCollapsinToolbarLayout.setTitle(restaurant.getName());
         setFavorite(restaurant.isFavorite());
