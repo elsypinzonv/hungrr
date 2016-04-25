@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.restaurants.restaurant.RestaurantProfile;
@@ -106,8 +107,7 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
     public void showRestaurantProfileUI(String id, Restaurant restaurant) {
         Intent intent = new Intent().setClass(getActivity().getApplicationContext(), RestaurantProfile.class);
         intent.putExtra("restaurantID", id);
-        //TODO:ELIMINAR EL RESTAURANT DE LOS PARAMETROS
-        intent.putExtra("restaurant",restaurant);
+        intent.putExtra("restaurant", new Gson().toJson(restaurant));
         startActivity(intent);
     }
 
