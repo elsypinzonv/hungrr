@@ -24,7 +24,7 @@ public class RestaurantInteractor {
         this.apiService = apiService;
     }
 
-    public void getDetails(final RestaurantCallback callback, final int restaurantID, final String token){
+    public void getDetails(final RestaurantCallback callback, final String restaurantID, final String token){
 
         Call<RestaurantResponse> call = apiService.getRestaurantDetail(restaurantID, token);
         Log.d(HunGrrApplication.TAG, "ORIGINAL REQ: " + call.request().toString());
@@ -35,7 +35,7 @@ public class RestaurantInteractor {
             public void onResponse(Call<RestaurantResponse> call, Response<RestaurantResponse> response) {
                 if (response.isSuccessful()){
                     final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
-                    Log.d(HunGrrApplication.TAG, "HunGrrSignUpSuccess: " + response.message()+ " with new token " + newToken);
+                    Log.d(HunGrrApplication.TAG, "HunGrrGetDetailsSuccess: " + response.message()+ " with new token " + newToken);
 
                     RestaurantResponse restaurantResponse = response.body();
                     callback.onDetailsSuccess(restaurantResponse.getDetails(), newToken);
@@ -54,7 +54,7 @@ public class RestaurantInteractor {
         });
     }
 
-    public void favorite(final FavoriteCallback callback, final int restaurantID, final String token) {
+    public void favorite(final FavoriteCallback callback, final String restaurantID, final String token) {
         Log.d(HunGrrApplication.TAG, "MARK as favorite with token " + token);
         Call<Void> call = apiService.markAsFavorite(restaurantID, token);
         Log.d(HunGrrApplication.TAG, "ORIGINAL REQ: " + call.request().toString());
@@ -63,11 +63,17 @@ public class RestaurantInteractor {
 
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+
+                Log.d(HunGrrApplication.TAG, "ORIGINAL RESTAURANTS RESPONSE RAW: " + response.raw().toString());
+
                 if (response.isSuccessful()) {
                     int statusCode = response.code();
                     if(statusCode == 201 ) {
+
+                        final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
+                        Log.d(HunGrrApplication.TAG, "HunGrrSuccess: " + response.message()+ " with new token " + newToken);
                         //Successfully MARKED
-                        callback.onSuccessMarkAsFavorite();
+                        callback.onSuccessMarkAsFavorite(restaurantID, newToken);
                     }
                 } else {
                     callback.onFailedActionFavorite();
@@ -83,20 +89,24 @@ public class RestaurantInteractor {
         });
     }
 
-    public void unfavorite(final FavoriteCallback callback, final int restaurantID, final String token){
+    public void unfavorite(final FavoriteCallback callback, final String restaurantID, final String token){
         Log.d(HunGrrApplication.TAG, "UNMARK as favorite with token " + token);
-        Call<Void> call = apiService.markAsFavorite(restaurantID, token);
+        Call<Void> call = apiService.unmarkAsFavorite(restaurantID, token);
         Log.d(HunGrrApplication.TAG, "ORIGINAL REQ: " + call.request().toString());
 
         call.enqueue(new Callback<Void>() {
-
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+
+                Log.d(HunGrrApplication.TAG, "ORIGINAL RESTAURANTS RESPONSE RAW: " + response.raw().toString());
+
                 if (response.isSuccessful()) {
                     int statusCode = response.code();
                     if(statusCode == 201 ) {
                         //Successfully UNMARKED
-                        callback.onSuccessUnmarkAsFavorite();
+                        final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
+                        Log.d(HunGrrApplication.TAG, "HunGrrSuccess: " + response.message()+ " with new token " + newToken);
+                        callback.onSuccessUnmarkAsFavorite(restaurantID, newToken);
                     }
                 } else {
                     callback.onFailedActionFavorite();

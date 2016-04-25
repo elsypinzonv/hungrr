@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
+import com.snotsoft.hungrr.domain.Schedule;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -64,8 +65,24 @@ public class RestaurantProfile extends AppCompatActivity {
         tx_adress.setText(restaurant.getAddress());
         tx_type.setText(restaurant.getType());
         collapsing_toolbar.setTitle(restaurant.getName());
-        tx_phone.setText("2-86-22-61");
-        tx_schedule.setText("No disponible");
+
+        if(!restaurant.getPhoneNumbers().isEmpty()){
+            tx_phone.setText(restaurant.getPhoneNumbers().get(0).getNumber());
+        } else {
+            tx_phone.setText("No disponible");
+        }
+
+        if(!restaurant.getSchedules().isEmpty()){
+            Schedule schedule = restaurant.getSchedules().get(0);
+            tx_schedule.setText(
+                    schedule.getWeekDay() +
+                            " de " + String.valueOf(schedule.getOpenHour()) +
+                            " hasta " + String.valueOf(schedule.getCloseHour())
+            );
+        } else {
+            tx_schedule.setText("No disponible");
+        }
+
         setImage();
     }
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Section {
 
-    @SerializedName("name")
+    @SerializedName("id")
     private int id;
 
     @SerializedName("name")
@@ -40,27 +40,6 @@ public class Section {
 
     public void setElements(ArrayList<Element> elements) {
         this.elements = elements;
-    }
-
-    public static class Element {
-
-        @SerializedName("id")
-        private int id;
-
-        @SerializedName("name")
-        private String name;
-
-        @SerializedName("description")
-        private String description;
-
-        @SerializedName("currency")
-        private String currency;
-
-        @SerializedName("image")
-        private String image;
-
-        @SerializedName("price")
-        private String price;
     }
 
 }

@@ -5,9 +5,10 @@ package com.snotsoft.hungrr.io.callbacks;
  */
 public interface FavoriteCallback {
 
-    void onSuccessMarkAsFavorite();
+    void onSuccessMarkAsFavorite(String restaurantID, String newToken);
+
+    void onSuccessUnmarkAsFavorite(String restaurantID, String newToken);
 
     void onFailedActionFavorite();
 
-    void onSuccessUnmarkAsFavorite();
 }

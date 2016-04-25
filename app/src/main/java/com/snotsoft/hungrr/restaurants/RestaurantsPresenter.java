@@ -4,7 +4,9 @@ import android.support.annotation.NonNull;
 
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
+import com.snotsoft.hungrr.io.callbacks.FavoriteCallback;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
+import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.LocationPreferencesManager;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 
@@ -15,7 +17,7 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 /**
  * Created by luisburgos on 23/03/16.
  */
-public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserActionsListener, RestaurantsCallback {
+public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserActionsListener, RestaurantsCallback, FavoriteCallback {
 
     private RestaurantsInteractor mInteractor;
     private RestaurantsLowLevelContract.View mView;
@@ -52,6 +54,20 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
     }
 
     @Override
+    public void markAsFavorite(Restaurant restaurant) {
+        String id = restaurant.getId();
+        if(restaurant.isFavorite()){
+            Injection.provideRestaurantInteractor().unfavorite(
+                    this, id, mSessionManager.getTokenSession()
+            );
+        } else {
+            Injection.provideRestaurantInteractor().favorite(
+                    this, id, mSessionManager.getTokenSession()
+            );
+        }
+    }
+
+    @Override
     public void onRestaurantsLoaded(ArrayList<Restaurant> restaurants, String newToken) {
         mView.setProgressIndicator(false);
 
@@ -77,5 +93,22 @@ public class RestaurantsPresenter implements RestaurantsLowLevelContract.UserAct
     @Override
     public void onServerError() {
 
+    }
+
+    @Override
+    public void onSuccessMarkAsFavorite(String id, String newToken) {
+        mSessionManager.updateSessionToken(newToken);
+        mView.setFavoriteRestaurant(id, true);
+    }
+
+    @Override
+    public void onFailedActionFavorite() {
+        mView.showErrorMessage("Error on favorite/unfavorite");
+    }
+
+    @Override
+    public void onSuccessUnmarkAsFavorite(String id, String newToken) {
+        mSessionManager.updateSessionToken(newToken);
+        mView.setFavoriteRestaurant(id, false);
     }
 }

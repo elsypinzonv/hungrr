@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Created by Elsy on 17/04/2016.
  */
-public class FavoritesFragment extends Fragment  implements FavoritesContract.View{
+public class FavoritesFragment extends Fragment  implements FavoritesContract.View {
 
     private RecyclerView mRecyclerView;
     private FavoritesAdapter mAdapter;

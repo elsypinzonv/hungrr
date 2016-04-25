@@ -102,7 +102,7 @@ public class Restaurant implements Serializable {
         this.image = image;
     }
 
-    public boolean getIsFavorite() {
+    public boolean isFavorite() {
         return isFavorite;
     }
 

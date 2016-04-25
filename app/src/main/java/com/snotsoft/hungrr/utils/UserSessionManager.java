@@ -112,9 +112,11 @@ public class UserSessionManager {
     }
 
     public void updateSessionToken(String sessionToken) {
-        Log.d(HunGrrApplication.TAG, "Saving new token " + sessionToken);
-        editor.putString(KEY_SESSION_TOKEN, sessionToken);
-        editor.commit();
+        if(sessionToken != null){
+            Log.d(HunGrrApplication.TAG, "Saving new token " + sessionToken);
+            editor.putString(KEY_SESSION_TOKEN, sessionToken);
+            editor.commit();
+        }
     }
 
     public User getLastSignUpUser() {

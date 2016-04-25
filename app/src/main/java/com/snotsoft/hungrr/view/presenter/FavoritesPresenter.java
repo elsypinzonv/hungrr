@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
+import com.snotsoft.hungrr.io.callbacks.FavoriteRestaurantsCallback;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
 import com.snotsoft.hungrr.utils.LocationPreferencesManager;
 import com.snotsoft.hungrr.utils.UserSessionManager;
@@ -16,7 +17,7 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 /**
  * Created by luisburgos on 23/03/16.
  */
-public class FavoritesPresenter implements FavoritesContract.UserActionsListener, RestaurantsCallback {
+public class FavoritesPresenter implements FavoritesContract.UserActionsListener, FavoriteRestaurantsCallback {
 
     private RestaurantsInteractor mInteractor;
     private FavoritesContract.View mView;
@@ -42,12 +43,8 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
         if (forceUpdate) {
             //mInteractor.refreshData();
         }
-        mInteractor.getRestaurants(
+        mInteractor.getFavoriteRestaurants(
                 this,
-                mLocationPreferences.getLatitude(),
-                mLocationPreferences.getLongitude(),
-                0, //TODO: Change for reference to Budget Manager
-                2000,
                 mSessionManager.getTokenSession()
         );
     }
@@ -71,13 +68,13 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
     }
 
     @Override
-    public void onRestaurantsLoaded(ArrayList<Restaurant> restaurants, String newToken) {
+    public void onFavoritesLoaded(ArrayList<Restaurant> favoriteRestaurants, String newToken) {
         mView.setProgressIndicator(false);
 
         mSessionManager.updateSessionToken(newToken);
 
-        if(restaurants != null && !restaurants.isEmpty()){
-            mView.showFavorites(restaurants);
+        if(favoriteRestaurants != null && !favoriteRestaurants.isEmpty()){
+            mView.showFavorites(favoriteRestaurants);
         } else {
             mView.showErrorMessage("No hay restaurantes para mostrar");
         }
@@ -88,13 +85,4 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
         mView.showErrorMessage("Ocurrió un error");
     }
 
-    @Override
-    public void onNetworkError() {
-
-    }
-
-    @Override
-    public void onServerError() {
-
-    }
 }

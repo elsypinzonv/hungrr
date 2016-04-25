@@ -1,5 +1,7 @@
 package com.snotsoft.hungrr.interactor;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.io.HunGrrApiConstants;
 import com.snotsoft.hungrr.io.callbacks.FavoriteRestaurantsCallback;
@@ -46,12 +48,11 @@ public class RestaurantsInteractor {
             @Override
             public void onResponse(Call<RestaurantsResponse> call, Response<RestaurantsResponse> response) {
 
-                int statusCode = response.code();
                 Log.d(HunGrrApplication.TAG, "ORIGINAL RESTAURANTS RESPONSE RAW: " + response.raw().toString());
 
                 if (response.isSuccessful()){
                     final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
-                    Log.d(HunGrrApplication.TAG, "HunGrrSignUpSuccess: " + response.message()+ " with new token " + newToken);
+                    Log.d(HunGrrApplication.TAG, "HunGrrSuccess: " + response.message()+ " with new token " + newToken);
 
                     RestaurantsResponse restaurantsResponse = response.body();
                     callback.onRestaurantsLoaded(restaurantsResponse.getRestaurants(), newToken);
@@ -82,7 +83,7 @@ public class RestaurantsInteractor {
 
         Log.d(HunGrrApplication.TAG,
                 "Getting restaurants from: LAT: " + String.valueOf(lat) + " - LNG " + String.valueOf(lng)
-                        + "MIN: " + String.valueOf(budgetMin) + "MAX: " + String.valueOf(budgetMax)
+                        + " - MIN: " + String.valueOf(budgetMin) + " - MAX: " + String.valueOf(budgetMax)
                         + " with token " + token);
 
         Call<RestaurantsResponse> call = apiService.getRestaurants(lat, lng, budgetMin, budgetMax, token);
@@ -97,7 +98,7 @@ public class RestaurantsInteractor {
 
                 if (response.isSuccessful()){
                     final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
-                    Log.d(HunGrrApplication.TAG, "HunGrrSignUpSuccess: " + response.message()+ " with new token " + newToken);
+                    Log.d(HunGrrApplication.TAG, "HunGrrSuccess: " + response.message()+ " with new token " + newToken);
                     RestaurantsResponse restaurantsResponse = response.body();
                     callback.onRestaurantsLoaded(restaurantsResponse.getRestaurants(), newToken);
                 } else {
@@ -127,12 +128,11 @@ public class RestaurantsInteractor {
             @Override
             public void onResponse(Call<RestaurantsResponse> call, Response<RestaurantsResponse> response) {
 
-                int statusCode = response.code();
                 Log.d(HunGrrApplication.TAG, "ORIGINAL FAV RESTAURANTS RESRAW: " + response.raw().toString());
 
                 if (response.isSuccessful()){
                     final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
-                    Log.d(HunGrrApplication.TAG, "HunGrrSignUpSuccess: " + response.message()+ " with new token " + newToken);
+                    Log.d(HunGrrApplication.TAG, "HunGrrSuccess: " + response.message()+ " with new token " + newToken);
                     RestaurantsResponse restaurantsResponse = response.body();
                     callback.onFavoritesLoaded(restaurantsResponse.getRestaurants(), newToken);
                 } else {

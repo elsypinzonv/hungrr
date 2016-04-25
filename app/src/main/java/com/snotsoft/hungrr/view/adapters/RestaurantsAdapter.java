@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
+import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
 import com.squareup.picasso.Picasso;
 
@@ -23,11 +24,18 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
     private Context mContext;
     private List<Restaurant> mRestaurants;
     private RestaurantItemListener mItemListener;
+    private FavoriteRestaurantItemListener mFavoriteListener;
 
-    public RestaurantsAdapter(Context context, ArrayList<Restaurant> restaurantList, RestaurantItemListener itemListener) {
-        this.mRestaurants = restaurantList;
-        this.mContext = context;
-        this.mItemListener = itemListener;
+    public RestaurantsAdapter(
+            Context context,
+            ArrayList<Restaurant> restaurantList,
+            RestaurantItemListener itemListener,
+            FavoriteRestaurantItemListener favoriteListener
+    ) {
+        mRestaurants = restaurantList;
+        mContext = context;
+        mItemListener = itemListener;
+        mFavoriteListener = favoriteListener;
     }
 
     @Override
@@ -40,11 +48,22 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
     @Override
     public void onBindViewHolder(RestaurantsViewHolder holder, int position) {
 
-        Restaurant restaurant = mRestaurants.get(position);
+        final Restaurant restaurant = mRestaurants.get(position);
         setListener(restaurant, holder);
+;
+        holder.tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
 
-        holder.tx_price.setText("$250");
-        //holder.tx_price.setText(restaurant.getPrice());
+        if(restaurant.isFavorite()){
+            holder.img_favorite.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_action_favorites));
+        }
+
+        holder.img_favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mFavoriteListener.onFavorite(restaurant);
+            }
+        });
+
         Picasso.with(mContext)
                 .load(restaurant.getProfileImage())
                 .placeholder(R.drawable.restaurant_image_placeholder)
@@ -78,5 +97,14 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
                 mItemListener.onRestaurantClick(restaurant);
             }
         });
+    }
+
+    public void toggleFavorite(String restaurantID, boolean isFavorite) {
+        for(Restaurant restaurant : mRestaurants){
+            if(restaurant.getId() == restaurantID){
+                restaurant.setIsFavorite(isFavorite);
+            }
+        }
+        notifyDataSetChanged();
     }
 }
