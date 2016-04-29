@@ -13,13 +13,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
+import com.snotsoft.hungrr.domain.Element;
 import com.snotsoft.hungrr.domain.Menu;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.domain.RestaurantPhone;
 import com.snotsoft.hungrr.domain.Schedule;
+import com.snotsoft.hungrr.domain.Section;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 import com.squareup.picasso.Picasso;
@@ -175,8 +178,35 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
     }
 
     private void setMenu(Menu menu) {
+        final int FIRST_ELEMENT=0;
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.adapter_menu, null, false);
+        TextView tx_menu_name = (TextView) layout.findViewById(R.id.menu_name);
+        tx_menu_name.setText(menu.getName());
+
+        if (!menu.getSections().isEmpty()) {
+            if (!menu.getSections().get(FIRST_ELEMENT).getElements().isEmpty()) {
+                setElement(menu.getSections().get(FIRST_ELEMENT).getElements().get(FIRST_ELEMENT), layout);
+            }
+        }
         informationLinearLayout.addView(layout);
+
     }
+
+        private void setElement(Element element, RelativeLayout layout){
+            ImageView img_menu_item = (ImageView) layout.findViewById(R.id.menu_item);
+            TextView tx_menu_item_name = (TextView) layout.findViewById(R.id.menu_item_name);
+            TextView menu_item_price = (TextView) layout.findViewById(R.id.menu_item_price);
+            TextView menu_item_description = (TextView) layout.findViewById(R.id.menu_item_description);
+
+            tx_menu_item_name.setText(element.getName());
+            menu_item_description.setText(element.getDescription());
+            menu_item_price.setText(element.getPrice());
+            Picasso.with(getApplicationContext())
+                    .load(element.getImage())
+                    .placeholder(R.drawable.restaurant_image_placeholder)
+                    .error(R.drawable.restaurant_image_error)
+                    .into(img_menu_item);
+        }
+ 
 }
