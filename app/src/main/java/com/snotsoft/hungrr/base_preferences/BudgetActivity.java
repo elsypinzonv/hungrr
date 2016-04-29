@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.edmodo.rangebar.RangeBar;
 import com.snotsoft.hungrr.R;
+import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
+import com.snotsoft.hungrr.utils.ActivityHelper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -40,8 +42,18 @@ public class BudgetActivity extends AppCompatActivity {
                 updateValues(leftThumbIndex,rightThumbIndex);
             }
         });
+
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToHungryLevel();
+            }
+        });
     }
 
+    private void goToHungryLevel(){
+        ActivityHelper.sendTo(this,MainDrawerActivity.class);
+    }
 
     private void updateValues(int leftThumbIndex, int rightThumbIndex){
         if(leftThumbIndex<MIN_VALUE) leftThumbIndex=MIN_VALUE;

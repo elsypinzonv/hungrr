@@ -12,6 +12,7 @@ import com.snotsoft.hungrr.io.services.LoginApiService;
 import com.snotsoft.hungrr.io.services.SignUpApiService;
 import com.snotsoft.hungrr.io.services.RestaurantsApiService;
 import com.snotsoft.hungrr.io.services.ServiceGenerator;
+import com.snotsoft.hungrr.utils.preferences_managers.BudgetPreferencesManager;
 
 public class Injection {
 
@@ -58,5 +59,10 @@ public class Injection {
     private static FacebookSignUpApiService provideFacebookRegisterApiService() {
         return ServiceGenerator.createService(FacebookSignUpApiService.class);
     }
+
+    public static BudgetPreferencesManager provideBudgetPreferencesManager(Context context) {
+        return new BudgetPreferencesManager(context);
+    }
+
 
 }
