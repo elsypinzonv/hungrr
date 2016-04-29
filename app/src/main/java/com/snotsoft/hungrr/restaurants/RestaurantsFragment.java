@@ -9,12 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.restaurants.restaurant.RestaurantProfile;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.adapters.RestaurantsAdapter;
+import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
 
 import java.util.ArrayList;
@@ -49,6 +52,11 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
             @Override
             public void onRestaurantLongClick(Restaurant clickedRestaurant, int position) {
 
+            }
+        }, new FavoriteRestaurantItemListener() {
+            @Override
+            public void onFavorite(Restaurant restaurant) {
+                mActionsListener.markAsFavorite(restaurant);
             }
         });
     }
@@ -99,13 +107,17 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
     public void showRestaurantProfileUI(String id, Restaurant restaurant) {
         Intent intent = new Intent().setClass(getActivity().getApplicationContext(), RestaurantProfile.class);
         intent.putExtra("restaurantID", id);
-        //TODO:ELIMINAR EL RESTAURANT DE LOS PARAMETROS
-        intent.putExtra("restaurant",restaurant);
+        intent.putExtra("restaurant", new Gson().toJson(restaurant));
         startActivity(intent);
     }
 
     @Override
     public void showErrorMessage(String message) {
         Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setFavoriteRestaurant(String restaurantID, boolean isFavorite) {
+        mAdapter.toggleFavorite(restaurantID, isFavorite);
     }
 }

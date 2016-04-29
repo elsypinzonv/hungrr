@@ -2,8 +2,10 @@ package com.snotsoft.hungrr.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.facebook.AccessToken;
+import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.User;
 
 public class UserSessionManager {
@@ -110,8 +112,11 @@ public class UserSessionManager {
     }
 
     public void updateSessionToken(String sessionToken) {
-        editor.putString(KEY_SESSION_TOKEN, sessionToken);
-        editor.commit();
+        if(sessionToken != null){
+            Log.d(HunGrrApplication.TAG, "Saving new token " + sessionToken);
+            editor.putString(KEY_SESSION_TOKEN, sessionToken);
+            editor.commit();
+        }
     }
 
     public User getLastSignUpUser() {

@@ -1,14 +1,27 @@
 package com.snotsoft.hungrr.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
- * Created by Elsy on 21/04/2016.
+ * Created by luisburgos on 24/04/16.
  */
 public class Element {
 
-    int id;
-    String name;
-    String description;
-    String price;
-    String image;
-    String currency;
+    @SerializedName("id")
+    private int id;
+
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("description")
+    private String description;
+
+    @SerializedName("currency")
+    private String currency;
+
+    @SerializedName("image")
+    private String image;
+
+    @SerializedName("price")
+    private String price;
 }
