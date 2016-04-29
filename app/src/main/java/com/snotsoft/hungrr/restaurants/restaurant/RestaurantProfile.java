@@ -128,7 +128,7 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
         final ResourceCompatMethod resourceCompat = new ResourceCompatMethod(this);
         if(isFavorite){
             mFab.setRippleColor(resourceCompat.getColorCompat(R.color.colorTextIcons));
-            mFab.setImageDrawable(resourceCompat.getDrawableCompat(R.drawable.ic_action_favorites));
+            mFab.setImageDrawable(resourceCompat.getDrawableCompat(R.mipmap.ic_favorite));
         } else {
             mFab.setRippleColor(resourceCompat.getColorCompat(R.color.colorAccent));
             mFab.setImageResource(R.mipmap.ic_favorite_border);
