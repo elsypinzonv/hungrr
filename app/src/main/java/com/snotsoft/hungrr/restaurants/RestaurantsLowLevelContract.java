@@ -19,6 +19,7 @@ public interface RestaurantsLowLevelContract {
 
         void showErrorMessage(String message);
 
+        void setFavoriteRestaurant(String restaurantID, boolean isFavorite);
     }
 
     interface UserActionsListener {
@@ -26,6 +27,8 @@ public interface RestaurantsLowLevelContract {
         void loadRestaurants(boolean forceUpdate);
 
         void openRestaurantProfile(Restaurant restaurant);
+
+        void markAsFavorite(Restaurant restaurant);
 
     }
 

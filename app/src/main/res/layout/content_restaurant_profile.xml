@@ -108,13 +108,15 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/menusHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Menus"
             android:background="@color/colorRed"
             android:textColor="@android:color/white"
             android:padding="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
     </RelativeLayout>

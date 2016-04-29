@@ -5,33 +5,45 @@ package com.snotsoft.hungrr.io;
  */
 public class HunGrrApiConstants {
 
-    //TODO: Change string VALUES
-
     public static final String BASE_URL = "http://www.hungrr.com.mx";
     public static final String API_PATH = "/api";
     public static final String VERSION_PATH = "/v1";
-
     public static final String BASE_API_URL = BASE_URL + API_PATH + VERSION_PATH;
 
-    public static final String SEARCH_PATH = "/search";
     public static final String LOGIN_PATH = "/login";
     public static final String SIGN_UP_PATH = "/signup";
+    public static final String RESTAURANT_PATH = "/restaurant";
     public static final String RESTAURANTS_PATH = "/restaurants";
+
+    public static final String RESTAURANT_DETAILS_PATH = RESTAURANT_PATH + "/details";
+    public static final String FAVORITE_RESTAURANT_PATH = RESTAURANT_PATH + "/favorite";
+    public static final String UNFAVORITE_RESTAURANT_PATH = RESTAURANT_PATH + "/unfavorite";
+    public static final String FAVORITES_RESTAURANTS_PATH = RESTAURANTS_PATH + "/favorites";
 
     public static final String KEY_LAT_PATH = "lat";
     public static final String KEY_LNG_PATH = "lng";
-    public static final String LATITUDE_RELATIVE_PATH = "/{lat}";
-    public static final String LONGITUDE_RELATIVE_PATH = "/{lng}";
+    public static final String KEY_RESTAURANT_ID_PATH = "restaurantID";
+    public static final String KEY_BUDGET_MIN_PATH = "budgetMin";
+    public static final String KEY_BUDGET_MAX_PATH = "budgetMax";
 
-    public static final String TYPE_QUERY = "type";
-    public static final String QUERY_TO_SEARCH = "q";
-    public static final String RESTAURANT = "restaurant";
-    public static final String RESTAURANT_SEARCH_URL = VERSION_PATH + SEARCH_PATH + "?" + TYPE_QUERY + "=" + RESTAURANT;
+    //Relative fragments
+    public static final String LATITUDE_RELATIVE_PATH = "/{"+ KEY_LAT_PATH +"}";
+    public static final String LONGITUDE_RELATIVE_PATH = "/{"+ KEY_LNG_PATH +"}";
+    public static final String RESTAURANT_ID_RELATIVE_PATH = "/{"+ KEY_RESTAURANT_ID_PATH +"}";
+    public static final String BUDGET_MIN_RELATIVE_PATH = "/{"+ KEY_BUDGET_MIN_PATH +"}";
+    public static final String BUDGET_MAX_RELATIVE_PATH = "/{"+ KEY_BUDGET_MAX_PATH +"}";
 
-    public static final String TOKEN_URL = "/token";
+    //Complete URL
     public static final String SIGN_UP_URL = BASE_API_URL + SIGN_UP_PATH;
     public static final String LOGIN_URL = BASE_API_URL + LOGIN_PATH;
     public static final String RESTAURANTS_URL = BASE_API_URL + RESTAURANTS_PATH + LATITUDE_RELATIVE_PATH + LONGITUDE_RELATIVE_PATH;
+    public static final String RESTAURANTS_LEVEL_2_URL = BASE_API_URL + RESTAURANTS_PATH +
+                    LATITUDE_RELATIVE_PATH + LONGITUDE_RELATIVE_PATH +
+                    BUDGET_MIN_RELATIVE_PATH + BUDGET_MAX_RELATIVE_PATH;
+    public static final String RESTAURANT_DETAIL_URL = BASE_API_URL + RESTAURANT_DETAILS_PATH + RESTAURANT_ID_RELATIVE_PATH;
+    public static final String FAVORITE_RESTAURANT_URL = BASE_API_URL + FAVORITE_RESTAURANT_PATH + RESTAURANT_ID_RELATIVE_PATH;;
+    public static final String UNFAVORITE_RESTAURANT_URL = BASE_API_URL + UNFAVORITE_RESTAURANT_PATH + RESTAURANT_ID_RELATIVE_PATH;;
+    public static final String RESTAURANTS_FAVORITES_URL = BASE_API_URL + FAVORITES_RESTAURANTS_PATH;
 
     //Fake Impl Simulation
     public static final int SERVICE_LATENCY_IN_MILLIS = 500;
