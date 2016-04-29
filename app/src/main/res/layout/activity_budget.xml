@@ -18,6 +18,7 @@
         >
 
         <TextView
+            android:id="@+id/left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lbl_min_budget"
@@ -29,6 +30,7 @@
 
 
         <TextView
+            android:id="@+id/right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lbl_max_budget"
@@ -40,22 +42,20 @@
 
     </RelativeLayout>
 
-
-
     <com.edmodo.rangebar.RangeBar
         xmlns:custom="http://schemas.android.com/apk/res-auto"
         android:id="@+id/budget"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/budget_range"
-        custom:tickCount="20"
+        android:layout_centerHorizontal="true"
+        custom:tickCount="2010"
         custom:thumbColorNormal="@color/colorOrange"
         custom:thumbColorPressed="@color/colorOrangeLight"
         custom:connectingLineColor="@color/colorRed"
         custom:barColor="@android:color/darker_gray"
         custom:barWeight="10px"
         custom:tickHeight="0dp"
-
         />
 
     <LinearLayout

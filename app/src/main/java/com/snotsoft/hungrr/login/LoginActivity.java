@@ -19,6 +19,7 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
 import com.snotsoft.hungrr.R;
+import com.snotsoft.hungrr.base_preferences.HungryLevelActivity;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.domain.User;
 import com.snotsoft.hungrr.signup.SignUpActivity;
@@ -102,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public void onLoginResult(Boolean result, int code) {
         if(result){
             finish();
-            ActivityHelper.sendTo(LoginActivity.this, LocationActivity.class);
+            ActivityHelper.sendTo(LoginActivity.this, HungryLevelActivity.class);
         } else {
             showLoginFailedMessage(getString(R.string.error_failed_login));
         }
