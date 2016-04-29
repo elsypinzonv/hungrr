@@ -208,5 +208,5 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
                     .error(R.drawable.restaurant_image_error)
                     .into(img_menu_item);
         }
- 
+
 }
