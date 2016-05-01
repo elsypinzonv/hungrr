@@ -68,16 +68,12 @@ public class SwipeDeckAdapter extends BaseAdapter {
         TextView tx_restaurant_name = (TextView) v.findViewById(R.id.restaurant_name);
         TextView tx_type = (TextView) v.findViewById(R.id.type);
         TextView tx_adress = (TextView) v.findViewById(R.id.adress);
-        TextView tx_phone = (TextView) v.findViewById(R.id.phone);
-        TextView tx_schedule = (TextView) v.findViewById(R.id.schedule);
 
         Restaurant restaurant = data.get(position);
 
         tx_restaurant_name.setText(restaurant.getName());
         tx_type.setText(restaurant.getType());
         tx_adress.setText(restaurant.getType());
-        setPhoneNumbers(tx_phone, restaurant.getPhoneNumbers());
-        setSchedules(tx_schedule, restaurant.getSchedules());
         setImage(img_restaurant_image, restaurant.getProfileImage());
         return v;
     }
@@ -90,24 +86,4 @@ public class SwipeDeckAdapter extends BaseAdapter {
                 .into(img_restaurant_image);
     }
 
-    private void setPhoneNumbers(TextView tx_phone, ArrayList<RestaurantPhone> phoneNumbers) {
-        if(phoneNumbers != null &&  !phoneNumbers.isEmpty()){
-            tx_phone.setText(phoneNumbers.get(0).getNumber());
-        } else {
-            tx_phone.setText("No disponible");
-        }
-    }
-
-    private void setSchedules(TextView tx_schedule,ArrayList<Schedule> schedules) {
-        if(schedules != null && !schedules.isEmpty()){
-            Schedule schedule = schedules.get(0);
-            tx_schedule.setText(
-                    schedule.getWeekDay() +
-                            " de " + String.valueOf(schedule.getOpenHour()) +
-                            " hasta " + String.valueOf(schedule.getCloseHour())
-            );
-        } else {
-            tx_schedule.setText("No disponible");
-        }
-    }
 }
