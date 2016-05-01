@@ -24,4 +24,29 @@ public class Element {
 
     @SerializedName("price")
     private String price;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public String getImage() {
+        return image;
+    }
 }

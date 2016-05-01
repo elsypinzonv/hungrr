@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daprlabs.cardstack.SwipeFrameLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.daprlabs.cardstack.SwipeDeck
+            android:id="@+id/restaurants"
+            android:layout_width="match_parent"
+            android:layout_height="440dp"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            swipedeck:card_spacing="10dp"
+            swipedeck:max_visible="3"
+            swipedeck:render_above="true"
+            swipedeck:rotation_degrees="15"
+            swipedeck:opacity_end="0.33"
+            android:layout_above="@+id/combo"
+            android:layout_alignParentTop="true"
+            />
+
+        <Button
+            android:id="@+id/combo"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorGreen"
+            android:text="@string/lbl_btn_arm_combo"
+            android:textColor="@android:color/white"
+            />
+
+
+    </RelativeLayout>
+
+
+</com.daprlabs.cardstack.SwipeFrameLayout>

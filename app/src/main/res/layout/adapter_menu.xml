@@ -50,9 +50,9 @@
                     android:src="@drawable/background_main_1" />
 
                 <TextView
+                    android:id="@+id/menu_item_name"
                     android:background="#AAFFFFFF"
                     android:gravity="center_horizontal"
-                    android:id="@+id/menu_item_name"
                     android:layout_alignParentBottom="true"
                     android:layout_height="wrap_content"
                     android:layout_width="250dp"
@@ -63,9 +63,9 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/menu_item_price"
                     android:background="@color/colorGreen"
                     android:gravity="center_horizontal"
-                    android:id="@+id/menu_item_price"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_height="wrap_content"
@@ -78,8 +78,8 @@
             </RelativeLayout>
 
             <TextView
-                android:ellipsize="end"
                 android:id="@+id/menu_item_description"
+                android:ellipsize="end"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_width="wrap_content"
