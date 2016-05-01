@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
+import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
+import com.snotsoft.hungrr.base_preferences.BudgetActivity;
+import com.snotsoft.hungrr.base_preferences.HungryLevelActivity;
+import com.snotsoft.hungrr.base_preferences.LocationActivity;
+import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.restaurants.restaurant.RestaurantsCardsFragment;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.UserSessionManager;
@@ -70,7 +76,7 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_filter) {
+        if (id == R.id.action_about_hungrr) {
             return true;
         }
 
@@ -110,27 +116,35 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
             case R.id.menu_item_favorites:
                 fragmentClass = FavoritesFragment.class;
                 break;
+            case R.id.menu_item_hungry_level:
+                ActivityHelper.begin(this, HungryLevelActivity.class);
+                break;
+            case R.id.menu_item_buget:
+                ActivityHelper.begin(this, BudgetActivity.class);
+                break;
+            case R.id.menu_item_location:
+                ActivityHelper.begin(this, LocationActivity.class);
+                break;
             case R.id.menu_item_logout:
                 requestLogoutConfirmation();
-
+                break;
             default:
                 fragmentClass = RestaurantsFragment.class;
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(fragmentClass != null){
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
         }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-
         mDrawerLayout.closeDrawers();
     }
 
     private void requestLogoutConfirmation() {
-
         new LogoutDialog(this, new LogoutDialog.OnConfirmationLogout() {
             @Override
             public void onConfirmation() {
@@ -156,8 +170,11 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         selectDrawerItem(item);
-        item.setChecked(true);
         mDrawerLayout.closeDrawers();
+
+        if (item.getGroupId() == R.id.menu_item_group_settings){
+            return false;
+        }
 
         return true;
     }

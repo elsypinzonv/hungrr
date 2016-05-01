@@ -2,9 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group
-        android:id="@+id/menu_item_search"
+        android:id="@+id/menu_item_group_main"
         android:checkableBehavior="single">
-        <item android:id="@+id/menu_paired"
+        <item
+            android:id="@+id/menu_item_search"
             android:icon="@drawable/ic_action_search_green_dark"
             android:title="@string/menu_item_search" />
 
@@ -16,8 +17,29 @@
     <item android:title="@string/menu_item_settings">
         <menu>
             <group
-                android:id="@+id/menu_item_group_second"
+                android:id="@+id/menu_item_group_settings"
                 android:checkableBehavior="single">
+
+                <item
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/menu_item_hungry_level"
+                    android:icon="@drawable/ic_hungry_level_blue_light"
+                    android:title="@string/menu_item_hungry_level"
+                    app:showAsAction="always" />
+
+                <item
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/menu_item_buget"
+                    android:icon="@drawable/ic_budget_cash"
+                    android:title="@string/menu_item_budget"
+                    app:showAsAction="always" />
+
+                <item
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/menu_item_location"
+                    android:icon="@drawable/ic_location"
+                    android:title="@string/menu_item_location"
+                    app:showAsAction="always" />
 
                 <item
                     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -26,12 +48,14 @@
                     android:title="@string/menu_item_logout"
                     app:showAsAction="always" />
 
+                <!--
                 <item
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/menu_item_about_hungrr"
                     android:icon="@drawable/ic_action_about"
                     android:title="@string/menu_item_about_hungrr"
                     app:showAsAction="always" />
+                    -->
 
             </group>
 
