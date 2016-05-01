@@ -50,7 +50,7 @@ public class BudgetPreferencesManager {
         return Double.longBitsToDouble(mPreferences.getLong(BUDGET_MAX, 0));
     }
 
-    public boolean hasAlreadyChooseLocation(){
+    public boolean hasAlreadyChooseBudget(){
         return mPreferences.getBoolean(KEY_IS_BUDGET_SET, false);
     }
 

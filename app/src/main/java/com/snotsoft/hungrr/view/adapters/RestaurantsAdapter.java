@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
+import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
 import com.squareup.picasso.Picasso;
@@ -25,6 +26,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
     private List<Restaurant> mRestaurants;
     private RestaurantItemListener mItemListener;
     private FavoriteRestaurantItemListener mFavoriteListener;
+    private ResourceCompatMethod rscCompat;
 
     public RestaurantsAdapter(
             Context context,
@@ -36,6 +38,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
         mContext = context;
         mItemListener = itemListener;
         mFavoriteListener = favoriteListener;
+        rscCompat = new ResourceCompatMethod(context);
     }
 
     @Override
@@ -54,7 +57,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
         holder.tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
 
         if(restaurant.isFavorite()){
-            holder.img_favorite.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_action_favorites));
+            holder.img_favorite.setImageDrawable(rscCompat.getDrawableCompat(R.mipmap.ic_favorite));
         }
 
         holder.img_favorite.setOnClickListener(new View.OnClickListener() {

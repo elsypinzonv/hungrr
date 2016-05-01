@@ -27,6 +27,7 @@ import com.snotsoft.hungrr.base_preferences.BudgetActivity;
 import com.snotsoft.hungrr.base_preferences.HungryLevelActivity;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
+import com.snotsoft.hungrr.restaurants.restaurant.RestaurantsCardsFragment;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 import com.snotsoft.hungrr.view.activities.DispatchActivity;
@@ -59,7 +60,9 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
         mNavigationView.setNavigationItemSelectedListener(this);
 
         if (null == savedInstanceState) {
-            initFragment(RestaurantsFragment.newInstance());
+         //   initFragment(RestaurantsFragment.newInstance());
+            initFragment(RestaurantsCardsFragment.newInstance());
+            Toast.makeText(getApplicationContext(),"Holi",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -106,7 +109,9 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
         Class fragmentClass = null; //TODO: Remove null
         switch(menuItem.getItemId()) {
             case R.id.menu_item_search:
-                fragmentClass = RestaurantsFragment.class;
+              //  fragmentClass = RestaurantsFragment.class;
+                fragmentClass = RestaurantsCardsFragment.class;
+
                 break;
             case R.id.menu_item_favorites:
                 fragmentClass = FavoritesFragment.class;

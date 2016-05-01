@@ -14,6 +14,9 @@ import com.edmodo.rangebar.RangeBar;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
+import com.snotsoft.hungrr.utils.GPSDataLoader;
+import com.snotsoft.hungrr.utils.Injection;
+import com.snotsoft.hungrr.utils.preferences_managers.BudgetPreferencesManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,7 +30,8 @@ public class BudgetActivity extends AppCompatActivity {
     private final int MIN_VALUE=0;
     private final int MAX_VALUE=2000;
     private final String CURRENCY="MX";
-
+    private GPSDataLoader mGPSLoader;
+    private BudgetPreferencesManager budgetPreferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,9 @@ public class BudgetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_budget);
         ButterKnife.bind(this);
         initRangerBudget();
+
+        mGPSLoader = new GPSDataLoader(this, Injection.provideLocationPreferencesManager(this));
+        budgetPreferencesManager = new BudgetPreferencesManager(getApplicationContext());
 
         ranger_budget.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
@@ -52,7 +59,14 @@ public class BudgetActivity extends AppCompatActivity {
     }
 
     private void goToHungryLevel(){
-        ActivityHelper.sendTo(this,MainDrawerActivity.class);
+        mGPSLoader.loadLastKnownLocation(new GPSDataLoader.OnLocationLoaded() {
+            @Override
+            public void onLocationLoadFinished(double lat, double lng) {
+                budgetPreferencesManager.registerBudgetValues(getMin(),getMax());
+                ActivityHelper.sendTo(BudgetActivity.this, MainDrawerActivity.class);
+            }
+        });
+
     }
 
     private void updateValues(int leftThumbIndex, int rightThumbIndex){
@@ -64,7 +78,25 @@ public class BudgetActivity extends AppCompatActivity {
 
     private void initRangerBudget(){
         ranger_budget.setThumbIndices(MIN_VALUE,MAX_VALUE);
-        ranger_left.setText(ranger_budget.getLeftIndex()+CURRENCY);
-        ranger_right.setText(ranger_budget.getRightIndex()+CURRENCY);
+        ranger_left.setText(getMin()+CURRENCY);
+        ranger_right.setText(getMax()+CURRENCY);
+    }
+
+    private int getMin(){
+        int leftThumbIndex;
+        leftThumbIndex=ranger_budget.getLeftIndex();
+        if(leftThumbIndex<MIN_VALUE){
+            leftThumbIndex=MIN_VALUE;
+        }
+        return leftThumbIndex;
+    }
+
+    private int getMax(){
+        int rightThumbIndex;
+        rightThumbIndex=ranger_budget.getLeftIndex();
+        if(rightThumbIndex<MAX_VALUE){
+            rightThumbIndex=MAX_VALUE;
+        }
+        return rightThumbIndex;
     }
 }
