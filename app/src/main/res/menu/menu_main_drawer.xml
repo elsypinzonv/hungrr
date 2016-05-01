@@ -4,10 +4,10 @@
     tools:context=".restaurants.MainDrawerActivity">
 
     <item
-        android:id="@+id/action_filter"
+        android:id="@+id/action_about_hungrr"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_action_filter"
-        android:title="@string/action_filter"
+        android:icon="@drawable/ic_action_about"
+        android:title="@string/menu_item_about_hungrr"
         app:showAsAction="never" />
 
 </menu>

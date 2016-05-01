@@ -13,9 +13,11 @@ import android.util.Log;
 
 import java.io.IOException;
 
+import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Header;
 
 /**
  * Created by luisburgos on 23/03/16.
@@ -51,6 +53,7 @@ public class RestaurantsInteractor {
                 Log.d(HunGrrApplication.TAG, "ORIGINAL RESTAURANTS RESPONSE RAW: " + response.raw().toString());
 
                 if (response.isSuccessful()){
+                    Log.d(HunGrrApplication.TAG, "HunGrrSuccess: " + "Raw response " + response.headers().toString());
                     final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
                     Log.d(HunGrrApplication.TAG, "HunGrrSuccess: " + response.message()+ " with new token " + newToken);
 
@@ -131,7 +134,11 @@ public class RestaurantsInteractor {
                 Log.d(HunGrrApplication.TAG, "ORIGINAL FAV RESTAURANTS RESRAW: " + response.raw().toString());
 
                 if (response.isSuccessful()){
-                    final String newToken = response.headers().get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
+                    Headers responseHeaders = response.headers();
+                    if(responseHeaders == null){
+                        Log.d(HunGrrApplication.TAG, "HunGrrSuccess but problems with response headers");
+                    }
+                    final String newToken = responseHeaders.get(HunGrrApiConstants.HEADER_RESPONSE_TOKEN);
                     Log.d(HunGrrApplication.TAG, "HunGrrSuccess: " + response.message()+ " with new token " + newToken);
                     RestaurantsResponse restaurantsResponse = response.body();
                     callback.onFavoritesLoaded(restaurantsResponse.getRestaurants(), newToken);
