@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.restaurants.restaurant.RestaurantProfile;
@@ -123,7 +124,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
     public void showRestaurantProfileUI(String id, Restaurant restaurant) {
         Intent intent = new Intent().setClass(getActivity().getApplicationContext(), RestaurantProfile.class);
         intent.putExtra("restaurantID", id);
-        intent.putExtra("restaurant",restaurant);
+        intent.putExtra("restaurant", new Gson().toJson(restaurant));
         startActivity(intent);
     }
 
@@ -140,7 +141,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
     @Override
     public void showFloatingMenu() {
         final int NOTHING_SELECTED = 0;
-        int itemsSelected =mAdapter.getSelectedItemCount();
+        int itemsSelected = mAdapter.getSelectedItemCount();
         if(itemsSelected == NOTHING_SELECTED){
             mFloatingMenu.setVisibility(View.GONE);
         }else{

@@ -16,9 +16,9 @@ public class HunGrrApiConstants {
     public static final String RESTAURANTS_PATH = "/restaurants";
 
     public static final String RESTAURANT_DETAILS_PATH = RESTAURANT_PATH + "/details";
-    public static final String FAVORITE_RESTAURANT_PATH = RESTAURANT_PATH + "/favorite";
-    public static final String UNFAVORITE_RESTAURANT_PATH = RESTAURANT_PATH + "/unfavorite";
-    public static final String FAVORITES_RESTAURANTS_PATH = RESTAURANTS_PATH + "/favorites";
+    public static final String FAVORITE_RESTAURANT_PATH = RESTAURANT_PATH + "/favourite";
+    public static final String UNFAVORITE_RESTAURANT_PATH = RESTAURANT_PATH + "/unfavourite";
+    public static final String FAVORITES_RESTAURANTS_PATH = RESTAURANT_PATH + "/favourites";
 
     public static final String KEY_LAT_PATH = "lat";
     public static final String KEY_LNG_PATH = "lng";
