@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
@@ -31,7 +32,7 @@ public class RestaurantCardsAdapter extends BaseAdapter {
     private Context context;
     private FavoriteRestaurantItemListener mFavoriteListener;
     private ResourceCompatMethod rscCompat;
-    private Restaurant restaurant;
+
     private RestaurantItemListener mItemListener;
 
     public RestaurantCardsAdapter(
@@ -74,7 +75,7 @@ public class RestaurantCardsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        ;
         View v = convertView;
         if(v == null){
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_card_restaurant, parent, false);
@@ -87,7 +88,7 @@ public class RestaurantCardsAdapter extends BaseAdapter {
         TextView tx_price = (TextView) v.findViewById(R.id.price);
         FloatingActionButton img_favorite = (FloatingActionButton) v.findViewById(R.id.fab);
 
-        restaurant = data.get(position);
+        final Restaurant restaurant = data.get(position);
         tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
         tx_restaurant_name.setText(restaurant.getName());
         tx_type.setText(restaurant.getType());
@@ -122,6 +123,15 @@ public class RestaurantCardsAdapter extends BaseAdapter {
                 .placeholder(R.drawable.restaurant_image_placeholder)
                 .error(R.drawable.restaurant_image_error)
                 .into(img_restaurant_image);
+    }
+
+    public void toggleFavorite(String restaurantID, boolean isFavorite) {
+            for(Restaurant restaurant : data){
+            if(restaurant.getId() == restaurantID){
+                restaurant.setIsFavorite(isFavorite);
+            }
+        }
+        notifyDataSetChanged();
     }
 
 }
