@@ -80,7 +80,9 @@ public class HungryLevelActivity extends AppCompatActivity {
     }
 
     private void initLevel(){
-        selected(levelPreferences.getLevel());
+        if(levelPreferences.hasAlreadyChooseLevel()){
+            selected(levelPreferences.getLevel());
+        }
     }
 
     private void selected(int selection){
