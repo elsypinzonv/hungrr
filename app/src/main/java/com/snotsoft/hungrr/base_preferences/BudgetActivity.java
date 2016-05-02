@@ -31,7 +31,8 @@ public class BudgetActivity extends AppCompatActivity {
     private final int MAX_VALUE=2000;
     private final String CURRENCY="MX";
     private GPSDataLoader mGPSLoader;
-    private BudgetPreferencesManager budgetPreferencesManager;
+    private static final int MEDIUM_LEVEL=1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,6 @@ public class BudgetActivity extends AppCompatActivity {
         initRangerBudget();
 
         mGPSLoader = new GPSDataLoader(this, Injection.provideLocationPreferencesManager(this));
-        budgetPreferencesManager = new BudgetPreferencesManager(getApplicationContext());
 
         ranger_budget.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
@@ -62,7 +62,7 @@ public class BudgetActivity extends AppCompatActivity {
         mGPSLoader.loadLastKnownLocation(new GPSDataLoader.OnLocationLoaded() {
             @Override
             public void onLocationLoadFinished(double lat, double lng) {
-                budgetPreferencesManager.registerBudgetValues(getMin(),getMax());
+                Injection.provideBudgetPreferencesManager(BudgetActivity.this).registerBudgetValues(getMin(),getMax());
                 ActivityHelper.sendTo(BudgetActivity.this, MainDrawerActivity.class);
             }
         });

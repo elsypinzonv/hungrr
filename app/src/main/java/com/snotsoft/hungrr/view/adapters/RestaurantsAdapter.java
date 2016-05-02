@@ -53,7 +53,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
 
         final Restaurant restaurant = mRestaurants.get(position);
         setListener(restaurant, holder);
-;
         holder.tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
 
         if(restaurant.isFavorite()){
