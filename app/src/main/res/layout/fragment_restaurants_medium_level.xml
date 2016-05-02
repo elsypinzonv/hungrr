@@ -33,6 +33,7 @@ android:orientation="vertical">
             android:background="@color/colorGreen"
             android:text="@string/lbl_btn_arm_combo"
             android:textColor="@android:color/white"
+            android:visibility="gone"
             />
 
 

@@ -64,8 +64,6 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
 
         if (null == savedInstanceState) {
             initFragment(getFragment());
-            //initFragment(RestaurantsFragment.newInstance());
-            //  Toast.makeText(getApplicationContext(),"Holi",Toast.LENGTH_LONG).show();
         }
     }
 

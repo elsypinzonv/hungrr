@@ -4,23 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.daprlabs.cardstack.SwipeDeck;
 import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
-import com.snotsoft.hungrr.restaurants.RestaurantsLowLevelContract;
-import com.snotsoft.hungrr.restaurants.RestaurantsPresenter;
+import com.snotsoft.hungrr.restaurants.RestaurantsCardsPresenter;
+import com.snotsoft.hungrr.restaurants.RestaurantsMediumLevelContract;
 import com.snotsoft.hungrr.utils.Injection;
-import com.snotsoft.hungrr.view.adapters.RestaurantsAdapter;
 import com.snotsoft.hungrr.view.adapters.SwipeDeckAdapter;
-import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
-import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +22,11 @@ import java.util.List;
 /**
  * Created by luisburgos on 23/03/16.
  */
-public class RestaurantsCardsFragment extends Fragment implements RestaurantsLowLevelContract.View {
+public class RestaurantsCardsFragment extends Fragment implements RestaurantsMediumLevelContract.View {
 
     private SwipeDeck swipeDeckRestaunrants;
-   // private RestaurantsAdapter mAdapter;
     private  SwipeDeckAdapter mAdapter;
-    private RestaurantsLowLevelContract.UserActionsListener mActionsListener;
+    private RestaurantsMediumLevelContract.UserActionsListener mActionsListener;
 
     public RestaurantsCardsFragment() {
         // Requires empty public constructor
@@ -59,11 +52,12 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsLow
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
-        mActionsListener = new RestaurantsPresenter(
+        mActionsListener = new RestaurantsCardsPresenter(
                 this,
                 Injection.provideRestaurantsInteractor(),
                 Injection.provideUserSessionManager(getActivity().getApplicationContext()),
-                Injection.provideLocationPreferencesManager(getActivity().getApplicationContext())
+                Injection.provideLocationPreferencesManager(getActivity().getApplicationContext()),
+                Injection.provideBudgetPreferencesManager(getActivity().getApplicationContext())
         );
     }
 
