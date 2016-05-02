@@ -10,6 +10,7 @@ import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
+import com.snotsoft.hungrr.utils.preferences_managers.LevelPreferencesManager;
 
 public class HungryLevelActivity extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class HungryLevelActivity extends AppCompatActivity {
     private static final int HIGH_LEVEL=2;
     private int selectedLevel=0;
     private ResourceCompatMethod rsc;
+    private LevelPreferencesManager levelPreferences;
 
 
     @Override
@@ -29,7 +31,9 @@ public class HungryLevelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hugry_level);
         initUI();
+        levelPreferences=Injection.provideLevelPreferencesManager(this);
         rsc =new ResourceCompatMethod(getApplicationContext());
+        initLevel();
         img_low_level.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,9 +74,13 @@ public class HungryLevelActivity extends AppCompatActivity {
 
                 break;
         }
-        Injection.provideLevelPreferencesManager(this).registerLevel(selectedLevel);
+        levelPreferences.registerLevel(selectedLevel);
         ActivityHelper.begin(this,targetClass);
 
+    }
+
+    private void initLevel(){
+        selected(levelPreferences.getLevel());
     }
 
     private void selected(int selection){
