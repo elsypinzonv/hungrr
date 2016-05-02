@@ -31,18 +31,16 @@ public class BudgetActivity extends AppCompatActivity {
     private final int MAX_VALUE=2000;
     private final String CURRENCY="MX";
     private GPSDataLoader mGPSLoader;
-    private static final int MEDIUM_LEVEL=1;
-
+    private BudgetPreferencesManager budgetPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget);
         ButterKnife.bind(this);
-        initRangerBudget();
-
         mGPSLoader = new GPSDataLoader(this, Injection.provideLocationPreferencesManager(this));
-
+        budgetPreferences = Injection.provideBudgetPreferencesManager(BudgetActivity.this);
+        initRangerBudget();
         ranger_budget.setOnRangeBarChangeListener(new RangeBar.OnRangeBarChangeListener() {
             @Override
             public void onIndexChangeListener(RangeBar rangeBar, int leftThumbIndex, int rightThumbIndex) {
@@ -62,7 +60,7 @@ public class BudgetActivity extends AppCompatActivity {
         mGPSLoader.loadLastKnownLocation(new GPSDataLoader.OnLocationLoaded() {
             @Override
             public void onLocationLoadFinished(double lat, double lng) {
-                Injection.provideBudgetPreferencesManager(BudgetActivity.this).registerBudgetValues(getMin(),getMax());
+                budgetPreferences.registerBudgetValues(getMin(),getMax());
                 ActivityHelper.sendTo(BudgetActivity.this, MainDrawerActivity.class);
             }
         });
@@ -77,9 +75,18 @@ public class BudgetActivity extends AppCompatActivity {
     }
 
     private void initRangerBudget(){
-        ranger_budget.setThumbIndices(MIN_VALUE,MAX_VALUE);
-        ranger_left.setText(getMin()+CURRENCY);
-        ranger_right.setText(getMax()+CURRENCY);
+        int min,max;
+
+        if(budgetPreferences.hasAlreadyChooseBudget()){
+            min=budgetPreferences.getBudgetMin();
+            max=budgetPreferences.getBudgetMax();
+        }else{
+            min=getMin();
+            max=getMax();
+        }
+        ranger_budget.setThumbIndices(min,max);
+        ranger_left.setText(min+CURRENCY);
+        ranger_right.setText(max+CURRENCY);
     }
 
     private int getMin(){
@@ -93,8 +100,8 @@ public class BudgetActivity extends AppCompatActivity {
 
     private int getMax(){
         int rightThumbIndex;
-        rightThumbIndex=ranger_budget.getLeftIndex();
-        if(rightThumbIndex<MAX_VALUE){
+        rightThumbIndex=ranger_budget.getRightIndex();
+        if(rightThumbIndex>MAX_VALUE){
             rightThumbIndex=MAX_VALUE;
         }
         return rightThumbIndex;

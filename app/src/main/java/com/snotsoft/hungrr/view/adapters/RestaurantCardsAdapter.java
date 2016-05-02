@@ -1,6 +1,7 @@
 package com.snotsoft.hungrr.view.adapters;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.domain.RestaurantPhone;
 import com.snotsoft.hungrr.domain.Schedule;
+import com.snotsoft.hungrr.utils.ResourceCompatMethod;
+import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,14 +24,19 @@ import java.util.List;
 /**
  * Created by Elsy on 29/04/2016.
  */
-public class SwipeDeckAdapter extends BaseAdapter {
+public class RestaurantCardsAdapter extends BaseAdapter {
 
     private List<Restaurant> data;
     private Context context;
+    private FavoriteRestaurantItemListener mFavoriteListener;
+    private ResourceCompatMethod rscCompat;
+    private Restaurant restaurant;
 
-    public SwipeDeckAdapter( Context context,ArrayList<Restaurant> data) {
+    public RestaurantCardsAdapter(Context context, ArrayList<Restaurant> data, FavoriteRestaurantItemListener favoriteListener) {
         this.data = data;
         this.context = context;
+        this.mFavoriteListener = favoriteListener;
+        rscCompat = new ResourceCompatMethod(context);
     }
 
     @Override
@@ -68,13 +76,30 @@ public class SwipeDeckAdapter extends BaseAdapter {
         TextView tx_restaurant_name = (TextView) v.findViewById(R.id.restaurant_name);
         TextView tx_type = (TextView) v.findViewById(R.id.type);
         TextView tx_adress = (TextView) v.findViewById(R.id.adress);
+        TextView tx_price = (TextView) v.findViewById(R.id.price);
+        FloatingActionButton img_favorite = (FloatingActionButton) v.findViewById(R.id.fab);
 
-        Restaurant restaurant = data.get(position);
-
+        restaurant = data.get(position);
+        tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
         tx_restaurant_name.setText(restaurant.getName());
         tx_type.setText(restaurant.getType());
         tx_adress.setText(restaurant.getType());
         setImage(img_restaurant_image, restaurant.getProfileImage());
+
+
+        if(restaurant.isFavorite()){
+            img_favorite.setImageDrawable(rscCompat.getDrawableCompat(R.mipmap.ic_favorite));
+        }
+
+        img_favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mFavoriteListener.onFavorite(restaurant);
+            }
+        });
+
+
+
         return v;
     }
 

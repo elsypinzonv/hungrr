@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.daprlabs.cardstack.SwipeDeck;
 import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
@@ -14,7 +16,9 @@ import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.restaurants.RestaurantsCardsPresenter;
 import com.snotsoft.hungrr.restaurants.RestaurantsMediumLevelContract;
 import com.snotsoft.hungrr.utils.Injection;
-import com.snotsoft.hungrr.view.adapters.SwipeDeckAdapter;
+import com.snotsoft.hungrr.utils.preferences_managers.BudgetPreferencesManager;
+import com.snotsoft.hungrr.view.adapters.RestaurantCardsAdapter;
+import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +29,7 @@ import java.util.List;
 public class RestaurantsCardsFragment extends Fragment implements RestaurantsMediumLevelContract.View {
 
     private SwipeDeck swipeDeckRestaunrants;
-    private  SwipeDeckAdapter mAdapter;
+    private RestaurantCardsAdapter mAdapter;
     private RestaurantsMediumLevelContract.UserActionsListener mActionsListener;
 
     public RestaurantsCardsFragment() {
@@ -39,7 +43,12 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsMed
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new SwipeDeckAdapter(getActivity(),new ArrayList<Restaurant>(0));
+        mAdapter = new RestaurantCardsAdapter(getActivity(),new ArrayList<Restaurant>(0),new FavoriteRestaurantItemListener() {
+            @Override
+            public void onFavorite(Restaurant restaurant) {
+                mActionsListener.markAsFavorite(restaurant);
+            }
+        });
     }
 
     @Override
