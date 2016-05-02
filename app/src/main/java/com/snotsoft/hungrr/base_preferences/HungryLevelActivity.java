@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.utils.ActivityHelper;
+import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 
 public class HungryLevelActivity extends AppCompatActivity {
@@ -69,8 +70,8 @@ public class HungryLevelActivity extends AppCompatActivity {
 
                 break;
         }
-        ActivityHelper.begin(
-                this,targetClass);
+        Injection.provideLevelPreferencesManager(this).registerLevel(selectedLevel);
+        ActivityHelper.begin(this,targetClass);
 
     }
 

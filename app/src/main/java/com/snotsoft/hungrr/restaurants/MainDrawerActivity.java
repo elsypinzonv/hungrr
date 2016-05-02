@@ -39,6 +39,9 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
     private CoordinatorLayout mCoordinator;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
+    private static final int LOW_LEVEL=0;
+    private static final int MEDIUM_LEVEL=1;
+    private static final int HIGH_LEVEL=2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +63,7 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
         mNavigationView.setNavigationItemSelectedListener(this);
 
         if (null == savedInstanceState) {
-         //   initFragment(RestaurantsFragment.newInstance());
-            initFragment(RestaurantsCardsFragment.newInstance());
-            Toast.makeText(getApplicationContext(),"Holi",Toast.LENGTH_LONG).show();
+            initFragment(getFragment());
         }
     }
 
@@ -109,9 +110,7 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
         Class fragmentClass = null; //TODO: Remove null
         switch(menuItem.getItemId()) {
             case R.id.menu_item_search:
-              //  fragmentClass = RestaurantsFragment.class;
-                fragmentClass = RestaurantsCardsFragment.class;
-
+                fragmentClass = getFragmentClass();
                 break;
             case R.id.menu_item_favorites:
                 fragmentClass = FavoritesFragment.class;
@@ -129,7 +128,7 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
                 requestLogoutConfirmation();
                 break;
             default:
-                fragmentClass = RestaurantsFragment.class;
+                fragmentClass = getFragmentClass();
         }
 
         if(fragmentClass != null){
@@ -160,12 +159,47 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
 
     private void doLogout() {
         Injection.provideLocationPreferencesManager(this).clearLocation();
+        Injection.provideBudgetPreferencesManager(this).clearBudget();
+        Injection.provideLevelPreferencesManager(this).clearLevel();
         Injection.provideUserSessionManager(this).logoutUser();
         LoginManager.getInstance().logOut();
         finish();
         startActivity(new Intent(this, DispatchActivity.class));
     }
 
+
+    private Fragment getFragment(){
+        Fragment fragment=null;
+        switch (Injection.provideLevelPreferencesManager(this).getLevel()){
+            case LOW_LEVEL:
+                fragment = RestaurantsFragment.newInstance();
+                break;
+            case MEDIUM_LEVEL:
+                fragment = RestaurantsCardsFragment.newInstance();
+                break;
+
+            case HIGH_LEVEL:
+
+                break;
+        }
+       return fragment;
+    }
+
+    private Class getFragmentClass(){
+        Class fragment=null;
+        switch (Injection.provideLevelPreferencesManager(this).getLevel()){
+            case LOW_LEVEL:
+                fragment = RestaurantsFragment.class;
+                break;
+            case MEDIUM_LEVEL:
+                fragment = RestaurantsCardsFragment.class;
+                break;
+
+            case HIGH_LEVEL:
+                break;
+        }
+        return fragment;
+    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

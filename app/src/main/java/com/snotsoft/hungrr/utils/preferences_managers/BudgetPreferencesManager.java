@@ -34,20 +34,20 @@ public class BudgetPreferencesManager {
 
     public void registerPreferences(String preference, boolean value){
         mEditor.putBoolean(preference, true);
+                mEditor.commit();
+    }
+
+    public void registerPreferences(String preference, int value){
+        mEditor.putInt(preference, value);
         mEditor.commit();
     }
 
-    public void registerPreferences(String preference, double value){
-        mEditor.putLong(preference, Double.doubleToLongBits(value));
-        mEditor.commit();
+    public int getBudgetMin(){
+        return mPreferences.getInt(BUDGET_MIN, 0);
     }
 
-    public double getBudgetMin(){
-        return Double.longBitsToDouble(mPreferences.getLong(BUDGET_MIN, 0));
-    }
-
-    public double getBudgetMax(){
-        return Double.longBitsToDouble(mPreferences.getLong(BUDGET_MAX, 0));
+    public int getBudgetMax(){
+        return mPreferences.getInt(BUDGET_MAX, 0);
     }
 
     public boolean hasAlreadyChooseBudget(){
