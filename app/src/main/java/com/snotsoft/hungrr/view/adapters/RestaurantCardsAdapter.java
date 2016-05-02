@@ -16,6 +16,7 @@ import com.snotsoft.hungrr.domain.RestaurantPhone;
 import com.snotsoft.hungrr.domain.Schedule;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
+import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -31,11 +32,18 @@ public class RestaurantCardsAdapter extends BaseAdapter {
     private FavoriteRestaurantItemListener mFavoriteListener;
     private ResourceCompatMethod rscCompat;
     private Restaurant restaurant;
+    private RestaurantItemListener mItemListener;
 
-    public RestaurantCardsAdapter(Context context, ArrayList<Restaurant> data, FavoriteRestaurantItemListener favoriteListener) {
+    public RestaurantCardsAdapter(
+            Context context,
+            ArrayList<Restaurant> data,
+            RestaurantItemListener itemListener,
+            FavoriteRestaurantItemListener favoriteListener
+    ){
         this.data = data;
         this.context = context;
         this.mFavoriteListener = favoriteListener;
+        mItemListener = itemListener;
         rscCompat = new ResourceCompatMethod(context);
     }
 
@@ -98,7 +106,12 @@ public class RestaurantCardsAdapter extends BaseAdapter {
             }
         });
 
-
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItemListener.onRestaurantClick(restaurant);
+            }
+        });
 
         return v;
     }

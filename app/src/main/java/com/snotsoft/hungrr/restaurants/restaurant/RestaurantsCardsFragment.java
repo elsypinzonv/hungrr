@@ -19,6 +19,7 @@ import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.preferences_managers.BudgetPreferencesManager;
 import com.snotsoft.hungrr.view.adapters.RestaurantCardsAdapter;
 import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
+import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,18 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsMed
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new RestaurantCardsAdapter(getActivity(),new ArrayList<Restaurant>(0),new FavoriteRestaurantItemListener() {
+        mAdapter = new RestaurantCardsAdapter(getActivity(),new ArrayList<Restaurant>(0),new RestaurantItemListener() {
+            @Override
+            public void onRestaurantClick(Restaurant clickedRestaurant) {
+                mActionsListener.openRestaurantProfile(clickedRestaurant);
+            }
+
+            @Override
+            public void onRestaurantLongClick(Restaurant clickedRestaurant, int position) {
+
+            }
+        },
+                new FavoriteRestaurantItemListener() {
             @Override
             public void onFavorite(Restaurant restaurant) {
                 mActionsListener.markAsFavorite(restaurant);
