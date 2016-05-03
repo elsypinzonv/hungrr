@@ -90,7 +90,7 @@ public class RestaurantCardsAdapter extends BaseAdapter {
         tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
         tx_restaurant_name.setText(restaurant.getName());
         tx_type.setText(restaurant.getType());
-        tx_adress.setText(restaurant.getType());
+        tx_adress.setText(restaurant.getAddress());
         setImage(img_restaurant_image, restaurant.getProfileImage());
 
 
