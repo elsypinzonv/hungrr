@@ -104,5 +104,7 @@
 
 
     <string name="lbl_btn_arm_combo">Arma un Combo</string>
+    <string name="mark_as_favorite">Agregado a favoritos</string>
+    <string name="unmark_as_favorite">Eliminado de favoritos</string>
 
 </resources>
