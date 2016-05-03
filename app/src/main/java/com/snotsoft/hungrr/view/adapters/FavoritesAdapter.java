@@ -76,13 +76,16 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder> 
         notifyDataSetChanged();
     }
 
-    public void removeData(){
-        ArrayList<Restaurant> restaurantList = getSelectedList();
+    public void removeData(ArrayList<Restaurant> restaurantList){
         for (Restaurant restaurant: restaurantList) {
             mRestaurants.remove(restaurant);
         }
         selectedItems.clear();
         notifyDataSetChanged();
+    }
+
+    public void removeSelectedData(){
+        removeData(getSelectedList());
     }
 
     public ArrayList<Restaurant> getSelectedList() {

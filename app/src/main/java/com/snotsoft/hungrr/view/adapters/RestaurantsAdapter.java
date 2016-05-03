@@ -57,6 +57,8 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
 
         if(restaurant.isFavorite()){
             holder.img_favorite.setImageDrawable(rscCompat.getDrawableCompat(R.mipmap.ic_favorite));
+        } else {
+            holder.img_favorite.setImageDrawable(rscCompat.getDrawableCompat(R.mipmap.ic_favorite_border));
         }
 
         holder.img_favorite.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +105,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsViewHold
 
     public void toggleFavorite(String restaurantID, boolean isFavorite) {
         for(Restaurant restaurant : mRestaurants){
-            if(restaurant.getId() == restaurantID){
+            if(restaurant.getId().equals(restaurantID)){
                 restaurant.setIsFavorite(isFavorite);
             }
         }

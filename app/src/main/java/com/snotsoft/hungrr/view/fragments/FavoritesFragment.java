@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -96,7 +95,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
         mRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActionsListener.removeFavorites(mAdapter.getSelectedList());
+                mActionsListener.removeFavorites(getActivity().getApplication(), mAdapter.getSelectedList());
             }
         });
 
@@ -116,9 +115,13 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
     @Override
     public void showFavorites() {
-        mAdapter.removeData();
+        mAdapter.removeSelectedData();
     }
 
+    @Override
+    public void removeFromFavoriteList(ArrayList<Restaurant> restaurantsToRemove){
+        mAdapter.removeData(restaurantsToRemove);
+    }
 
     @Override
     public void showRestaurantProfileUI(String id, Restaurant restaurant) {
