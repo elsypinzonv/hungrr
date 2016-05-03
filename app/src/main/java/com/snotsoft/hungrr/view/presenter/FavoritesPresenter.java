@@ -7,9 +7,7 @@ import com.snotsoft.hungrr.interactor.RestaurantInteractor;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
 import com.snotsoft.hungrr.io.callbacks.FavoriteCallback;
 import com.snotsoft.hungrr.io.callbacks.FavoriteRestaurantsCallback;
-import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
 import com.snotsoft.hungrr.utils.Injection;
-import com.snotsoft.hungrr.utils.LocationPreferencesManager;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 import com.snotsoft.hungrr.view.contracts.FavoritesContract;
 
@@ -26,7 +24,7 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
     private RestaurantsInteractor mInteractor;
     private FavoritesContract.View mView;
     private UserSessionManager mSessionManager;
-    private RestaurantInteractor restaurantInteractor;
+    private RestaurantInteractor mRestaurantInteractor;
 
     public FavoritesPresenter(
             @NonNull FavoritesContract.View view,
@@ -37,7 +35,7 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
         mInteractor = checkNotNull(interactor);
         mView = checkNotNull(view);
         mSessionManager = checkNotNull(sessionManager);
-         restaurantInteractor = checkNotNull(restaurantInteractor);
+        mRestaurantInteractor = checkNotNull(restaurantInteractor);
     }
 
 

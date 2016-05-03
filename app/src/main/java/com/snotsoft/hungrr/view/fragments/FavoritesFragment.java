@@ -76,7 +76,8 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
        mActionsListener = new FavoritesPresenter(
                 this,
                 Injection.provideRestaurantsInteractor(),
-                Injection.provideUserSessionManager(getActivity().getApplicationContext())
+                Injection.provideUserSessionManager(getActivity().getApplicationContext()),
+                Injection.provideRestaurantInteractor()
         );
     }
 
