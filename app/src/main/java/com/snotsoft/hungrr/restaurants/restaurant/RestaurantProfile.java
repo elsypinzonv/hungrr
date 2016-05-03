@@ -41,7 +41,7 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
     @Bind(R.id.phone) TextView phoneTextView;
     @Bind(R.id.restaurant) ImageView restaurantImageView;
     @Bind(R.id.photoFab) FloatingActionButton mFab;
-    @Bind(R.id.info)  LinearLayout informationLinearLayout;
+    @Bind(R.id.rl_principal)  LinearLayout informationLinearLayout;
     @Bind(R.id.menusHeader) TextView menusHeaderTextView;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout mCollapsinToolbarLayout;
     @Bind(R.id.restaurant_detail_coordinator_layout) CoordinatorLayout mCoordinator;
@@ -189,6 +189,7 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
                 setElement(menu.getSections().get(FIRST_ELEMENT).getElements().get(FIRST_ELEMENT), layout);
             }
         }
+
         informationLinearLayout.addView(layout);
 
     }
