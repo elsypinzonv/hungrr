@@ -3,37 +3,41 @@ package com.snotsoft.hungrr.view.presenter;
 import android.support.annotation.NonNull;
 
 import com.snotsoft.hungrr.domain.Restaurant;
+import com.snotsoft.hungrr.interactor.RestaurantInteractor;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
+import com.snotsoft.hungrr.io.callbacks.FavoriteCallback;
 import com.snotsoft.hungrr.io.callbacks.FavoriteRestaurantsCallback;
 import com.snotsoft.hungrr.io.callbacks.RestaurantsCallback;
+import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.LocationPreferencesManager;
 import com.snotsoft.hungrr.utils.UserSessionManager;
 import com.snotsoft.hungrr.view.contracts.FavoritesContract;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
  * Created by luisburgos on 23/03/16.
  */
-public class FavoritesPresenter implements FavoritesContract.UserActionsListener, FavoriteRestaurantsCallback {
+public class FavoritesPresenter implements FavoritesContract.UserActionsListener ,FavoriteCallback, FavoriteRestaurantsCallback {
 
     private RestaurantsInteractor mInteractor;
     private FavoritesContract.View mView;
     private UserSessionManager mSessionManager;
-    private LocationPreferencesManager mLocationPreferences;
+    private RestaurantInteractor restaurantInteractor;
 
     public FavoritesPresenter(
             @NonNull FavoritesContract.View view,
             @NonNull RestaurantsInteractor interactor,
             @NonNull UserSessionManager sessionManager,
-            @NonNull LocationPreferencesManager locationPreferences
+            @NonNull RestaurantInteractor restaurantInteractor
     ) {
         mInteractor = checkNotNull(interactor);
         mView = checkNotNull(view);
         mSessionManager = checkNotNull(sessionManager);
-        mLocationPreferences = checkNotNull(locationPreferences);
+         restaurantInteractor = checkNotNull(restaurantInteractor);
     }
 
 
@@ -62,7 +66,14 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
     }
 
     @Override
-    public void removeFavorites() {
+    public void removeFavorites(List<Restaurant> restaurants) {
+
+        for(Restaurant restaurant: restaurants){
+            Injection.provideRestaurantInteractor().unfavorite(
+                    this, restaurant.getId(), mSessionManager.getTokenSession()
+            );
+        }
+
         mView.showFavorites();
         mView.showFloatingMenu();
     }
@@ -85,4 +96,18 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
         mView.showErrorMessage("Ocurrió un error");
     }
 
+    @Override
+    public void onSuccessMarkAsFavorite(String restaurantID, String newToken) {
+
+    }
+
+    @Override
+    public void onSuccessUnmarkAsFavorite(String restaurantID, String newToken) {
+
+    }
+
+    @Override
+    public void onFailedActionFavorite() {
+
+    }
 }

@@ -35,7 +35,7 @@ public interface FavoritesContract {
 
         void selectFavorites(Restaurant restaurant, int position);
 
-        void removeFavorites();
+        void removeFavorites(List<Restaurant> restaurants);
     }
 
 }

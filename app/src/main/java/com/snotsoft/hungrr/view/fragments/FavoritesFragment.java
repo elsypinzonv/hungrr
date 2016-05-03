@@ -76,8 +76,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
        mActionsListener = new FavoritesPresenter(
                 this,
                 Injection.provideRestaurantsInteractor(),
-                Injection.provideUserSessionManager(getActivity().getApplicationContext()),
-                Injection.provideLocationPreferencesManager(getActivity().getApplicationContext())
+                Injection.provideUserSessionManager(getActivity().getApplicationContext())
         );
     }
 
@@ -96,7 +95,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
         mRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mActionsListener.removeFavorites();
+                mActionsListener.removeFavorites(mAdapter.getSelectedList());
             }
         });
 
