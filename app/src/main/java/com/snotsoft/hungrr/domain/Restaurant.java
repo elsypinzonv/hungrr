@@ -31,7 +31,7 @@ public class Restaurant implements Serializable {
     @SerializedName("image")
     private String image;
 
-    @SerializedName("is_favorite")
+    @SerializedName("is_favourite")
     private boolean isFavorite;
 
     @SerializedName("avg_price")
