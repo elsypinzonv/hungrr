@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
@@ -139,6 +140,7 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
             mFab.setRippleColor(resourceCompat.getColorCompat(R.color.colorAccent));
             mFab.setImageResource(R.mipmap.ic_favorite_border);
         }
+        mRestaurant.setIsFavorite(isFavorite);
     }
 
     private void setImage(String imageURL){
