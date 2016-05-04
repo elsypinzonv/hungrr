@@ -26,6 +26,7 @@ import com.snotsoft.hungrr.signup.SignUpActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.UserSessionManager;
+import com.snotsoft.hungrr.view.activities.DispatchActivity;
 
 import java.util.List;
 
@@ -102,7 +103,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void onLoginResult(Boolean result, int code) {
         if(result){
-            finish();
             ActivityHelper.sendTo(LoginActivity.this, HungryLevelActivity.class);
         } else {
             showLoginFailedMessage(getString(R.string.error_failed_login));
@@ -190,5 +190,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mProgressDialog.setMessage("Iniciando Sesión");
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        ActivityHelper.sendTo(LoginActivity.this, DispatchActivity.class);
     }
 }

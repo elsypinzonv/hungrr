@@ -87,7 +87,7 @@ public class DispatchActivity extends AppCompatActivity implements FacebookCallb
     }
 
     @OnClick(R.id.btn_login) public void actionLogin(){
-        ActivityHelper.begin(DispatchActivity.this, LoginActivity.class);
+        ActivityHelper.sendTo(DispatchActivity.this, LoginActivity.class);
     }
 
     @OnClick(R.id.btn_register) public void actionRegister(){

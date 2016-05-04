@@ -23,8 +23,8 @@ public class ActivityHelper {
 
     public static void sendTo(Activity activity, Class classTo) {
         Intent intent = new Intent().setClass(activity, classTo);
-        activity.finish();
         activity.startActivity(intent);
+        activity.finish();
     }
 
     public static ProgressDialog createModalProgressDialog(Activity activity) {

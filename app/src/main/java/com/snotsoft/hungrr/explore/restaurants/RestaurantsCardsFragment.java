@@ -88,7 +88,6 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsMed
 
         swipeDeckRestaunrants = (SwipeDeck) root.findViewById(R.id.restaurants);
         swipeDeckRestaunrants.setAdapter(mAdapter);
-
         swipeDeckRestaunrants.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override
             public void cardSwipedLeft(int position) {
