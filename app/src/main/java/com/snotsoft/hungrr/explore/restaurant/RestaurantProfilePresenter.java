@@ -1,4 +1,4 @@
-package com.snotsoft.hungrr.restaurants.restaurant;
+package com.snotsoft.hungrr.explore.restaurant;
 
 import android.support.annotation.NonNull;
 
@@ -32,6 +32,7 @@ public class RestaurantProfilePresenter implements RestaurantProfileContract.Use
 
     @Override
     public void loadRestaurantInformation(String restaurantID) {
+        mView.setProgressIndicator(true);
         mInteractor.getDetails(this, restaurantID, mSessionManager.getTokenSession());
     }
 
@@ -51,12 +52,14 @@ public class RestaurantProfilePresenter implements RestaurantProfileContract.Use
 
     @Override
     public void onDetailsSuccess(Restaurant restaurant, String newToken) {
+        mView.setProgressIndicator(false);
         mSessionManager.updateSessionToken(newToken);
         mView.showRestaurant(restaurant);
     }
 
     @Override
     public void onFailedGetDetail() {
+        mView.setProgressIndicator(false);
         mView.showFailedLoadMessage();
     }
 
@@ -68,7 +71,7 @@ public class RestaurantProfilePresenter implements RestaurantProfileContract.Use
 
     @Override
     public void onFailedActionFavorite() {
-        mView.showErrorMessage("Error on favorite/unfavorite");
+        mView.showErrorMessage("Ha ocurrido un error");
     }
 
     @Override

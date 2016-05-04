@@ -1,5 +1,6 @@
-package com.snotsoft.hungrr.restaurants.restaurant;
+package com.snotsoft.hungrr.explore.restaurant;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -13,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
@@ -22,6 +22,7 @@ import com.snotsoft.hungrr.domain.Menu;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.domain.RestaurantPhone;
 import com.snotsoft.hungrr.domain.Schedule;
+import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 import com.squareup.picasso.Picasso;
@@ -47,9 +48,8 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
 
     private String mRestaurantID;
     private Restaurant mRestaurant;
+    private ProgressDialog mProgressDialog;
     private RestaurantProfileContract.UserActionsListener mActionsListener;
-    private boolean isAlreadyFetchDetails;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,19 +82,21 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
             }
         });
         setData(mRestaurant);
+        mProgressDialog = ActivityHelper.createModalProgressDialog(this, "Obteniendo información");
         mActionsListener.loadRestaurantInformation(mRestaurantID);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        isAlreadyFetchDetails = false;
-
+    public void setProgressIndicator(boolean active){
+        if(active){
+            mProgressDialog.show();
+        } else {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override
     public void showRestaurant(Restaurant restaurant) {
-        isAlreadyFetchDetails = true;
         setData(restaurant);
     }
 

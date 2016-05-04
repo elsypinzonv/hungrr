@@ -1,5 +1,6 @@
-package com.snotsoft.hungrr.restaurants.restaurant;
+package com.snotsoft.hungrr.explore.restaurants;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -7,16 +8,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.daprlabs.cardstack.SwipeDeck;
 import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
-import com.snotsoft.hungrr.restaurants.RestaurantsCardsPresenter;
-import com.snotsoft.hungrr.restaurants.RestaurantsMediumLevelContract;
+import com.snotsoft.hungrr.explore.restaurant.RestaurantProfile;
+import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
-import com.snotsoft.hungrr.utils.preferences_managers.BudgetPreferencesManager;
 import com.snotsoft.hungrr.view.adapters.RestaurantCardsAdapter;
 import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
@@ -31,6 +30,7 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsMed
 
     private SwipeDeck swipeDeckRestaunrants;
     private RestaurantCardsAdapter mAdapter;
+    private ProgressDialog mProgressDialog;
     private RestaurantsMediumLevelContract.UserActionsListener mActionsListener;
 
     public RestaurantsCardsFragment() {
@@ -54,13 +54,13 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsMed
             public void onRestaurantLongClick(Restaurant clickedRestaurant, int position) {
 
             }
-        },
-                new FavoriteRestaurantItemListener() {
+        }, new FavoriteRestaurantItemListener() {
             @Override
             public void onFavorite(Restaurant restaurant) {
                 mActionsListener.markAsFavorite(restaurant);
             }
         });
+        mProgressDialog = ActivityHelper.createModalProgressDialog(getActivity());
     }
 
     @Override
@@ -96,7 +96,12 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsMed
 
     @Override
     public void setProgressIndicator(boolean active) {
-
+        if(active){
+            mProgressDialog.setMessage("Cargando restaurantes");
+            mProgressDialog.show();
+        } else {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override

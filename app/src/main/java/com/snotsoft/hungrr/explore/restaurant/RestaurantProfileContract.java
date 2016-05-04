@@ -1,4 +1,4 @@
-package com.snotsoft.hungrr.restaurants.restaurant;
+package com.snotsoft.hungrr.explore.restaurant;
 
 import com.snotsoft.hungrr.domain.Restaurant;
 
@@ -8,6 +8,8 @@ import com.snotsoft.hungrr.domain.Restaurant;
 public interface RestaurantProfileContract {
 
     interface View {
+
+        void setProgressIndicator(boolean active);
 
         void showRestaurant(Restaurant restaurant);
 

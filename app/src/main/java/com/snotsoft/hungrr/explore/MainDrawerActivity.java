@@ -1,4 +1,4 @@
-package com.snotsoft.hungrr.restaurants;
+package com.snotsoft.hungrr.explore;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,24 +12,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
-import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.base_preferences.BudgetActivity;
 import com.snotsoft.hungrr.base_preferences.HungryLevelActivity;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
+import com.snotsoft.hungrr.explore.restaurants.RestaurantsCardsFragment;
+import com.snotsoft.hungrr.explore.restaurants.RestaurantsFragment;
 import com.snotsoft.hungrr.utils.ActivityHelper;
-import com.snotsoft.hungrr.restaurants.restaurant.RestaurantsCardsFragment;
 import com.snotsoft.hungrr.utils.Injection;
-import com.snotsoft.hungrr.utils.UserSessionManager;
 import com.snotsoft.hungrr.view.activities.DispatchActivity;
 import com.snotsoft.hungrr.view.fragments.FavoritesFragment;
 import com.snotsoft.hungrr.view.widgets.LogoutDialog;

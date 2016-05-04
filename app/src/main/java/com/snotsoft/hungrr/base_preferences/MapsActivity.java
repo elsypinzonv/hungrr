@@ -1,13 +1,8 @@
 package com.snotsoft.hungrr.base_preferences;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,13 +18,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
-import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
+import com.snotsoft.hungrr.explore.MainDrawerActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.GPSDataLoader;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.LocationPreferencesManager;
-
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -1,24 +1,11 @@
 package com.snotsoft.hungrr.base_preferences;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
-import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
-import com.snotsoft.hungrr.io.HunGrrApiConstants;
-import com.snotsoft.hungrr.restaurants.MainDrawerActivity;
+import com.snotsoft.hungrr.explore.MainDrawerActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.GPSDataLoader;
 import com.snotsoft.hungrr.utils.Injection;

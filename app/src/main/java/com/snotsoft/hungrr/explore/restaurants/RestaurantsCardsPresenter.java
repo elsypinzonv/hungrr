@@ -1,4 +1,4 @@
-package com.snotsoft.hungrr.restaurants;
+package com.snotsoft.hungrr.explore.restaurants;
 
 import android.support.annotation.NonNull;
 
@@ -88,6 +88,7 @@ public class RestaurantsCardsPresenter implements RestaurantsMediumLevelContract
 
     @Override
     public void onFailedLoad() {
+        mView.setProgressIndicator(false);
         mView.showErrorMessage("Ocurrió un error");
     }
 
@@ -109,7 +110,7 @@ public class RestaurantsCardsPresenter implements RestaurantsMediumLevelContract
 
     @Override
     public void onFailedActionFavorite() {
-        mView.showErrorMessage("Error on favorite/unfavorite");
+        mView.showErrorMessage("Ha ocurrido un error");
     }
 
     @Override

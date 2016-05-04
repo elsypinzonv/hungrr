@@ -53,12 +53,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".restaurants.restaurant.RestaurantProfile"
+            android:name=".explore.restaurant.RestaurantProfile"
             android:label="@string/title_activity_restaurant_profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".restaurants.MainDrawerActivity"
+            android:name=".explore.MainDrawerActivity"
             android:label="@string/title_activity_main_drawer"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

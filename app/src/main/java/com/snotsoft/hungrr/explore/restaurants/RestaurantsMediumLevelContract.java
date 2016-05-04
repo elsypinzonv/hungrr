@@ -1,4 +1,4 @@
-package com.snotsoft.hungrr.restaurants;
+package com.snotsoft.hungrr.explore.restaurants;
 
 import com.snotsoft.hungrr.domain.Restaurant;
 

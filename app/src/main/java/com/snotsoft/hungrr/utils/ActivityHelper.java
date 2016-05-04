@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.snotsoft.hungrr.domain.User;
+import com.snotsoft.hungrr.explore.restaurant.RestaurantProfile;
 import com.snotsoft.hungrr.login.LoginActivity;
 import com.snotsoft.hungrr.signup.SignUpActivity;
 
@@ -27,11 +28,18 @@ public class ActivityHelper {
     }
 
     public static ProgressDialog createModalProgressDialog(Activity activity) {
+        return createModalProgressDialog(activity, null);
+    }
+
+    public static ProgressDialog createModalProgressDialog(Activity activity, String dialogMessage) {
         final ProgressDialog progressDialog;
         progressDialog = new ProgressDialog(activity);
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
+
+        if(dialogMessage != null){
+            progressDialog.setMessage(dialogMessage);
+        }
         return progressDialog;
     }
-
 }

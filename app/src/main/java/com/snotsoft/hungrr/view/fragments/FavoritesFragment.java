@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
-import com.snotsoft.hungrr.restaurants.restaurant.RestaurantProfile;
+import com.snotsoft.hungrr.explore.restaurant.RestaurantProfile;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.adapters.FavoritesAdapter;
