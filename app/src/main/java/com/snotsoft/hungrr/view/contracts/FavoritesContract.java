@@ -1,7 +1,10 @@
 package com.snotsoft.hungrr.view.contracts;
 
+import android.content.Context;
+
 import com.snotsoft.hungrr.domain.Restaurant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +16,13 @@ public interface FavoritesContract {
 
         void setProgressIndicator(boolean active);
 
+        void setRemoveProgressIndicator(boolean active);
+
         void showFavorites(List<Restaurant> restaurants);
 
         void showFavorites();
+
+        void removeFromFavoriteList(ArrayList<Restaurant> restaurantsToRemove);
 
         void showRestaurantProfileUI(String id, Restaurant restaurant);
 
@@ -35,7 +42,7 @@ public interface FavoritesContract {
 
         void selectFavorites(Restaurant restaurant, int position);
 
-        void removeFavorites(List<Restaurant> restaurants);
+        void removeFavorites(Context context, ArrayList<Restaurant> restaurants);
     }
 
 }
