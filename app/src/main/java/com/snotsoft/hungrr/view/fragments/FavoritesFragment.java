@@ -3,6 +3,7 @@ package com.snotsoft.hungrr.view.fragments;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.restaurants.restaurant.RestaurantProfile;
+import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.adapters.FavoritesAdapter;
 import com.snotsoft.hungrr.view.contracts.FavoritesContract;
@@ -61,7 +63,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
                 mActionsListener.selectFavorites(clickedRestaurant, position);
             }
         });
-        setupProgressDialog();
+        mProgressDialog = ActivityHelper.createModalProgressDialog(getActivity());
     }
 
     @Override
@@ -150,7 +152,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
     @Override
     public void showErrorMessage(String message) {
-
+        Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -169,12 +171,6 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
             setData(itemsSelected);
         }
 
-    }
-
-    private void setupProgressDialog() {
-        mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setCancelable(false);
     }
 
     private void setData(int itemsSelected){

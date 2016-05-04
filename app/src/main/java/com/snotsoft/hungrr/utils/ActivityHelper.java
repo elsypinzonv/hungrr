@@ -1,6 +1,7 @@
 package com.snotsoft.hungrr.utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,14 @@ public class ActivityHelper {
         Intent intent = new Intent().setClass(activity, classTo);
         activity.finish();
         activity.startActivity(intent);
+    }
+
+    public static ProgressDialog createModalProgressDialog(Activity activity) {
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(activity);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        return progressDialog;
     }
 
 }
