@@ -1,5 +1,6 @@
 package com.snotsoft.hungrr.view.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
     private LinearLayout mFloatingMenu;
     private TextView mElements;
     private ImageView mRemove;
+    private ProgressDialog mProgressDialog;
     private FavoritesContract.UserActionsListener mActionsListener;
 
     public FavoritesFragment() {
@@ -59,7 +61,7 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
                 mActionsListener.selectFavorites(clickedRestaurant, position);
             }
         });
-
+        setupProgressDialog();
     }
 
     @Override
@@ -105,7 +107,22 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
 
     @Override
     public void setProgressIndicator(boolean active) {
+        mProgressDialog.setMessage("Cargando favoritos");
+        setProgressDialog(active);
+    }
 
+    @Override
+    public void setRemoveProgressIndicator(boolean active) {
+        mProgressDialog.setMessage("Eliminando favoritos");
+        setProgressDialog(active);
+    }
+
+    private void setProgressDialog(boolean active){
+        if(active){
+            mProgressDialog.show();
+        } else {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override
@@ -152,6 +169,12 @@ public class FavoritesFragment extends Fragment  implements FavoritesContract.Vi
             setData(itemsSelected);
         }
 
+    }
+
+    private void setupProgressDialog() {
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(false);
     }
 
     private void setData(int itemsSelected){

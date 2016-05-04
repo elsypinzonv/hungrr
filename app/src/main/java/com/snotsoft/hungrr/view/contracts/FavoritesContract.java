@@ -16,6 +16,8 @@ public interface FavoritesContract {
 
         void setProgressIndicator(boolean active);
 
+        void setRemoveProgressIndicator(boolean active);
+
         void showFavorites(List<Restaurant> restaurants);
 
         void showFavorites();

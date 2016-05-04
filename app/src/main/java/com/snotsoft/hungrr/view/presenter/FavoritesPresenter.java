@@ -74,6 +74,7 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
         removeQueue = ApiServiceQueue.getQueueInstance(context);
         ServiceNotifier.getInstance().register(this);
         removeQueue.enqueue(restaurants);
+        mView.setRemoveProgressIndicator(true);
     }
 
     @Override
@@ -100,6 +101,7 @@ public class FavoritesPresenter implements FavoritesContract.UserActionsListener
         mSessionManager.updateSessionToken(newToken);
 
         if(removeQueue.isFinish()){
+            mView.setRemoveProgressIndicator(false);
             mView.showFavorites();
             mView.showFloatingMenu();
         }
