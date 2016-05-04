@@ -1,5 +1,6 @@
 package com.snotsoft.hungrr.restaurants;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.restaurants.restaurant.RestaurantProfile;
+import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.adapters.RestaurantsAdapter;
 import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
@@ -30,6 +32,7 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
 
     private RecyclerView mRecyclerView;
     private RestaurantsAdapter mAdapter;
+    private ProgressDialog mProgressDialog;
     private RestaurantsLowLevelContract.UserActionsListener mActionsListener;
 
     public RestaurantsFragment() {
@@ -59,6 +62,7 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
                 mActionsListener.markAsFavorite(restaurant);
             }
         });
+        mProgressDialog = ActivityHelper.createModalProgressDialog(getActivity());
     }
 
     @Override
@@ -95,7 +99,12 @@ public class RestaurantsFragment extends Fragment implements RestaurantsLowLevel
 
     @Override
     public void setProgressIndicator(boolean active) {
-
+        if(active){
+            mProgressDialog.setMessage("Cargando restaurantes");
+            mProgressDialog.show();
+        } else {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override
