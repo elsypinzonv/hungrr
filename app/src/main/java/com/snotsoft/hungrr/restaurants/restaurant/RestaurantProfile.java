@@ -22,7 +22,6 @@ import com.snotsoft.hungrr.domain.Menu;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.domain.RestaurantPhone;
 import com.snotsoft.hungrr.domain.Schedule;
-import com.snotsoft.hungrr.domain.Section;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 import com.squareup.picasso.Picasso;
@@ -41,7 +40,7 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
     @Bind(R.id.phone) TextView phoneTextView;
     @Bind(R.id.restaurant) ImageView restaurantImageView;
     @Bind(R.id.photoFab) FloatingActionButton mFab;
-    @Bind(R.id.info)  LinearLayout informationLinearLayout;
+    @Bind(R.id.rl_principal)  LinearLayout informationLinearLayout;
     @Bind(R.id.menusHeader) TextView menusHeaderTextView;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout mCollapsinToolbarLayout;
     @Bind(R.id.restaurant_detail_coordinator_layout) CoordinatorLayout mCoordinator;
@@ -50,6 +49,7 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
     private Restaurant mRestaurant;
     private RestaurantProfileContract.UserActionsListener mActionsListener;
     private boolean isAlreadyFetchDetails;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +82,14 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
             }
         });
         setData(mRestaurant);
+        mActionsListener.loadRestaurantInformation(mRestaurantID);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         isAlreadyFetchDetails = false;
-        mActionsListener.loadRestaurantInformation(mRestaurantID);
+
     }
 
     @Override
@@ -169,12 +170,13 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
     }
 
     private void setMenus(ArrayList<Menu> menus) {
-        if(menus != null && !menus.isEmpty()){
-            menusHeaderTextView.setVisibility(View.VISIBLE);
-            for(Menu menu : menus){
-                setMenu(menu);
+            if(menus != null && !menus.isEmpty()){
+                menusHeaderTextView.setVisibility(View.VISIBLE);
+                for(Menu menu : menus){
+                    setMenu(menu);
+                }
             }
-        }
+
     }
 
     private void setMenu(Menu menu) {
@@ -189,6 +191,7 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
                 setElement(menu.getSections().get(FIRST_ELEMENT).getElements().get(FIRST_ELEMENT), layout);
             }
         }
+
         informationLinearLayout.addView(layout);
 
     }

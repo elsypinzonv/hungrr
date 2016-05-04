@@ -39,6 +39,7 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
     private CoordinatorLayout mCoordinator;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
+    private Toolbar toolbar;
     private static final int LOW_LEVEL=0;
     private static final int MEDIUM_LEVEL=1;
     private static final int HIGH_LEVEL=2;
@@ -47,23 +48,22 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_drawer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
-
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         mCoordinator = (CoordinatorLayout) findViewById(R.id.main_coordinator);
-
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer);
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-
-        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         setupHeaderContent();
         mNavigationView.setNavigationItemSelectedListener(this);
 
         if (null == savedInstanceState) {
             initFragment(getFragment());
+            setTitle(getString(R.string.menu_item_search));
         }
     }
 
@@ -110,9 +110,11 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
         Class fragmentClass = null; //TODO: Remove null
         switch(menuItem.getItemId()) {
             case R.id.menu_item_search:
+                setTitle(getString(R.string.menu_item_search));
                 fragmentClass = getFragmentClass();
                 break;
             case R.id.menu_item_favorites:
+                setTitle(getString(R.string.menu_item_favorites));
                 fragmentClass = FavoritesFragment.class;
                 break;
             case R.id.menu_item_hungry_level:
@@ -129,6 +131,7 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
                 break;
             default:
                 fragmentClass = getFragmentClass();
+                setTitle(getString(R.string.menu_item_search));
         }
 
         if(fragmentClass != null){
@@ -167,6 +170,9 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
         startActivity(new Intent(this, DispatchActivity.class));
     }
 
+    private void setTitle(String text){
+        toolbar.setTitle(text);
+    }
 
     private Fragment getFragment(){
         Fragment fragment=null;
