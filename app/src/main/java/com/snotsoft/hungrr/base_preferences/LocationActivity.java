@@ -44,7 +44,7 @@ public class LocationActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_choose_location)
     public void chooseOtherLocation(){
-        ActivityHelper.begin(LocationActivity.this, MapsActivity.class);
+        ActivityHelper.sendTo(LocationActivity.this, MapsActivity.class);
     }
 
     @Override
