@@ -2,7 +2,6 @@ package com.snotsoft.hungrr.view.adapters;
 
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,6 @@ import android.widget.TextView;
 
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
-import com.snotsoft.hungrr.domain.RestaurantPhone;
-import com.snotsoft.hungrr.domain.Schedule;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
@@ -27,7 +24,7 @@ import java.util.List;
  */
 public class RestaurantCardsAdapter extends BaseAdapter {
 
-    private List<Restaurant> data;
+    private List<Restaurant> restaurantList;
     private Context context;
     private FavoriteRestaurantItemListener mFavoriteListener;
     private ResourceCompatMethod rscCompat;
@@ -35,11 +32,11 @@ public class RestaurantCardsAdapter extends BaseAdapter {
 
     public RestaurantCardsAdapter(
             Context context,
-            ArrayList<Restaurant> data,
+            ArrayList<Restaurant> restaurantList,
             RestaurantItemListener itemListener,
             FavoriteRestaurantItemListener favoriteListener
     ){
-        this.data = data;
+        this.restaurantList = restaurantList;
         this.context = context;
         this.mFavoriteListener = favoriteListener;
         mItemListener = itemListener;
@@ -48,12 +45,12 @@ public class RestaurantCardsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return data.size();
+        return restaurantList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return data.get(position);
+        return restaurantList.get(position);
     }
 
     @Override
@@ -67,7 +64,7 @@ public class RestaurantCardsAdapter extends BaseAdapter {
     }
 
     private void setList(List<Restaurant> restaurants) {
-        data = restaurants;
+        restaurantList = restaurants;
     }
 
 
@@ -86,7 +83,7 @@ public class RestaurantCardsAdapter extends BaseAdapter {
         TextView tx_price = (TextView) v.findViewById(R.id.price);
         FloatingActionButton img_favorite = (FloatingActionButton) v.findViewById(R.id.fab);
 
-        restaurant = data.get(position);
+        restaurant = restaurantList.get(position);
         tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
         tx_restaurant_name.setText(restaurant.getName());
         tx_type.setText(restaurant.getType());
@@ -124,11 +121,20 @@ public class RestaurantCardsAdapter extends BaseAdapter {
     }
 
     public void toggleFavorite(String restaurantID, boolean isFavorite) {
-            for(Restaurant restaurant : data){
+        boolean flag =false;
+        List<Restaurant> restaurantsToEliminate = new ArrayList<>();
+        for(Restaurant restaurant : restaurantList){
             if(restaurant.getId() == restaurantID){
                 restaurant.setIsFavorite(isFavorite);
+                flag =true;
             }
+            if(flag ==false) restaurantsToEliminate.add(restaurant);
         }
+
+        for(Restaurant restaurant : restaurantsToEliminate){
+            restaurantList.remove(restaurant);
+        }
+        notifyDataSetInvalidated();
         notifyDataSetChanged();
     }
 
