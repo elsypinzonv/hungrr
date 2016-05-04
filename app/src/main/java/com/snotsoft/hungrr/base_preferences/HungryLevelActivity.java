@@ -1,5 +1,6 @@
 package com.snotsoft.hungrr.base_preferences;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class HungryLevelActivity extends AppCompatActivity {
     private int selectedLevel=0;
     private ResourceCompatMethod rsc;
     private LevelPreferencesManager levelPreferences;
+    public static String SEND_KEY="COMES_FROM_HUNGRY_LEVEL";
 
 
     @Override
@@ -75,7 +77,13 @@ public class HungryLevelActivity extends AppCompatActivity {
                 break;
         }
         levelPreferences.registerLevel(selectedLevel);
-        ActivityHelper.begin(this,targetClass);
+
+        Intent intent = new Intent().setClass(this, targetClass);
+        intent.putExtra(SEND_KEY,true);
+        startActivity(intent);
+        finish();
+
+       // ActivityHelper.sendTo(this,targetClass);
 
     }
 

@@ -18,6 +18,7 @@ public class LocationActivity extends AppCompatActivity {
 
     @Bind(R.id.btn_current_location) Button btnCurrentLocation;
     @Bind(R.id.btn_choose_location) Button btnChooseLocation;
+    private static String SEND_KEY="COMES_FROM_HUNGRY_LEVEL";
 
     private GPSDataLoader mGPSLoader;
 
@@ -43,7 +44,17 @@ public class LocationActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_choose_location)
     public void chooseOtherLocation(){
-        ActivityHelper.sendTo(LocationActivity.this, MapsActivity.class);
+        ActivityHelper.begin(LocationActivity.this, MapsActivity.class);
     }
 
+    @Override
+    public void onBackPressed() {
+        if(getIntent().getExtras()!=null){
+            if(getIntent().getExtras().getBoolean(SEND_KEY)){
+                ActivityHelper.sendTo(this,HungryLevelActivity.class);
+            }else {
+                super.onBackPressed();
+            }
+        }else super.onBackPressed();
+    }
 }
