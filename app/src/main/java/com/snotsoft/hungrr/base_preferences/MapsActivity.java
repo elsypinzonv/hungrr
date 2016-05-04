@@ -118,4 +118,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mLatLng = new LatLng(lat, lng);
         zoomToCurrentLatLngPosition();
     }
+
+    @Override
+    public void onBackPressed() {
+        ActivityHelper.sendTo(this,LocationActivity.class);
+    }
 }

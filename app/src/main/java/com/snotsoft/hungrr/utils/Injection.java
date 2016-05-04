@@ -16,6 +16,7 @@ import com.snotsoft.hungrr.io.services.RestaurantsApiService;
 import com.snotsoft.hungrr.io.services.ServiceGenerator;
 import com.snotsoft.hungrr.utils.preferences_managers.BudgetPreferencesManager;
 import com.snotsoft.hungrr.utils.preferences_managers.LevelPreferencesManager;
+import com.snotsoft.hungrr.utils.preferences_managers.MainDrawerPreferencesManager;
 
 public class Injection {
 
@@ -77,5 +78,9 @@ public class Injection {
 
     public static LevelPreferencesManager provideLevelPreferencesManager(Context context) {
         return new LevelPreferencesManager(context);
+    }
+
+    public static MainDrawerPreferencesManager provideMainDrawerPreferencesManager(Context context) {
+        return new MainDrawerPreferencesManager(context);
     }
 }

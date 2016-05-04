@@ -28,6 +28,7 @@ public class BudgetActivity extends AppCompatActivity {
     private final String CURRENCY="MX";
     private GPSDataLoader mGPSLoader;
     private BudgetPreferencesManager budgetPreferences;
+    private static String SEND_KEY="COMES_FROM_HUNGRY_LEVEL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class BudgetActivity extends AppCompatActivity {
                 goToHungryLevel();
             }
         });
+
     }
 
     private void goToHungryLevel(){
@@ -101,5 +103,16 @@ public class BudgetActivity extends AppCompatActivity {
             rightThumbIndex=MAX_VALUE;
         }
         return rightThumbIndex;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getIntent().getExtras()!=null){
+            if(getIntent().getExtras().getBoolean(SEND_KEY)){
+                ActivityHelper.sendTo(this,HungryLevelActivity.class);
+            }else {
+                super.onBackPressed();
+            }
+        } else super.onBackPressed();
     }
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
@@ -59,8 +58,10 @@ public class RestaurantCardsAdapter extends BaseAdapter {
     }
 
     public void replaceData(List<Restaurant> restaurants) {
+        if(!restaurantList.isEmpty())delete(restaurants);
         setList(restaurants);
         notifyDataSetChanged();
+        notifyDataSetInvalidated();
     }
 
     private void setList(List<Restaurant> restaurants) {
@@ -137,5 +138,25 @@ public class RestaurantCardsAdapter extends BaseAdapter {
         notifyDataSetInvalidated();
         notifyDataSetChanged();
     }
+
+    public void delete(int position){
+        restaurantList.remove(position);
+    }
+
+    private void delete(List<Restaurant> restaurants){
+        boolean flag =false;
+        List<Restaurant> restaurantsToEliminate = new ArrayList<>();
+        for(Restaurant restaurant : restaurants){
+            if(restaurant.getId().equals(restaurantList.get(0).getId())){
+                flag = true;
+            }
+            if(flag ==false) restaurantsToEliminate.add(restaurant);
+        }
+
+        for(Restaurant restaurant : restaurantsToEliminate){
+            restaurants.remove(restaurant);
+        }
+    }
+
 
 }

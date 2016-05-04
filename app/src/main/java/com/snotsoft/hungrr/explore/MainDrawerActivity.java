@@ -57,13 +57,16 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
         setupHeaderContent();
         mNavigationView.setNavigationItemSelectedListener(this);
 
+        Injection.provideMainDrawerPreferencesManager(this).hasAlreadyChooseMainDrawer();
+
         if (null == savedInstanceState) {
             initFragment(getFragment());
             setTitle(getString(R.string.menu_item_search));
         }
     }
 
-    @Override
+
+      @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_drawer, menu);
         return true;
@@ -161,6 +164,7 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
         Injection.provideBudgetPreferencesManager(this).clearBudget();
         Injection.provideLevelPreferencesManager(this).clearLevel();
         Injection.provideUserSessionManager(this).logoutUser();
+        Injection.provideMainDrawerPreferencesManager(this).clearMainDrawer();
         LoginManager.getInstance().logOut();
         finish();
         startActivity(new Intent(this, DispatchActivity.class));
@@ -213,5 +217,11 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
         }
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Injection.provideMainDrawerPreferencesManager(this).clearMainDrawer();
+        super.onBackPressed();
     }
 }

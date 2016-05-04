@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.daprlabs.cardstack.SwipeDeck;
 import com.google.gson.Gson;
 import com.snotsoft.hungrr.R;
@@ -89,6 +88,32 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsMed
 
         swipeDeckRestaunrants = (SwipeDeck) root.findViewById(R.id.restaurants);
         swipeDeckRestaunrants.setAdapter(mAdapter);
+        swipeDeckRestaunrants.setEventCallback(new SwipeDeck.SwipeEventCallback() {
+            @Override
+            public void cardSwipedLeft(int position) {
+                mAdapter.delete(position);
+            }
+
+            @Override
+            public void cardSwipedRight(int position) {
+                mAdapter.delete(position);
+            }
+
+            @Override
+            public void cardsDepleted() {
+
+            }
+
+            @Override
+            public void cardActionDown() {
+
+            }
+
+            @Override
+            public void cardActionUp() {
+
+            }
+        });
 
         return root;
     }
@@ -125,5 +150,14 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsMed
     @Override
     public void setFavoriteRestaurant(String restaurantID, boolean isFavorite) {
         mAdapter.toggleFavorite(restaurantID, isFavorite);
+        String message;
+        if(isFavorite){
+            message = getString(R.string.mark_as_favorite);
+        } else {
+            message = getString(R.string.unmark_as_favorite);
+        }
+        Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+
+
     }
 }
