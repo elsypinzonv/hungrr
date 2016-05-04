@@ -125,5 +125,14 @@ public class RestaurantsCardsFragment extends Fragment implements RestaurantsMed
     @Override
     public void setFavoriteRestaurant(String restaurantID, boolean isFavorite) {
         mAdapter.toggleFavorite(restaurantID, isFavorite);
+        String message;
+        if(isFavorite){
+            message = getString(R.string.mark_as_favorite);
+        } else {
+            message = getString(R.string.unmark_as_favorite);
+        }
+        Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+
+
     }
 }
