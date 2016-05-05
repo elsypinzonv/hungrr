@@ -22,7 +22,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"></style>
 
     <!-- CUSTOM THEMES -->
-    <style name="SplashTheme" parent="AppTheme.NoActionBar"/>
+    <style name="SplashTheme" parent="AppTheme.NoActionBar" />
 
     <style name="LoginTheme" parent="AppTheme.NoActionBar" />
 

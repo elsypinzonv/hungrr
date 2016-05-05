@@ -1,6 +1,7 @@
 package com.snotsoft.hungrr.explore.restaurant;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,6 +25,7 @@ import com.snotsoft.hungrr.domain.Menu;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.domain.RestaurantPhone;
 import com.snotsoft.hungrr.domain.Schedule;
+import com.snotsoft.hungrr.menu.MenuActivity;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
@@ -194,12 +197,23 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
 
     }
 
-    private void setMenu(Menu menu) {
+    private void setMenu(final Menu menu) {
         final int FIRST_ELEMENT=0;
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.adapter_menu, null, false);
         TextView tx_menu_name = (TextView) layout.findViewById(R.id.menu_name);
+        Button btn_show_menu = (Button) layout.findViewById(R.id.show_menu);
         tx_menu_name.setText(menu.getName());
+
+        btn_show_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RestaurantProfile.this, MenuActivity.class);
+                intent.putExtra("Menu",menu);
+                startActivity(intent);
+                //ActivityHelper.begin(RestaurantProfile.this, MenuActivity.class);
+            }
+        });
 
         if (!menu.getSections().isEmpty()) {
             if (!menu.getSections().get(FIRST_ELEMENT).getElements().isEmpty()) {
