@@ -2,10 +2,12 @@ package com.snotsoft.hungrr.domain;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by luisburgos on 24/04/16.
  */
-public class Element {
+public class Element implements Serializable {
 
     @SerializedName("id")
     private int id;
