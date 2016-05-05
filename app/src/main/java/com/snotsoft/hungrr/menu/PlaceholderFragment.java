@@ -17,8 +17,9 @@ import com.snotsoft.hungrr.view.adapters.ElementAdapter;
 public  class PlaceholderFragment extends Fragment {
 
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String ARG_SECTION = "Section";
         private TextView tx_section;
-        private static Section this_section;
+        private Section section;
         private RecyclerView recy_elements;
         private ElementAdapter mAdapter;
 
@@ -30,8 +31,9 @@ public  class PlaceholderFragment extends Fragment {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putSerializable(ARG_SECTION, section);
             fragment.setArguments(args);
-            this_section = section;
+
             return fragment;
         }
 
@@ -39,11 +41,14 @@ public  class PlaceholderFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
+
+            section = (Section) getArguments().getSerializable(ARG_SECTION);
+
             tx_section = (TextView) rootView.findViewById(R.id.section);
             recy_elements = (RecyclerView) rootView.findViewById(R.id.elements);
 
-            tx_section.setText(this_section.getName());
-            mAdapter=new ElementAdapter(getContext(),this_section.getElements());
+            tx_section.setText(section.getName());
+            mAdapter=new ElementAdapter(getContext(),section.getElements());
             recy_elements.setAdapter(mAdapter);
             recy_elements.setHasFixedSize(true);
             recy_elements.setLayoutManager(new LinearLayoutManager(getActivity()));

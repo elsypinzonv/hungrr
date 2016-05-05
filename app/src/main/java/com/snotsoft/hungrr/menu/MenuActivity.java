@@ -27,10 +27,11 @@ public class MenuActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-           Menu menu = (Menu) getIntent().getSerializableExtra("Menu");
+        Menu menu = (Menu) getIntent().getSerializableExtra("Menu");
 
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),menu);
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),menu,this);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 

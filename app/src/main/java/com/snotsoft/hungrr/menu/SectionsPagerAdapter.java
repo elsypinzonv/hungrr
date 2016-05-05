@@ -1,7 +1,10 @@
 package com.snotsoft.hungrr.menu;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import com.snotsoft.hungrr.domain.Menu;
 
@@ -9,33 +12,27 @@ import com.snotsoft.hungrr.domain.Menu;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private Menu menu;
+        private Context context;
 
-        public SectionsPagerAdapter(FragmentManager fm, Menu menu) {
+        public SectionsPagerAdapter(FragmentManager fm, Menu menu, Context context) {
             super(fm);
             this.menu = menu;
+            this.context = context;
         }
 
         @Override
         public Fragment getItem(int position) {
-                  return PlaceholderFragment.newInstance(position + 1, menu.getSections().get(0));
+            Toast.makeText(context,position+" "+menu.getSections().get(position).getName(),Toast.LENGTH_LONG).show();
+            return PlaceholderFragment.newInstance(position, menu.getSections().get(position));
         }
 
         @Override
         public int getCount() {
-
-            return 3;
+            return menu.getSections().size();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-            }
-            return null;
+            return menu.getSections().get(position).getName();
         }
     }
