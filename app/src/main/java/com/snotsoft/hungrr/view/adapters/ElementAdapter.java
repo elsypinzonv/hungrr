@@ -53,8 +53,7 @@ public class ElementAdapter extends RecyclerView.Adapter<ElementViewHolder> {
                 .placeholder(R.drawable.restaurant_image_placeholder)
                 .error(R.drawable.restaurant_image_error)
                 .into(holder.img_element);
-
-    }
+     }
 
 
     public Element getItem(int position) {

@@ -3,8 +3,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.widget.Toast;
+;
 
 import com.snotsoft.hungrr.domain.Menu;
 
@@ -22,7 +21,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         @Override
         public Fragment getItem(int position) {
-            Toast.makeText(context,position+" "+menu.getSections().get(position).getName(),Toast.LENGTH_LONG).show();
             return PlaceholderFragment.newInstance(position, menu.getSections().get(position));
         }
 

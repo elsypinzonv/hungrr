@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.snotsoft.hungrr.R;
+
 
 
 public class ElementViewHolder extends RecyclerView.ViewHolder {
