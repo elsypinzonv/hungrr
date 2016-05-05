@@ -46,6 +46,9 @@ public class Restaurant implements Serializable {
     @SerializedName("menus")
     private ArrayList<Menu> menus;
 
+    @SerializedName("packs")
+    private ArrayList<FoodPack> packs;
+
     public String getId() {
         return id;
     }
@@ -140,5 +143,13 @@ public class Restaurant implements Serializable {
 
     public void setMenus(ArrayList<Menu> menus) {
         this.menus = menus;
+    }
+
+    public ArrayList<FoodPack> getPacks() {
+        return packs;
+    }
+
+    public void setPacks(ArrayList<FoodPack> packs) {
+        this.packs = packs;
     }
 }

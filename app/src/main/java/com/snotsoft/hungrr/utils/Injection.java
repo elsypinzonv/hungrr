@@ -4,11 +4,13 @@ import android.content.Context;
 
 import com.mobsandgeeks.saripaar.Validator;
 import com.snotsoft.hungrr.interactor.FacebookSignUpInteractor;
+import com.snotsoft.hungrr.interactor.FoodPacksInteractor;
 import com.snotsoft.hungrr.interactor.RestaurantInteractor;
 import com.snotsoft.hungrr.interactor.SignUpInteractor;
 import com.snotsoft.hungrr.interactor.RestaurantsInteractor;
 import com.snotsoft.hungrr.interactor.LoginInteractor;
 import com.snotsoft.hungrr.io.services.FacebookSignUpApiService;
+import com.snotsoft.hungrr.io.services.FoodPacksApiService;
 import com.snotsoft.hungrr.io.services.LoginApiService;
 import com.snotsoft.hungrr.io.services.RestaurantApiService;
 import com.snotsoft.hungrr.io.services.SignUpApiService;
@@ -70,6 +72,14 @@ public class Injection {
 
     private static FacebookSignUpApiService provideFacebookRegisterApiService() {
         return ServiceGenerator.createService(FacebookSignUpApiService.class);
+    }
+
+    public static FoodPacksInteractor provideFoodPacksInteractor() {
+        return new FoodPacksInteractor(provideFoodPacksApiService());
+    }
+
+    private static FoodPacksApiService provideFoodPacksApiService() {
+        return ServiceGenerator.createService(FoodPacksApiService.class);
     }
 
     public static BudgetPreferencesManager provideBudgetPreferencesManager(Context context) {

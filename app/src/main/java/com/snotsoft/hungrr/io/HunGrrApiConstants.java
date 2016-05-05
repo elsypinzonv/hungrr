@@ -14,6 +14,7 @@ public class HunGrrApiConstants {
     public static final String SIGN_UP_PATH = "/signup";
     public static final String RESTAURANT_PATH = "/restaurant";
     public static final String RESTAURANTS_PATH = "/restaurants";
+    public static final String PACKS_PATH = "/packs";
 
     public static final String RESTAURANT_DETAILS_PATH = RESTAURANT_PATH + "/details";
     public static final String FAVORITE_RESTAURANT_PATH = RESTAURANT_PATH + "/favourite";
@@ -44,6 +45,9 @@ public class HunGrrApiConstants {
     public static final String FAVORITE_RESTAURANT_URL = BASE_API_URL + FAVORITE_RESTAURANT_PATH + RESTAURANT_ID_RELATIVE_PATH;;
     public static final String UNFAVORITE_RESTAURANT_URL = BASE_API_URL + UNFAVORITE_RESTAURANT_PATH + RESTAURANT_ID_RELATIVE_PATH;;
     public static final String RESTAURANTS_FAVORITES_URL = BASE_API_URL + FAVORITES_RESTAURANTS_PATH;
+    public static final String RESTAURANTS_LEVEL_3_URL = BASE_API_URL + PACKS_PATH +
+            LATITUDE_RELATIVE_PATH + LONGITUDE_RELATIVE_PATH +
+            BUDGET_MIN_RELATIVE_PATH + BUDGET_MAX_RELATIVE_PATH;
 
     //Fake Impl Simulation
     public static final int SERVICE_LATENCY_IN_MILLIS = 500;
