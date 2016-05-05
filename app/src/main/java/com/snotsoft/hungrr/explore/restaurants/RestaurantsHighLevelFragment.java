@@ -1,13 +1,16 @@
 package com.snotsoft.hungrr.explore.restaurants;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.daprlabs.cardstack.SwipeDeck;
 import com.google.gson.Gson;
@@ -46,7 +49,18 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //mAdapter = new RestaurantFoodPacksAdapter();
+        mAdapter = new RestaurantFoodPacksAdapter(getActivity(), new ArrayList<Restaurant>(0),
+                new RestaurantItemListener() {
+            @Override
+            public void onRestaurantClick(Restaurant clickedRestaurant) {
+                mActionsListener.openRestaurantProfile(clickedRestaurant);
+            }
+
+            @Override
+            public void onRestaurantLongClick(Restaurant clickedRestaurant, int position) {
+
+            }
+        });
         mProgressDialog = ActivityHelper.createModalProgressDialog(getActivity());
     }
 
@@ -60,7 +74,15 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
-        mActionsListener = new RestaurantsHighLevelPresenter();
+        final Context appContext = getActivity().getApplicationContext();
+        Toast.makeText(appContext, "High Level", Toast.LENGTH_LONG).show();
+        mActionsListener = new RestaurantsHighLevelPresenter(
+                this,
+                Injection.provideFoodPacksInteractor(),
+                Injection.provideUserSessionManager(appContext),
+                Injection.provideLocationPreferencesManager(appContext),
+                Injection.provideBudgetPreferencesManager(appContext)
+        );
     }
 
     @Override
@@ -73,12 +95,12 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
         swipeDeckFoodPacks.setEventCallback(new SwipeDeck.SwipeEventCallback() {
             @Override
             public void cardSwipedLeft(int position) {
-
+                mAdapter.delete(position);
             }
 
             @Override
             public void cardSwipedRight(int position){
-
+                mAdapter.delete(position);
             }
 
             @Override
@@ -111,8 +133,8 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
     }
 
     @Override
-    public void showFoodPacks(List<FoodPack> foodPacks) {
-        //mAdapter.replaceData(foodPacks);
+    public void showFoodPacks(ArrayList<Restaurant> restaurantsWithFoodPacks) {
+        mAdapter.replaceData(restaurantsWithFoodPacks);
     }
 
     @Override

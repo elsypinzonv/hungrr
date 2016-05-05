@@ -10,10 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snotsoft.hungrr.R;
-import com.snotsoft.hungrr.domain.FoodPack;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
-import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
 import com.squareup.picasso.Picasso;
 
@@ -25,33 +23,30 @@ import java.util.List;
  */
 public class RestaurantFoodPacksAdapter extends BaseAdapter {
 
-    private List<FoodPack> mFoodPacks;
-    private Context context;
-    private FavoriteRestaurantItemListener mFavoriteListener;
-    private ResourceCompatMethod rscCompat;
-    private RestaurantItemListener mItemListener;
+    private List<Restaurant> mRestaurantsWithPacksList;
+    private Context mContext;
+    private ResourceCompatMethod mResourceCompat;
+    private RestaurantItemListener mRestaurantProfileListener;
 
     public RestaurantFoodPacksAdapter(
             Context context,
-            ArrayList<FoodPack> foodPacks,
-            RestaurantItemListener itemListener,
-            FavoriteRestaurantItemListener favoriteListener
+            ArrayList<Restaurant> restaurantsWithFoodPacks,
+            RestaurantItemListener restaurantItemListener
     ){
-        mFoodPacks = foodPacks;
-        this.context = context;
-        this.mFavoriteListener = favoriteListener;
-        mItemListener = itemListener;
-        rscCompat = new ResourceCompatMethod(context);
+        mRestaurantsWithPacksList = restaurantsWithFoodPacks;
+        this.mContext = context;
+        mRestaurantProfileListener = restaurantItemListener;
+        mResourceCompat = new ResourceCompatMethod(context);
     }
 
     @Override
     public int getCount() {
-        return mFoodPacks.size();
+        return mRestaurantsWithPacksList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mFoodPacks.get(position);
+        return mRestaurantsWithPacksList.get(position);
     }
 
     @Override
@@ -60,33 +55,36 @@ public class RestaurantFoodPacksAdapter extends BaseAdapter {
     }
 
     public void replaceData(List<Restaurant> restaurants) {
-        //setList(restaurants);
+        if(!mRestaurantsWithPacksList.isEmpty()){
+            delete(restaurants);
+        }
+        setList(restaurants);
         notifyDataSetChanged();
         notifyDataSetInvalidated();
     }
 
-    private void setList(List<FoodPack> foodPacks) {
-        mFoodPacks = foodPacks;
+    private void setList(List<Restaurant> foodPacks) {
+        mRestaurantsWithPacksList = foodPacks;
     }
 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Restaurant restaurant;
+
         View v = convertView;
         if(v == null){
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_card_restaurant, parent, false);
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_card_food_packs, parent, false);
         }
 
-        /*
+        final Restaurant restaurant;
+
         ImageView img_restaurant_image = (ImageView) v.findViewById(R.id.restaurant_image);
         TextView tx_restaurant_name = (TextView) v.findViewById(R.id.restaurant_name);
         TextView tx_type = (TextView) v.findViewById(R.id.type);
         TextView tx_adress = (TextView) v.findViewById(R.id.adress);
         TextView tx_price = (TextView) v.findViewById(R.id.price);
-        FloatingActionButton img_favorite = (FloatingActionButton) v.findViewById(R.id.fab);
 
-        restaurant = foodPacks.get(position);
+        restaurant = mRestaurantsWithPacksList.get(position);
         tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
         tx_restaurant_name.setText(restaurant.getName());
         tx_type.setText(restaurant.getType());
@@ -94,35 +92,42 @@ public class RestaurantFoodPacksAdapter extends BaseAdapter {
         setImage(img_restaurant_image, restaurant.getProfileImage());
 
 
-        if(restaurant.isFavorite()){
-            img_favorite.setImageDrawable(rscCompat.getDrawableCompat(R.mipmap.ic_favorite));
-        }
-
-        img_favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFavoriteListener.onFavorite(restaurant);
-            }
-        });
-
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mItemListener.onRestaurantClick(restaurant);
+                mRestaurantProfileListener.onRestaurantClick(restaurant);
             }
-        });*/
+        });
 
         return v;
     }
 
     private void setImage(ImageView img_restaurant_image, String imageURL){
-        Picasso.with(context)
+        Picasso.with(mContext)
                 .load(imageURL)
                 .placeholder(R.drawable.restaurant_image_placeholder)
                 .error(R.drawable.restaurant_image_error)
                 .into(img_restaurant_image);
     }
 
+    public void delete(int position) {
+        mRestaurantsWithPacksList.remove(position);
+    }
+
+    private void delete(List<Restaurant> restaurants){
+        boolean flag =false;
+        List<Restaurant> restaurantsToEliminate = new ArrayList<>();
+        for(Restaurant restaurant : restaurants){
+            if(restaurant.getId().equals(mRestaurantsWithPacksList.get(0).getId())){
+                flag = true;
+            }
+            if(flag ==false) restaurantsToEliminate.add(restaurant);
+        }
+
+        for(Restaurant restaurant : restaurantsToEliminate){
+            restaurants.remove(restaurant);
+        }
+    }
 }
 
 

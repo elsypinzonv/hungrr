@@ -1,8 +1,11 @@
 package com.snotsoft.hungrr.explore.restaurants;
 
+import android.support.annotation.NonNull;
+
 import com.snotsoft.hungrr.domain.FoodPack;
 import com.snotsoft.hungrr.domain.Restaurant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +17,7 @@ public interface RestaurantsHighLevelContract {
 
         void setProgressIndicator(boolean active);
 
-        void showFoodPacks(List<FoodPack> foodPacks);
+        void showFoodPacks(ArrayList<Restaurant> restaurantsWithFoodPacks);
 
         void showRestaurantProfileUI(String id, Restaurant restaurant);
 
@@ -24,6 +27,8 @@ public interface RestaurantsHighLevelContract {
     interface UserActionsListener {
 
         void loadFoodPacks(boolean forceUpdate);
+
+        void openRestaurantProfile(@NonNull Restaurant restaurant);
     }
 
 }
