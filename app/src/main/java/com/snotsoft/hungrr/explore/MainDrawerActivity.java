@@ -24,6 +24,7 @@ import com.snotsoft.hungrr.base_preferences.HungryLevelActivity;
 import com.snotsoft.hungrr.base_preferences.LocationActivity;
 import com.snotsoft.hungrr.explore.restaurants.RestaurantsCardsFragment;
 import com.snotsoft.hungrr.explore.restaurants.RestaurantsFragment;
+import com.snotsoft.hungrr.explore.restaurants.RestaurantsHighLevelFragment;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
 import com.snotsoft.hungrr.view.activities.DispatchActivity;
@@ -200,8 +201,8 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
             case MEDIUM_LEVEL:
                 fragment = RestaurantsCardsFragment.class;
                 break;
-
             case HIGH_LEVEL:
+                fragment = RestaurantsHighLevelFragment.class;
                 break;
         }
         return fragment;
