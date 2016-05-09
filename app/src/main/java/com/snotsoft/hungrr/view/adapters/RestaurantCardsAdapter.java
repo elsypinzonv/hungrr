@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
@@ -141,6 +143,8 @@ public class RestaurantCardsAdapter extends BaseAdapter {
 
     public void delete(int position){
         restaurantList.remove(position);
+        notifyDataSetInvalidated();
+        notifyDataSetChanged();
     }
 
     private void delete(List<Restaurant> restaurants){
