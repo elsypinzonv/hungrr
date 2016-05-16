@@ -11,8 +11,22 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/fragment_restaurants_high_level_content" />
+        <include
+            layout="@layout/fragment_restaurants_high_level_content" />
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/restaurant_profile"
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="bottom">
+
+        <include
+            layout="@layout/adapter_favorites_restaurant_body" />
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

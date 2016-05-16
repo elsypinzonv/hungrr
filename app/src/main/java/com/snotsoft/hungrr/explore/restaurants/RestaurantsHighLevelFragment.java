@@ -4,29 +4,31 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daprlabs.cardstack.SwipeDeck;
 import com.google.gson.Gson;
+import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
-import com.snotsoft.hungrr.domain.FoodPack;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.explore.restaurant.RestaurantProfile;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
-import com.snotsoft.hungrr.view.adapters.RestaurantCardsAdapter;
+import com.snotsoft.hungrr.utils.RoundedTransformation;
 import com.snotsoft.hungrr.view.adapters.RestaurantFoodPacksAdapter;
-import com.snotsoft.hungrr.view.listeners.FavoriteRestaurantItemListener;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by luisburgos on 4/05/16.
@@ -34,6 +36,10 @@ import java.util.List;
 public class RestaurantsHighLevelFragment extends Fragment implements RestaurantsHighLevelContract.View {
 
     private SwipeDeck swipeDeckFoodPacks;
+    private LinearLayout restaurantProfileLayout;
+    private ImageView restaurantProfileImage;
+    private TextView restaurantProfileName;
+
     private RestaurantFoodPacksAdapter mAdapter;
     private ProgressDialog mProgressDialog;
     private RestaurantsHighLevelContract.UserActionsListener mActionsListener;
@@ -96,11 +102,13 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
             @Override
             public void cardSwipedLeft(int position) {
                 mAdapter.delete(position);
+                showValidatedRestaurantInfo();
             }
 
             @Override
             public void cardSwipedRight(int position){
                 mAdapter.delete(position);
+                showValidatedRestaurantInfo();
             }
 
             @Override
@@ -116,6 +124,16 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
             @Override
             public void cardActionUp() {
 
+            }
+        });
+
+        restaurantProfileImage = (ImageView) root.findViewById(R.id.restaurant);
+        restaurantProfileName = (TextView) root.findViewById(R.id.name);
+        restaurantProfileLayout = (LinearLayout) root.findViewById(R.id.restaurant_profile);
+        restaurantProfileLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActionsListener.openRestaurantProfile((Restaurant) mAdapter.getItem(0));
             }
         });
 
@@ -135,6 +153,27 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
     @Override
     public void showFoodPacks(ArrayList<Restaurant> restaurantsWithFoodPacks) {
         mAdapter.replaceData(restaurantsWithFoodPacks);
+        showValidatedRestaurantInfo();
+    }
+
+    private void showValidatedRestaurantInfo() {
+        if (mAdapter.getCount() != 0) {
+            restaurantProfileLayout.setVisibility(View.VISIBLE);
+            showRestaurantInfo((Restaurant) mAdapter.getItem(0));
+        } else {
+            restaurantProfileLayout.setVisibility(View.GONE);
+            Log.d(HunGrrApplication.TAG, "Lista vacía, final alcanzado");
+        }
+    }
+
+    private void showRestaurantInfo(Restaurant restaurant) {
+        restaurantProfileName.setText(restaurant.getName());
+        Picasso.with(getActivity().getApplicationContext())
+                .load(restaurant.getProfileImage())
+                .transform(new RoundedTransformation())
+                .placeholder(R.drawable.favorites_image_placeholder)
+                .error(R.drawable.favorites_image_error)
+                .into(restaurantProfileImage);
     }
 
     @Override

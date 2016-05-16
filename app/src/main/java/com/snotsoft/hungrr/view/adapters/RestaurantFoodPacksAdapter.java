@@ -2,6 +2,7 @@ package com.snotsoft.hungrr.view.adapters;
 
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
@@ -91,7 +93,6 @@ public class RestaurantFoodPacksAdapter extends BaseAdapter {
         tx_adress.setText(restaurant.getAddress());
         setImage(img_restaurant_image, restaurant.getProfileImage());
 
-
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +113,8 @@ public class RestaurantFoodPacksAdapter extends BaseAdapter {
 
     public void delete(int position) {
         mRestaurantsWithPacksList.remove(position);
+        notifyDataSetInvalidated();
+        notifyDataSetChanged();
     }
 
     private void delete(List<Restaurant> restaurants){
