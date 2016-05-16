@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,20 +8,19 @@
     android:padding="15dp"
     tools:context=".base_preferences.HungryLevelActivity">
 
-
     <LinearLayout
         android:id="@+id/hungry_levels"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:layout_marginTop="60dp"
-        >
+        android:layout_marginTop="60dp">
 
         <ImageView
             android:id="@+id/low_level"
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:layout_weight=".3"
             android:src="@mipmap/ic_low_level"
             android:background="@drawable/background_low_level"/>
 
@@ -28,18 +28,18 @@
             android:id="@+id/medium_level"
             android:layout_width="110dp"
             android:layout_height="110dp"
-
+            android:layout_weight=".3"
             android:src="@mipmap/ic_medium_level"
-            android:background="@null"
-            android:layout_marginLeft="50dp"/>
+            android:background="@null" />
 
         <ImageView
             android:id="@+id/high_level"
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:layout_weight=".3"
             android:src="@mipmap/ic_high_level"
-            android:background="@null"
-            android:visibility="gone"/>
+            android:background="@null" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -78,7 +78,6 @@
         android:textSize="22dp"
         android:layout_marginBottom="50dp"
         android:background="@color/colorGreen"
-        android:text="@string/lbl_btn_explorer"
-        />
+        android:text="@string/lbl_btn_explorer" />
 
 </RelativeLayout>

@@ -81,7 +81,6 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
         final Context appContext = getActivity().getApplicationContext();
-        Toast.makeText(appContext, "High Level", Toast.LENGTH_LONG).show();
         mActionsListener = new RestaurantsHighLevelPresenter(
                 this,
                 Injection.provideFoodPacksInteractor(),

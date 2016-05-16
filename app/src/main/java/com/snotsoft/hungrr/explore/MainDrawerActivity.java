@@ -185,6 +185,7 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
                 fragment = RestaurantsCardsFragment.newInstance();
                 break;
             case HIGH_LEVEL:
+                fragment = RestaurantsHighLevelFragment.newInstance();
                 break;
         }
        return fragment;
@@ -197,8 +198,7 @@ public class MainDrawerActivity extends AppCompatActivity implements NavigationV
                 fragment = RestaurantsFragment.class;
                 break;
             case MEDIUM_LEVEL:
-                fragment = RestaurantsHighLevelFragment.class;
-                //fragment = RestaurantsCardsFragment.class;
+                fragment = RestaurantsCardsFragment.class;
                 break;
             case HIGH_LEVEL:
                 fragment = RestaurantsHighLevelFragment.class;

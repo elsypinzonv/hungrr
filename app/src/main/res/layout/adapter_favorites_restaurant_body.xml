@@ -23,7 +23,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre"
+            android:text="Cargando..."
             android:textSize="18sp"
             android:textStyle="bold"
             android:singleLine="true"

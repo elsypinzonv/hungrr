@@ -69,17 +69,14 @@ public class HungryLevelActivity extends AppCompatActivity {
                 targetClass = LocationActivity.class;
                 break;
             case MEDIUM_LEVEL:
-                targetClass = BudgetActivity.class;
-                break;
-
             case HIGH_LEVEL:
-
+                targetClass = BudgetActivity.class;
                 break;
         }
         levelPreferences.registerLevel(selectedLevel);
 
         Intent intent = new Intent().setClass(this, targetClass);
-        intent.putExtra(SEND_KEY,true);
+        intent.putExtra(SEND_KEY, true);
         startActivity(intent);
         finish();
 
