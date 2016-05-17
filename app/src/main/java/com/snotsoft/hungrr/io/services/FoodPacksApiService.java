@@ -19,6 +19,7 @@ public interface FoodPacksApiService {
             @Path(HunGrrApiConstants.KEY_LNG_PATH) double lng,
             @Path(HunGrrApiConstants.KEY_BUDGET_MIN_PATH) double budgetMin,
             @Path(HunGrrApiConstants.KEY_BUDGET_MAX_PATH) double budgetMax,
+            @Path(HunGrrApiConstants.KEY_RANDOM_PATH) boolean isRandom,
             @Header(HunGrrApiConstants.HEADER_REQUEST_TOKEN) String token
     );
 

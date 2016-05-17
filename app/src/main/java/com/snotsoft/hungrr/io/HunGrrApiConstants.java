@@ -26,6 +26,7 @@ public class HunGrrApiConstants {
     public static final String KEY_RESTAURANT_ID_PATH = "restaurantID";
     public static final String KEY_BUDGET_MIN_PATH = "budgetMin";
     public static final String KEY_BUDGET_MAX_PATH = "budgetMax";
+    public static final String KEY_RANDOM_PATH = "isRandom";
 
     //Relative fragments
     public static final String LATITUDE_RELATIVE_PATH = "/{"+ KEY_LAT_PATH +"}";
@@ -33,6 +34,7 @@ public class HunGrrApiConstants {
     public static final String RESTAURANT_ID_RELATIVE_PATH = "/{"+ KEY_RESTAURANT_ID_PATH +"}";
     public static final String BUDGET_MIN_RELATIVE_PATH = "/{"+ KEY_BUDGET_MIN_PATH +"}";
     public static final String BUDGET_MAX_RELATIVE_PATH = "/{"+ KEY_BUDGET_MAX_PATH +"}";
+    public static final String RANDOM_PATH = "/{"+ KEY_RANDOM_PATH +"}";
 
     //Complete URL
     public static final String SIGN_UP_URL = BASE_API_URL + SIGN_UP_PATH;
@@ -47,7 +49,7 @@ public class HunGrrApiConstants {
     public static final String RESTAURANTS_FAVORITES_URL = BASE_API_URL + FAVORITES_RESTAURANTS_PATH;
     public static final String RESTAURANTS_LEVEL_3_URL = BASE_API_URL + PACKS_PATH +
             LATITUDE_RELATIVE_PATH + LONGITUDE_RELATIVE_PATH +
-            BUDGET_MIN_RELATIVE_PATH + BUDGET_MAX_RELATIVE_PATH;
+            BUDGET_MIN_RELATIVE_PATH + BUDGET_MAX_RELATIVE_PATH + RANDOM_PATH;
 
     //Fake Impl Simulation
     public static final int SERVICE_LATENCY_IN_MILLIS = 500;

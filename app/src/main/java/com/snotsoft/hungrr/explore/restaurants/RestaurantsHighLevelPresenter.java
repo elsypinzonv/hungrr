@@ -1,7 +1,9 @@
 package com.snotsoft.hungrr.explore.restaurants;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.interactor.FoodPacksInteractor;
 import com.snotsoft.hungrr.io.callbacks.FoodPacksCallback;
@@ -44,8 +46,13 @@ public class RestaurantsHighLevelPresenter implements RestaurantsHighLevelContra
     public void loadFoodPacks(boolean forceUpdate) {
         mView.setProgressIndicator(true);
 
+        mInteractor.getFoodPacks(this,
+                mLocationPreferences.getLatitude(), mLocationPreferences.getLongitude(),
+                mBudgetPreferences.getBudgetMin(), mBudgetPreferences.getBudgetMax(), false,
+                mSessionManager.getTokenSession()
+        );
         //TODO: Remove
-        Injection
+        /*Injection
                 .provideRestaurantsInteractor()
                 .getRestaurants(new RestaurantsCallback() {
                                     @Override
@@ -77,12 +84,8 @@ public class RestaurantsHighLevelPresenter implements RestaurantsHighLevelContra
                                 },
                         mLocationPreferences.getLatitude(), mLocationPreferences.getLongitude(),
                         mBudgetPreferences.getBudgetMin(), mBudgetPreferences.getBudgetMax(),
-                        mSessionManager.getTokenSession());
-        /*mInteractor.getFoodPacks(this,
-                mLocationPreferences.getLatitude(), mLocationPreferences.getLongitude(),
-                mBudgetPreferences.getBudgetMin(), mBudgetPreferences.getBudgetMax(),
-                mSessionManager.getTokenSession()
-        );*/
+                        mSessionManager.getTokenSession());*/
+
     }
 
     @Override
@@ -104,6 +107,13 @@ public class RestaurantsHighLevelPresenter implements RestaurantsHighLevelContra
 
         if(restaurantsWithPacks != null && !restaurantsWithPacks.isEmpty()){
             mView.showFoodPacks(restaurantsWithPacks);
+            String name = "";
+            try {
+                name = restaurantsWithPacks.get(0).getPacks().get(0).getName();
+            } catch (NullPointerException e){
+                Log.d(HunGrrApplication.TAG, "NO FOOD PACK NAME");
+            }
+            Log.d(HunGrrApplication.TAG, "A food pack name " + name);
         } else {
             mView.showErrorMessage("No hay combinaciones para mostrar");
         }

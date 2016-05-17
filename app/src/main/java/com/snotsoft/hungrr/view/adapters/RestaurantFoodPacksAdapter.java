@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
+import com.snotsoft.hungrr.domain.RestaurantPhone;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
 import com.squareup.picasso.Picasso;
@@ -29,15 +31,18 @@ public class RestaurantFoodPacksAdapter extends BaseAdapter {
     private Context mContext;
     private ResourceCompatMethod mResourceCompat;
     private RestaurantItemListener mRestaurantProfileListener;
+    private RestaurantPhoneListener mCallListener;
 
     public RestaurantFoodPacksAdapter(
             Context context,
             ArrayList<Restaurant> restaurantsWithFoodPacks,
-            RestaurantItemListener restaurantItemListener
+            RestaurantItemListener restaurantItemListener,
+            RestaurantPhoneListener callListener
     ){
         mRestaurantsWithPacksList = restaurantsWithFoodPacks;
         this.mContext = context;
         mRestaurantProfileListener = restaurantItemListener;
+        mCallListener = callListener;
         mResourceCompat = new ResourceCompatMethod(context);
     }
 
@@ -85,6 +90,7 @@ public class RestaurantFoodPacksAdapter extends BaseAdapter {
         TextView tx_type = (TextView) v.findViewById(R.id.type);
         TextView tx_adress = (TextView) v.findViewById(R.id.adress);
         TextView tx_price = (TextView) v.findViewById(R.id.price);
+        FloatingActionButton btn_call = (FloatingActionButton) v.findViewById(R.id.call);
 
         restaurant = mRestaurantsWithPacksList.get(position);
         tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
@@ -92,6 +98,13 @@ public class RestaurantFoodPacksAdapter extends BaseAdapter {
         tx_type.setText(restaurant.getType());
         tx_adress.setText(restaurant.getAddress());
         setImage(img_restaurant_image, restaurant.getProfileImage());
+
+        btn_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallListener.onMakeCall(restaurant.getPhoneNumbers());
+            }
+        });
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +143,10 @@ public class RestaurantFoodPacksAdapter extends BaseAdapter {
         for(Restaurant restaurant : restaurantsToEliminate){
             restaurants.remove(restaurant);
         }
+    }
+
+    public interface RestaurantPhoneListener {
+        void onMakeCall(ArrayList<RestaurantPhone> phones);
     }
 }
 

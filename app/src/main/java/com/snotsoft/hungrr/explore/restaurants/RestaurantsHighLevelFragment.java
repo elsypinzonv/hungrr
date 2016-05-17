@@ -3,6 +3,7 @@ package com.snotsoft.hungrr.explore.restaurants;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import com.google.gson.Gson;
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
 import com.snotsoft.hungrr.domain.Restaurant;
+import com.snotsoft.hungrr.domain.RestaurantPhone;
 import com.snotsoft.hungrr.explore.restaurant.RestaurantProfile;
 import com.snotsoft.hungrr.utils.ActivityHelper;
 import com.snotsoft.hungrr.utils.Injection;
@@ -65,6 +67,16 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
             @Override
             public void onRestaurantLongClick(Restaurant clickedRestaurant, int position) {
 
+            }
+        }, new RestaurantFoodPacksAdapter.RestaurantPhoneListener() {
+            @Override
+            public void onMakeCall(ArrayList<RestaurantPhone> phones) {
+                if(phones != null && !phones.isEmpty()){
+                    RestaurantPhone firstPhone = phones.get(0);
+                    makeCallToRestaurant(firstPhone);
+                } else {
+                    showErrorMessage("Ups! El restaurante no ha proporcioado un télefono");
+                }
             }
         });
         mProgressDialog = ActivityHelper.createModalProgressDialog(getActivity());
@@ -181,6 +193,13 @@ public class RestaurantsHighLevelFragment extends Fragment implements Restaurant
         intent.putExtra("restaurantID", id);
         intent.putExtra("restaurant", new Gson().toJson(restaurant));
         startActivity(intent);
+    }
+
+    private void makeCallToRestaurant(RestaurantPhone phone){
+        Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+        String phoneNumber = phone.getNumber();
+        phoneIntent.setData(Uri.parse("tel:"+phoneNumber));
+        startActivity(phoneIntent);
     }
 
     @Override

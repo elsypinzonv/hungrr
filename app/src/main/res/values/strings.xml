@@ -108,5 +108,6 @@
     <string name="unmark_as_favorite">Eliminado de favoritos</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="action_call">Llamar</string>
 
 </resources>

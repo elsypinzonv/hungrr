@@ -31,6 +31,7 @@ public class FoodPacksInteractor {
             final double lng,
             final double budgetMin,
             final double budgetMax,
+            final boolean isRandom,
             final String token
     ) {
         Log.d(HunGrrApplication.TAG,
@@ -38,7 +39,7 @@ public class FoodPacksInteractor {
                         + " - MIN: " + String.valueOf(budgetMin) + " - MAX: " + String.valueOf(budgetMax)
                         + " with token " + token);
 
-        Call<RestaurantsResponse> call = apiService.getFoodPacks(lat, lng, budgetMin, budgetMax, token);
+        Call<RestaurantsResponse> call = apiService.getFoodPacks(lat, lng, budgetMin, budgetMax, isRandom, token);
         Log.d(HunGrrApplication.TAG, "ORIGINAL REQ: " + call.request().toString());
 
         call.enqueue(new Callback<RestaurantsResponse>() {
