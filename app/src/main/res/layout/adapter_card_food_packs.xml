@@ -6,25 +6,14 @@
     android:layout_margin="5dp">
 
     <RelativeLayout
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/restaurant_image"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/background_main_1"
-            android:scaleType="centerCrop"
-            android:layout_alignParentTop="true" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/info"
+            android:id="@+id/restaurant_name_holder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="15dp"
-            android:layout_below="@+id/restaurant_image">
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true">
 
             <TextView
                 android:id="@+id/restaurant_name"
@@ -32,70 +21,163 @@
                 android:layout_height="wrap_content"
                 android:maxLines="2"
                 android:ellipsize="end"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="Nombre restaurant"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/foodPack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/restaurant_name_holder">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:layout_marginTop="15dp">
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_restaurant"/>
+                    android:id="@+id/first_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/background_main_1"
+                    android:layout_gravity="center_vertical"/>
 
-                <TextView
-                    android:id="@+id/type"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="tipo"
-                    android:layout_marginLeft="5dp"/>
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="NOMBRE"/>
+
+                    <TextView
+                        android:id="@+id/first_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="description"
+                        android:layout_marginTop="5dp"
+                        android:lines="3"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:id="@+id/first_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:background="@color/colorGreenLigth"
+                        android:layout_gravity="right"
+                        android:text="$33"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/second_element"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="5dp">
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_location"/>
+                    android:id="@+id/second_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/background_main_1"
+                    android:layout_gravity="center_vertical"/>
 
-                <TextView
-                    android:id="@+id/adress"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="dirección"
-                    android:layout_marginLeft="5dp"/>
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/second_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="NOMBRE"/>
+
+                    <TextView
+                        android:id="@+id/second_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="description"
+                        android:layout_marginTop="5dp"
+                        android:lines="3"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:id="@+id/second_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:background="@color/colorGreenLigth"
+                        android:layout_gravity="right"
+                        android:text="$33"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/colorRed"
-            android:layout_gravity="right"
-            android:textColor="@android:color/white"
-            android:text="$500 MX"
-            android:gravity="center_vertical"
-            android:paddingRight="15dp"
-            android:paddingLeft="15dp"
-            android:textSize="20sp"/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_below="@+id/foodPack">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Precio total: "
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/pack_price"
+                android:background="@color/colorGreen"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/white"
+                android:text="$500 MX"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/call"
@@ -104,8 +186,9 @@
             android:clickable="true"
             android:src="@drawable/ic_phone_white"
             android:layout_alignParentRight="true"
-            android:layout_above="@+id/info"
+            android:layout_above="@+id/foodPack"
             android:layout_marginBottom="-25dp"
+            android:visibility="gone"
             android:layout_marginRight="25dp" />
 
     </RelativeLayout>

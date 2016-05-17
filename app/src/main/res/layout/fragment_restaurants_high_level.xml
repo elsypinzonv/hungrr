@@ -19,7 +19,7 @@
     <LinearLayout
         android:id="@+id/restaurant_profile"
         android:layout_width="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:layout_gravity="bottom">

@@ -13,12 +13,15 @@ import android.widget.TextView;
 
 import com.snotsoft.hungrr.HunGrrApplication;
 import com.snotsoft.hungrr.R;
+import com.snotsoft.hungrr.domain.Element;
+import com.snotsoft.hungrr.domain.FoodPack;
 import com.snotsoft.hungrr.domain.Restaurant;
 import com.snotsoft.hungrr.domain.RestaurantPhone;
 import com.snotsoft.hungrr.utils.ResourceCompatMethod;
 import com.snotsoft.hungrr.view.listeners.RestaurantItemListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,50 +81,84 @@ public class RestaurantFoodPacksAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View v = convertView;
-        if(v == null){
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_card_food_packs, parent, false);
+        View root = convertView;
+        if(root == null){
+            root = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_card_food_packs, parent, false);
         }
 
+        TextView restaurantNameTextView = (TextView) root.findViewById(R.id.restaurant_name);
+        TextView packPrice = (TextView) root.findViewById(R.id.pack_price);
+        FloatingActionButton btnCall = (FloatingActionButton) root.findViewById(R.id.call);
+
+        ImageView firstImage = (ImageView) root.findViewById(R.id.first_image);
+        TextView firstName = (TextView) root.findViewById(R.id.first_name);
+        TextView firstDescription = (TextView) root.findViewById(R.id.first_description);
+        TextView firstPrice = (TextView) root.findViewById(R.id.first_price);
+        ImageView secondImage = (ImageView) root.findViewById(R.id.second_image);
+        TextView secondName = (TextView) root.findViewById(R.id.second_name);
+        TextView secondDescription = (TextView) root.findViewById(R.id.second_description);
+        TextView secondPrice = (TextView) root.findViewById(R.id.second_price);
+
         final Restaurant restaurant;
-
-        ImageView img_restaurant_image = (ImageView) v.findViewById(R.id.restaurant_image);
-        TextView tx_restaurant_name = (TextView) v.findViewById(R.id.restaurant_name);
-        TextView tx_type = (TextView) v.findViewById(R.id.type);
-        TextView tx_adress = (TextView) v.findViewById(R.id.adress);
-        TextView tx_price = (TextView) v.findViewById(R.id.price);
-        FloatingActionButton btn_call = (FloatingActionButton) v.findViewById(R.id.call);
-
         restaurant = mRestaurantsWithPacksList.get(position);
-        tx_price.setText("MX$"+String.valueOf(restaurant.getAveragePrice()));
-        tx_restaurant_name.setText(restaurant.getName());
-        tx_type.setText(restaurant.getType());
-        tx_adress.setText(restaurant.getAddress());
-        setImage(img_restaurant_image, restaurant.getProfileImage());
 
-        btn_call.setOnClickListener(new View.OnClickListener() {
+        ArrayList<Element> foodPackElements = restaurant.getPacks().get(0).getElements();
+
+        Element first = getElementOfType("bebida", foodPackElements);
+        Element second = getElementOfType("comida", foodPackElements);
+
+        restaurantNameTextView.setText(restaurant.getName());
+
+        firstName.setText(first.getName());
+        firstDescription.setText(first.getDescription());
+        firstPrice.setText("MX$"+first.getPrice());
+        secondName.setText(second.getName());
+        secondDescription.setText(second.getDescription());
+        secondPrice.setText("MX$"+second.getPrice());
+
+        packPrice.setText("MX$"+
+                String.format("%.2f", Double.parseDouble(first.getPrice()) + Double.parseDouble(second.getPrice()))
+        );
+
+        setImage(firstImage, first.getImage());
+        setImage(secondImage, second.getImage());
+
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCallListener.onMakeCall(restaurant.getPhoneNumbers());
             }
         });
 
-        v.setOnClickListener(new View.OnClickListener() {
+        root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mRestaurantProfileListener.onRestaurantClick(restaurant);
             }
         });
 
-        return v;
+        return root;
     }
 
-    private void setImage(ImageView img_restaurant_image, String imageURL){
+    private Element getElementOfType(String toMatch, ArrayList<Element> foodPackElements) {
+        Element findElement = null;
+        for (Element element : foodPackElements){
+            if(element.getType().equalsIgnoreCase(toMatch)){
+                findElement = element;
+                break;
+            }
+        }
+        return findElement;
+    }
+
+
+    private void setImage(ImageView imageView, String imageURL){
         Picasso.with(mContext)
                 .load(imageURL)
                 .placeholder(R.drawable.restaurant_image_placeholder)
                 .error(R.drawable.restaurant_image_error)
-                .into(img_restaurant_image);
+                .into(imageView);
     }
 
     public void delete(int position) {

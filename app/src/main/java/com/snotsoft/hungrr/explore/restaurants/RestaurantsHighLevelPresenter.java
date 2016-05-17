@@ -51,41 +51,6 @@ public class RestaurantsHighLevelPresenter implements RestaurantsHighLevelContra
                 mBudgetPreferences.getBudgetMin(), mBudgetPreferences.getBudgetMax(), false,
                 mSessionManager.getTokenSession()
         );
-        //TODO: Remove
-        /*Injection
-                .provideRestaurantsInteractor()
-                .getRestaurants(new RestaurantsCallback() {
-                                    @Override
-                                    public void onRestaurantsLoaded(ArrayList<Restaurant> restaurants, String newToken) {
-                                        mView.setProgressIndicator(false);
-                                        mSessionManager.updateSessionToken(newToken);
-
-                                        if(restaurants != null && !restaurants.isEmpty()){
-                                            mView.showFoodPacks(restaurants);
-                                        } else {
-                                            mView.showErrorMessage("No hay combinaciones para mostrar");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailedLoad() {
-
-                                    }
-
-                                    @Override
-                                    public void onNetworkError() {
-
-                                    }
-
-                                    @Override
-                                    public void onServerError() {
-
-                                    }
-                                },
-                        mLocationPreferences.getLatitude(), mLocationPreferences.getLongitude(),
-                        mBudgetPreferences.getBudgetMin(), mBudgetPreferences.getBudgetMax(),
-                        mSessionManager.getTokenSession());*/
-
     }
 
     @Override

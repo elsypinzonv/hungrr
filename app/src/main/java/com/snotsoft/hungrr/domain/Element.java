@@ -21,6 +21,9 @@ public class Element implements Serializable {
     @SerializedName("currency")
     private String currency;
 
+    @SerializedName("type")
+    private String type;
+
     @SerializedName("image")
     private String image;
 
@@ -50,5 +53,13 @@ public class Element implements Serializable {
 
     public String getImage() {
         return image;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
