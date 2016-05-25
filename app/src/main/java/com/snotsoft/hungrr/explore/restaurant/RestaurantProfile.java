@@ -179,8 +179,8 @@ public class RestaurantProfile extends AppCompatActivity implements RestaurantPr
             Schedule schedule = schedules.get(0);
             scheduleTextView.setText(
                     schedule.getWeekDay() +
-                            " de " + String.valueOf(schedule.getOpenHour()) +
-                            " hasta " + String.valueOf(schedule.getCloseHour())
+                            " de " + schedule.getOpenHour() +
+                            " hasta " + schedule.getCloseHour()
             );
         } else {
             scheduleTextView.setText("No disponible");
