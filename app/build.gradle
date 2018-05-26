@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "com.snotsoft.hungrr"
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 
@@ -29,19 +29,17 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:palette-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.supportV4"
     compile "com.google.android.gms:play-services-maps:$rootProject.playServices"
     compile "com.android.support:multidex:$rootProject.multidex"
-
     //ReactiveLocation for Android
     compile "pl.charmas.android:android-reactive-location:$rootProject.reactiveLocation"
     compile "com.google.android.gms:play-services-location:$rootProject.playServices"
     compile "io.reactivex:rxjava:$rootProject.rxjava"
-
     //Third party libs and SDKs
     compile "com.facebook.android:facebook-android-sdk:$rootProject.facebook"
     compile "com.squareup.okhttp3:okhttp:$rootProject.okhttp"
@@ -54,7 +52,6 @@ dependencies {
     compile "com.mobsandgeeks:android-saripaar:$rootProject.saripaar"
     compile "com.squareup.picasso:picasso:$rootProject.picasso"
     compile "com.daprlabs.aaron:cardstack:$rootProject.cardstack"
-
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
 }
